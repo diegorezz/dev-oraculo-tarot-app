@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oráculo do Tarô & To-Do Sagrado | Arcanos Maiores</title>
+    <meta name="description" content="Oráculo dos Arcanos Maiores com tiragens de 1, 3 e 5 cartas e gestor integrado de tarefas e ações inspiradas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Fundo Estrelado Específico -->
+    <div class="star-bg"></div>
+
+    <!-- Cabeçalho Principal -->
+    <header>
+        <div class="top-bar">
+            <div class="brand-badge">
+                <span>✦</span> Informativo Iniciático • Arcanos Maiores
+            </div>
+            <div class="top-actions">
+                <button id="toggleAudioBtn" class="icon-btn" onclick="toggleAudio()" title="Ativar/Desativar Sons">
+                    🔊
+                </button>
+            </div>
+        </div>
+
+        <h1>Oráculo & Tarefas Sagradas</h1>
+        <p class="subtitle">
+            Estudo simbólico e tiragens dos 22 Arcanos Maiores integrados a um gestor de ações conscientes e metas diárias.
+        </p>
+
+        <!-- Navegação por Abas -->
+        <nav class="tabs-nav" aria-label="Navegação da Aplicação">
+            <button class="tab-btn active" data-tab="oracle">
+                <span>🔮</span> Oráculo (Tiragens)
+            </button>
+            <button class="tab-btn" data-tab="tasks">
+                <span>📋</span> Minhas Tarefas
+                <span id="tasksTabBadge" class="badge-count" style="display: none;">0</span>
+            </button>
+            <button class="tab-btn" data-tab="grimorio">
+                <span>📖</span> Grimório dos 22 Arcanos
+            </button>
+            <button class="tab-btn" data-tab="history">
+                <span>📜</span> Histórico
+            </button>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-wrapper">
+
+        <!-- ============================================== -->
+        <!-- ABA 1: ORÁCULO / CONSULTA DE TARÔ             -->
+        <!-- ============================================== -->
+        <section id="tab-oracle" class="tab-content active">
+            <div class="glass-panel">
+                <form class="oracle-form" onsubmit="event.preventDefault(); realizarTiragem();">
+                    
+                    <!-- Campo de Pergunta -->
+                    <div class="form-group">
+                        <label for="question">
+                            <span>✦</span> Qual a sua pergunta ou foco para a consulta?
+                        </label>
+                        <div class="input-container">
+                            <input 
+                                type="text" 
+                                id="question" 
+                                placeholder="Ex: O que preciso compreender sobre meu momento atual e o que devo focar hoje?"
+                                autocomplete="off"
+                                required
+                            >
+                        </div>
+                        
+                        <!-- Sugestões Rápidas de Foco -->
+                        <div class="suggestion-chips">
+                            <span class="chip" data-question="O que preciso compreender sobre meu momento atual?">✦ Momento Atual</span>
+                            <span class="chip" data-question="Qual conselho para destravar meu trabalho e metas hoje?">⚡ Trabalho & Ação</span>
+                            <span class="chip" data-question="Como equilibrar minhas emoções e ter clareza nas decisões?">🌱 Equilíbrio & Clareza</span>
+                            <span class="chip" data-question="Qual energia rege o meu dia e qual ação devo tomar?">☀️ Arcano do Dia</span>
+                        </div>
+                    </div>
+
+                    <!-- Seleção do Método de Tiragem -->
+                    <div class="form-group">
+                        <label for="spreadType">
+                            <span>✦</span> Escolha o Método de Tiragem:
+                        </label>
+                        <select id="spreadType">
+                            <option value="5" selected>Método Sagrado de 5 Cartas (Raiz, Momento, Obstáculo, Conselho, Arcano Chave)</option>
+                            <option value="3">Método de 3 Cartas (A Situação, O que pede atenção, A Orientação)</option>
+                            <option value="1">Arcano do Dia (1 Carta - Foco & Ação Prática)</option>
+                            <option value="simnao">Oráculo de Decisão Rápida (1 Carta - Conselho Direto)</option>
+                        </select>
+                    </div>
+
+                    <!-- Botão de Disparo -->
+                    <button type="submit" class="btn-primary" id="btnTiragem">
+                        <span>✨</span> Realizar Tiragem do Oráculo
+                    </button>
+                </form>
+
+                <!-- Resultados da Tiragem -->
+                <div id="resultsContainer" class="results-container" style="display: none;">
+                    
+                    <!-- Cabeçalho Informativo da Tiragem Realizada -->
+                    <div id="spreadInfo" class="spread-header-info"></div>
+
+                    <!-- Grade com as Cartas 3D -->
+                    <div id="results" class="spread-results"></div>
+
+                    <!-- Barra de Ação para Transformar em Tarefas -->
+                    <div id="readingActionBar" class="reading-action-bar" style="display: none;">
+                        <div class="reading-summary-text">
+                            <h4>Transforme a Sabedoria em Ação</h4>
+                            <p>Adicione os conselhos das cartas sorteadas diretamente à sua lista diária de tarefas.</p>
+                        </div>
+                        <div class="reading-buttons">
+                            <button type="button" class="btn-gold" onclick="addAllReadingAsTasks()">
+                                <span>🪄</span> Adicionar Conselhos como Tarefas
+                            </button>
+                            <button type="button" class="btn-secondary" onclick="switchTab('tasks')">
+                                <span>📋</span> Ver Minhas Tarefas
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- ABA 2: GESTOR DE TAREFAS (TO-DO APP)          -->
+        <!-- ============================================== -->
+        <section id="tab-tasks" class="tab-content">
+            <div class="glass-panel todo-container">
+                
+                <!-- Estatísticas e Barra de Progresso -->
+                <div class="todo-header-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">Total de Tarefas</span>
+                        <span class="stat-value" id="statTotalTasks">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Concluídas</span>
+                        <span class="stat-value" style="color: var(--success);" id="statCompletedTasks">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Pendentes</span>
+                        <span class="stat-value" style="color: var(--warning);" id="statPendingTasks">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Progresso Diário</span>
+                        <span class="stat-value" id="statProgressPercent">0%</span>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" id="statProgressBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário para Nova Tarefa Manual -->
+                <form id="newTaskForm" class="new-task-card">
+                    <div class="task-input-row">
+                        <input 
+                            type="text" 
+                            id="newTaskInput" 
+                            placeholder="O que você precisa realizar hoje com intenção consciente?" 
+                            required
+                        >
+                        <button type="submit" class="btn-primary" style="padding: 12px 20px;">
+                            <span>➕</span> Adicionar
+                        </button>
+                    </div>
+
+                    <div class="task-options-row">
+                        <label style="font-size: 0.85rem; color: var(--text-muted);">
+                            <span>Categoria:</span>
+                            <select id="newTaskCategory">
+                                <option value="espiritual">🔮 Espiritual & Reflexão</option>
+                                <option value="trabalho">💼 Trabalho & Projetos</option>
+                                <option value="pessoal">🌿 Pessoal & Hábitos</option>
+                                <option value="mente">🧘 Mente & Bem-Estar</option>
+                            </select>
+                        </label>
+
+                        <label style="font-size: 0.85rem; color: var(--text-muted);">
+                            <span>Prioridade:</span>
+                            <select id="newTaskPriority">
+                                <option value="alta">🔥 Alta</option>
+                                <option value="media" selected>⚡ Média</option>
+                                <option value="baixa">🌱 Baixa</option>
+                            </select>
+                        </label>
+                    </div>
+                </form>
+
+                <!-- Barra de Filtros -->
+                <div class="todo-filters-bar">
+                    <div class="filter-pills">
+                        <button type="button" class="filter-pill active" data-filter="all">Todas</button>
+                        <button type="button" class="filter-pill" data-filter="pending">Pendentes</button>
+                        <button type="button" class="filter-pill" data-filter="completed">Concluídas</button>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Categoria:</span>
+                        <select id="taskCategoryFilter" style="width: auto; padding: 6px 12px; font-size: 0.85rem;">
+                            <option value="all">Todas as Categorias</option>
+                            <option value="espiritual">🔮 Espiritual</option>
+                            <option value="trabalho">💼 Trabalho</option>
+                            <option value="pessoal">🌿 Pessoal</option>
+                            <option value="mente">🧘 Bem-Estar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Lista Dinâmica de Tarefas -->
+                <div id="taskList" class="task-list"></div>
+
+                <!-- Estado Vazio de Tarefas -->
+                <div id="taskEmptyState" class="empty-state" style="display: none;">
+                    <div class="empty-icon">✨</div>
+                    <h3>Nenhuma tarefa nesta visualização</h3>
+                    <p>Suas tarefas criadas manualmente ou geradas pelas cartas do Tarô aparecerão aqui.</p>
+                    <button class="btn-secondary" onclick="switchTab('oracle')" style="margin-top: 10px;">
+                        <span>🔮</span> Fazer uma Tiragem do Tarô
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- ABA 3: GRIMÓRIO DOS 22 ARCANOS MAIORES         -->
+        <!-- ============================================== -->
+        <section id="tab-grimorio" class="tab-content">
+            <div class="glass-panel">
+                <div class="grimorio-header">
+                    <div>
+                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Grimório dos Arcanos Maiores</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">
+                            Consulte os símbolos, conselhos de luz, sombra e ações práticas dos 22 arquetipos.
+                        </p>
+                    </div>
+                    
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input 
+                            type="text" 
+                            id="grimorioSearch" 
+                            placeholder="Buscar por arcano, palavra-chave ou elemento..."
+                        >
+                    </div>
+                </div>
+
+                <!-- Grid dos 22 Arcanos -->
+                <div id="grimorioGrid" class="grimorio-grid"></div>
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- ABA 4: HISTÓRICO DE LEITURAS                   -->
+        <!-- ============================================== -->
+        <section id="tab-history" class="tab-content">
+            <div class="glass-panel">
+                <div class="history-header">
+                    <div>
+                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Histórico de Leituras</h2>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">
+                            Registro das suas consultas e orientações passadas salvas neste navegador.
+                        </p>
+                    </div>
+                    <button class="btn-secondary" onclick="clearHistory()" style="color: var(--danger); border-color: rgba(247, 90, 104, 0.4);">
+                        <span>🗑️</span> Limpar Histórico
+                    </button>
+                </div>
+
+                <!-- Lista de Leituras Anteriores -->
+                <div id="historyList" class="history-list"></div>
+
+                <!-- Estado Vazio do Histórico -->
+                <div id="historyEmptyState" class="empty-state" style="display: none;">
+                    <div class="empty-icon">📜</div>
+                    <h3>Nenhuma leitura registrada ainda</h3>
+                    <p>Realize sua primeira consulta no Oráculo para registrar aqui suas reflexões.</p>
+                    <button class="btn-primary" onclick="switchTab('oracle')" style="margin-top: 10px;">
+                        <span>🔮</span> Consultar o Oráculo
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================== -->
+    <!-- MODAL DE DETALHES DO ARCANO                    -->
+    <!-- ============================================== -->
+    <div id="arcanoModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div id="arcanoModalContent" class="modal-content"></div>
+    </div>
+
+    <!-- Toast de Notificações Rápidas -->
+    <div id="toast" class="toast-notification"></div>
+
+    <!-- Scripts da Aplicação -->
+    <script src="cards-data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
