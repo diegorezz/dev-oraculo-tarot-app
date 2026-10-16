@@ -1046,6 +1046,10 @@ function aplicarSugestaoPergunta(texto) {
     }
 }
 
+function iniciarTiragemEscolhida() {
+    abrirMesaInterativa();
+}
+
 // Inicia o fluxo: abre o modal de respiração meditativa ou a mesa
 function abrirMesaInterativa() {
     initAudio();
