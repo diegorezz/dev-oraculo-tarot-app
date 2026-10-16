@@ -1,15 +1,25 @@
-// Dados dos 22 Arcanos Maiores com os textos originais, arquétipos e ações sugeridas para tarefas
+// ========================================================
+// BASE DE DADOS DOS 22 ARCANOS MAIORES
+// Com dados oraculares, conselhos amorosos, profissionais,
+// oráculo Sim/Não e arquétipos de nascimento para perfil
+// ========================================================
+
 const ARCANOS_DATA = [
     {
         id: 0,
         numero: "I",
         nome: "O Mago",
-        direito: "Habilidade, iniciativa, escolha antes de agir.",
-        invertido: "Disputas, ação mal orientada, dispersão.",
+        direito: "Habilidade, iniciativa, escolha antes de agir e poder de manifestação.",
+        invertido: "Disputas, ação mal orientada, dispersão e manipulação.",
         elemento: "Ar / Mercúrio",
         palavrasChave: ["Iniciativa", "Habilidade", "Foco", "Poder Criador"],
         acaoSugerida: "Dar o primeiro passo prático em um projeto importante com foco total.",
-        afirmacao: "Tenho todas as ferramentas necessárias para manifestar minha vontade.",
+        afirmacao: "Tenho todas as ferramentas necessárias para manifestar minha vontade no plano físico.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Você possui os talentos e a iniciativa necessária para fazer acontecer.",
+        amor: "Comunicação fluida, novo ciclo afetivo promissor e magnetismo em alta.",
+        trabalho: "Excelente momento para propor ideias, iniciar empreendimentos e liderar projetos.",
+        arquetipoVida: "O Criador e Comunicador: dotado de imenso talento para transformar ideias em realidade prática.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/>
             <path d="M50 16 L53 30 L67 33 L53 36 L50 50 L47 36 L33 33 L47 30 Z" fill="#ffd700"/>
@@ -24,12 +34,17 @@ const ARCANOS_DATA = [
         id: 1,
         numero: "II",
         nome: "A Papisa",
-        direito: "Revelação, meditação, situação segura.",
-        invertido: "Intuições falsas, atraso, lentidão.",
+        direito: "Revelação, meditação, intuição pura e situação segura.",
+        invertido: "Intuições falsas, atraso, lentidão e segredos nocivos.",
         elemento: "Água / Lua",
         palavrasChave: ["Intuição", "Mistério", "Silêncio", "Sabedoria"],
         acaoSugerida: "Reservar 15 minutos para meditação ou estudo silencioso antes de tomar decisões.",
-        afirmacao: "Minha intuição me guia com clareza e serenidade interior.",
+        afirmacao: "Minha intuição me guia com clareza cristalina e serenidade interior.",
+        simNao: "TALVEZ",
+        simNaoDesc: "Aguarde o momento certo; respostas e fatores ocultos ainda precisam vir à tona.",
+        amor: "Conexão profunda e espiritual, mas requer respeito ao espaço e tempo do outro.",
+        trabalho: "Aprofunde seus estudos, mantenha discrição sobre seus planos e confie no sexto sentido.",
+        arquetipoVida: "A Guardiã dos Mistérios: profunda, serena, intuitiva e dotada de perspicácia espiritual única.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M50 20 C35 32 35 68 50 80 C65 68 65 32 50 20 Z" fill="rgba(130, 87, 229, 0.2)" stroke="#8257e5" stroke-width="2"/>
@@ -43,12 +58,17 @@ const ARCANOS_DATA = [
         id: 2,
         numero: "III",
         nome: "A Imperatriz",
-        direito: "Pensamento fecundo, soluções, melhora.",
-        invertido: "Divergências, complicação, atraso.",
+        direito: "Pensamento fecundo, fertilidade, soluções elegantes e melhora contínua.",
+        invertido: "Divergências, complicação, atraso e desperdício de energia.",
         elemento: "Terra / Vênus",
         palavrasChave: ["Abundância", "Criatividade", "Fertilidade", "Harmonia"],
         acaoSugerida: "Nutrir uma ideia criativa ou cuidar do ambiente ao seu redor para gerar prosperidade.",
-        afirmacao: "Minha criatividade floresce e gera resultados belos e abundantes.",
+        afirmacao: "Minha criatividade floresce e gera resultados belos, prósperos e abundantes.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Caminhos férteis e momentos prósperos abertos para o seu objetivo.",
+        amor: "Amor caloroso, acolhedor, sensualidade em alta e entendimento carinhoso.",
+        trabalho: "Projetos em plena expansão; sucesso em empreendimentos criativos e comunicação.",
+        arquetipoVida: "A Mestra da Abundância: calorosa, criativa, nutridora e geradora de prosperidade e beleza.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M50 18 L60 38 L82 40 L65 54 L70 76 L50 64 L30 76 L35 54 L18 40 L40 38 Z" stroke="#d4af37" stroke-width="1.5" fill="rgba(212,175,55,0.15)"/>
@@ -60,12 +80,17 @@ const ARCANOS_DATA = [
         id: 3,
         numero: "IV",
         nome: "O Imperador",
-        direito: "Realização, acordo, contrato, situação definida.",
-        invertido: "Ruptura de equilíbrio, risco de perdas.",
+        direito: "Realização, acordo, contrato, firmeza e situação estruturada.",
+        invertido: "Ruptura de equilíbrio, autoritarismo e risco de perdas por teimosia.",
         elemento: "Fogo / Áries",
         palavrasChave: ["Estrutura", "Ordem", "Liderança", "Estabilidade"],
         acaoSugerida: "Definir um plano estruturado e estabelecer limites claros para suas metas de hoje.",
-        afirmacao: "Sou o arquiteto da minha estabilidade e lidero com firmeza e justiça.",
+        afirmacao: "Sou o arquiteto da minha estabilidade e lidero minhas escolhas com firmeza e justiça.",
+        simNao: "SIM",
+        simNaoDesc: "Sim, contanto que mantenha disciplina, método e organização impecável.",
+        amor: "Relação sólida, proteção recíproca, estabilidade e compromisso formal.",
+        trabalho: "Consolidação de carreira, liderança respeitada, organização financeira e vitórias duradouras.",
+        arquetipoVida: "O Construtor e Soberano: determinado, pragmático, protetor e arquiteto de bases sólidas.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <rect x="32" y="32" width="36" height="36" rx="4" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
@@ -78,12 +103,17 @@ const ARCANOS_DATA = [
         id: 4,
         numero: "V",
         nome: "O Papa",
-        direito: "Conselho sólido, segurança, vocação.",
-        invertido: "Falta de apoio espiritual, projeto retardado.",
+        direito: "Conselho sólido, segurança ética, vocação e bênção espiritual.",
+        invertido: "Falta de apoio, preconceito, dogma e projeto retardado.",
         elemento: "Terra / Touro",
         palavrasChave: ["Orientação", "Tradição", "Ética", "Vocação"],
         acaoSugerida: "Buscar a orientação de um mentor ou agir alinhado estritamente aos seus princípios éticos.",
         afirmacao: "Agir com retidão atrai sabedoria e apoio verdadeiro para minha jornada.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Uma resposta auspiciosa, favorecendo uniões formais e acordos justos.",
+        amor: "União guiada por valores em comum, respeito, bênçãos de longo prazo e confiança.",
+        trabalho: "Ensino, mentorias, acordos solenes e progresso fundamentado em competência moral.",
+        arquetipoVida: "O Mentor e Farol Moral: conciliador, portador de ensinamentos perenes e guardião de valores.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M50 20 L50 80 M34 36 L66 36 M38 48 L62 48 M42 60 L58 60" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
@@ -95,12 +125,17 @@ const ARCANOS_DATA = [
         id: 5,
         numero: "VI",
         nome: "O Enamorado",
-        direito: "União, escolha a fazer.",
-        invertido: "Desordem, cisão, risco de ruptura.",
+        direito: "União verdadeira, escolha a fazer com o coração, alianças benéficas.",
+        invertido: "Desordem, cisão, dúvida paralisante e risco de ruptura.",
         elemento: "Ar / Gêmeos",
         palavrasChave: ["Escolhas", "Coração", "Valores", "Aliança"],
-        acaoSugerida: "Tomar uma decisão pendente alinhada com seus valores mais autênticos.",
-        afirmacao: "Escolho seguir o que ressoa verdadeiramente com o meu coração.",
+        acaoSugerida: "Tomar uma decisão pendente alinhada com seus valores mais autênticos sem hesitar.",
+        afirmacao: "Escolho seguir o que ressoa verdadeiramente com o meu coração e alma.",
+        simNao: "TALVEZ",
+        simNaoDesc: "A resposta está no poder de uma escolha que você precisa assumir conscientemente.",
+        amor: "Encontro de almas, paixão mútua, atração sincera ou decisão entre caminhos amorosos.",
+        trabalho: "Parcerias vantajosas; necessidade de definir prioridades e escolher entre propostas.",
+        arquetipoVida: "O Buscador da União: sensível, diplomático, motivado pelo amor sincero e harmonia social.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M50 34 C44 24 30 24 26 36 C22 48 38 64 50 76 C62 64 78 48 74 36 C70 24 56 24 50 34 Z" fill="rgba(130, 87, 229, 0.3)" stroke="#8257e5" stroke-width="2"/>
@@ -112,12 +147,17 @@ const ARCANOS_DATA = [
         id: 6,
         numero: "VII",
         nome: "A Carruagem",
-        direito: "Atividade, rapidez, conquista, notícia boa.",
-        invertido: "Desordem, imprudência, más notícias.",
+        direito: "Atividade, rapidez, conquista, notícia auspiciosa e vitória na jornada.",
+        invertido: "Desordem, imprudência, conflito interno e más notícias por impulsividade.",
         elemento: "Água / Câncer",
         palavrasChave: ["Vitória", "Direção", "Progresso", "Determinação"],
-        acaoSugerida: "Manter a disciplina e acelerar uma tarefa sem se distrair com desvios.",
-        afirmacao: "Controlo minhas forças e sigo confiantemente rumo ao sucesso.",
+        acaoSugerida: "Manter a disciplina e acelerar uma tarefa sem se distrair com desvios secundários.",
+        afirmacao: "Controlo minhas forças e sigo confiantemente rumo ao sucesso merecido.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Sucesso e vitória rápida ao avançar com coragem e rédeas firmes.",
+        amor: "Conquista amorosa, superação de impasses e viagens românticas conjuntas.",
+        trabalho: "Triunfo em negociações, metas batidas com velocidade e liderança dinâmica.",
+        arquetipoVida: "O Triunfador Determinado: focado, disciplinado, resiliente e condutor das próprias rédeas.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M30 46 L70 46 L62 74 L38 74 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.15)"/>
@@ -131,12 +171,17 @@ const ARCANOS_DATA = [
         id: 7,
         numero: "VIII",
         nome: "A Justiça",
-        direito: "Julgamento claro, rigor, justiça feita.",
-        invertido: "Risco de perda ou de julgamento injusto.",
+        direito: "Julgamento claro, rigor, justiça feita, equilíbrio de débitos e créditos.",
+        invertido: "Risco de perda, julgamento injusto, burocracia excessiva e desonestidade.",
         elemento: "Ar / Libra",
         palavrasChave: ["Equilíbrio", "Clareza", "Responsabilidade", "Verdade"],
         acaoSugerida: "Analisar os fatos com imparcialidade e resolver pendências burocráticas ou acordos.",
         afirmacao: "Ajo com retidão e colho a harmonia gerada pelas minhas escolhas justas.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Se você agiu com transparência, a justiça e o equilíbrio estarão a seu favor.",
+        amor: "Relação pautada pela franqueza, igualdade de direitos e decisões lúcidas.",
+        trabalho: "Acordos formais aprovados, contratos assinados e reconhecimento mérito a mérito.",
+        arquetipoVida: "O Guardião da Equidade: lúcido, imparcial, focado na verdade e no equilíbrio harmônico.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M50 20 L50 80" stroke="#d4af37" stroke-width="2"/>
@@ -150,209 +195,273 @@ const ARCANOS_DATA = [
         id: 8,
         numero: "IX",
         nome: "O Eremita",
-        direito: "Luz sobre um problema, prudência, segredo.",
-        invertido: "Obscuridade, visão falsa da situação.",
+        direito: "Prudência, sabedoria acumulada, pesquisa profunda e luz interior.",
+        invertido: "Solidão amarga, atraso, teimosia em isolamento e recusa a conselhos.",
         elemento: "Terra / Virgem",
-        palavrasChave: ["Prudência", "Introspecção", "Luz Interior", "Paciência"],
-        acaoSugerida: "Evitar a pressa, pesquisar a fundo antes de opinar e buscar a reflexão solitária.",
-        afirmacao: "Minha luz interior ilumina cada passo seguro do meu caminho.",
+        palavrasChave: ["Introspecção", "Prudência", "Sabedoria", "Guia Interior"],
+        acaoSugerida: "Dedicar tempo para autoanálise silenciosa e rever planos antes de expô-los ao mundo.",
+        afirmacao: "Minha própria luz interna ilumina os passos certos no tempo ideal.",
+        simNao: "TALVEZ",
+        simNaoDesc: "A situação pede cautela e tempo de maturação; não tome decisões precipitadas.",
+        amor: "Tempo de autoconhecimento individual ou busca por uma relação madura e verdadeira.",
+        trabalho: "Pesquisa minuciosa, projetos que requerem paciência e estratégia silenciosa.",
+        arquetipoVida: "O Sábio Peregrino: reflexivo, paciente, autossuficiente e portador da lâmpada da verdade.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M60 30 L60 76 M60 30 C55 24 45 28 45 38 L45 74" stroke="#a0a0a0" stroke-width="2.5" stroke-linecap="round"/>
-            <rect x="30" y="38" width="16" height="24" rx="3" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.2)"/>
-            <circle cx="38" cy="50" r="4" fill="#ffd700"/>
-            <path d="M38 34 L38 38 M34 50 L30 50 M46 50 L42 50" stroke="#ffd700" stroke-width="1.5"/>
+            <path d="M35 78 L45 28 L55 28 L65 78 Z" stroke="#8257e5" stroke-width="2" fill="rgba(130,87,229,0.15)"/>
+            <circle cx="50" cy="22" r="8" fill="#d4af37"/>
+            <path d="M62 45 L72 50 L72 65 L62 60 Z" stroke="#ffd700" stroke-width="1.5" fill="rgba(255,215,0,0.3)"/>
+            <circle cx="67" cy="56" r="3" fill="#ffffff"/>
+            <path d="M28 80 L32 40" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
         </svg>`
     },
     {
         id: 9,
         numero: "X",
-        nome: "Roda da Fortuna",
-        direito: "Mudança, evolução, julgamento equilibrado.",
-        invertido: "Transformação lenta e difícil.",
+        nome: "A Roda da Fortuna",
+        direito: "Mudança rápida, destino favorável, oportunidade inesperada e sucesso cíclico.",
+        invertido: "Instabilidade transitória, imprevistos e resistência aos ciclos da vida.",
         elemento: "Fogo / Júpiter",
-        palavrasChave: ["Ciclos", "Mudança", "Oportunidade", "Destino"],
-        acaoSugerida: "Aproveitar o momento favorável para iniciar um novo ciclo e adaptar-se às mudanças.",
-        afirmacao: "Abraço os ciclos da vida e fluo com sabedoria em direção à evolução.",
+        palavrasChave: ["Destino", "Ciclos", "Oportunidade", "Transformação"],
+        acaoSugerida: "Aproveitar uma oportunidade rápida que surgir hoje sem hesitar.",
+        afirmacao: "Abraço as viradas do destino com entusiasmo e confiança na abundância do universo.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Os ventos da sorte estão virando a seu favor; esteja pronto para agarrar a chance.",
+        amor: "Reviravolta apaixonante, reencontro significativo e nova fase dinâmica a dois.",
+        trabalho: "Novos contatos de negócio, ganhos inesperados e guinada positiva na carreira.",
+        arquetipoVida: "O Agente da Sincronicidade: dinâmico, adaptável e sempre sintonizado com o fluxo do destino.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <circle cx="50" cy="50" r="26" stroke="#ffd700" stroke-width="2.5"/>
-            <circle cx="50" cy="50" r="10" stroke="#8257e5" stroke-width="2"/>
-            <path d="M50 24 L50 76 M24 50 L76 50 M32 32 L68 68 M32 68 L68 32" stroke="#d4af37" stroke-width="1.5"/>
-            <circle cx="50" cy="50" r="3" fill="#ffd700"/>
+            <circle cx="50" cy="50" r="28" stroke="#d4af37" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="10" stroke="#ffd700" stroke-width="2" fill="rgba(130,87,229,0.2)"/>
+            <path d="M50 22 L50 40 M50 60 L50 78 M22 50 L40 50 M60 50 L78 50" stroke="#d4af37" stroke-width="2"/>
+            <path d="M30 30 L43 43 M57 57 L70 70 M70 30 L57 43 M43 57 L30 70" stroke="#8257e5" stroke-width="1.5"/>
         </svg>`
     },
     {
         id: 10,
         numero: "XI",
         nome: "A Força",
-        direito: "Domínio de si, firmeza, poder de dirigir.",
-        invertido: "Brutalidade ou fraqueza, risco de ser dominado.",
+        direito: "Coragem moral, serenidade, domínio das paixões e vitória pacífica.",
+        invertido: "Impaciência, explosão de raiva, fraqueza interior ou esforço excessivo.",
         elemento: "Fogo / Leão",
-        palavrasChave: ["Autodomínio", "Gentileza", "Coragem", "Poder Interno"],
-        acaoSugerida: "Lidar com situações desafiadoras através da paciência e firmeza serena, sem agressividade.",
-        afirmacao: "Minha maior força reside na serenidade, coragem e domínio de mim mesmo.",
+        palavrasChave: ["Coragem", "Paciência", "Magnetismo", "Autodomínio"],
+        acaoSugerida: "Resolver um desafio interpessoal com calma, afeto e paciência inabalável.",
+        afirmacao: "Minha verdadeira força nasce da calma, do amor e do autocontrole sereno.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Domine suas ansiedades com gentileza e o resultado será vitorioso.",
+        amor: "Amor ardente equilibrado com ternura; cumplicidade capaz de superar qualquer atrito.",
+        trabalho: "Negociações delicadas resolvidas com diplomacia assertiva e persuasão moral.",
+        arquetipoVida: "O Domador Sereno: corajoso, magnético, compassivo e mestre no autocontrole e empatia.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M30 35 Q40 25 50 35 T70 35 Q60 45 50 35 T30 35" stroke="#ffd700" stroke-width="2.5" fill="none"/>
-            <path d="M35 55 C35 45 65 45 65 55 C65 68 50 78 50 78 C50 78 35 68 35 55 Z" stroke="#8257e5" stroke-width="2" fill="rgba(130,87,229,0.2)"/>
-            <circle cx="50" cy="58" r="4" fill="#ffd700"/>
+            <path d="M36 34 C30 24 20 34 26 44 C34 54 44 34 50 34 C56 34 66 54 74 44 C80 34 70 24 64 34 C58 44 42 24 36 34 Z" stroke="#ffd700" stroke-width="2" fill="none"/>
+            <path d="M35 56 C40 52 60 52 65 56 C70 60 70 76 50 78 C30 76 30 60 35 56 Z" fill="rgba(130,87,229,0.2)" stroke="#8257e5" stroke-width="2"/>
+            <circle cx="44" cy="64" r="3" fill="#ffd700"/>
+            <circle cx="56" cy="64" r="3" fill="#ffd700"/>
         </svg>`
     },
     {
         id: 11,
         numero: "XII",
-        nome: "O Dependurado",
-        direito: "Espera, renúncia, indecisão.",
-        invertido: "Éxito incerto, reticência, projeto secreto.",
+        nome: "O Enforcado",
+        direito: "Desprendimento, sacrifício voluntário, nova perspectiva e iluminação sutil.",
+        invertido: "Sacrifício inútil, estagnação, teimosia cega e vitimismo.",
         elemento: "Água / Netuno",
-        palavrasChave: ["Perspectiva", "Pausa", "Entrega", "Ressignificação"],
-        acaoSugerida: "Olhar para uma pendência por outro ângulo; praticar a paciência antes de agir por impulso.",
-        afirmacao: "Ao soltar o controle apressado, ganho nova perspectiva e clareza profunda.",
+        palavrasChave: ["Pausa", "Perspectiva", "Desapego", "Iluminação"],
+        acaoSugerida: "Olhar uma situação difícil sob uma ótica totalmente nova e abrir mão do controle.",
+        afirmacao: "Ao soltar o controle aparente, encontro paz e novas visões transformadoras.",
+        simNao: "NÃO",
+        simNaoDesc: "Não no momento. É tempo de pausa, reflexão e ajuste de expectativas antes de avançar.",
+        amor: "Período de reflexão e paciência; evite cobrar respostas imediatas de quem ama.",
+        trabalho: "Aguarde o momento mais favorável para lançamentos; repense as estratégias.",
+        arquetipoVida: "O Visionário Iluminado: capaz de enxergar o mundo sob prismas que ninguém mais percebe.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M26 24 L74 24 M50 24 L50 48" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
-            <path d="M50 48 L42 62 L50 72 L58 62 Z" fill="#8257e5"/>
-            <path d="M50 48 L62 58 M42 66 L58 66" stroke="#9466ff" stroke-width="2"/>
-            <circle cx="50" cy="80" r="5" fill="#ffd700"/>
+            <path d="M25 24 L75 24 M50 24 L50 38" stroke="#d4af37" stroke-width="2.5"/>
+            <path d="M50 38 L50 68 M40 54 L60 54 M50 68 L36 82 M50 68 L64 82" stroke="#8257e5" stroke-width="2"/>
+            <circle cx="50" cy="38" r="6" fill="#ffd700"/>
         </svg>`
     },
     {
         id: 12,
         numero: "XIII",
-        nome: "A Morte (Sem Nome)",
-        direito: "Renovação, fim de etapa, mudança total.",
-        invertido: "Estagnação, mudança adiada.",
+        nome: "A Morte",
+        direito: "Fim inevitável de um ciclo, renovação completa, libertação e renascimento.",
+        invertido: "Resistência ao fim, medo da perda, apego ao passado e luto prolongado.",
         elemento: "Água / Escorpião",
-        palavrasChave: ["Transformação", "Renovação", "Desapego", "Recomeço"],
-        acaoSugerida: "Desapegar-se de hábitos, objetos ou pendências antigas para abrir espaço ao novo.",
-        afirmacao: "Liberto o que já cumpriu seu ciclo para permitir o renascimento em minha vida.",
+        palavrasChave: ["Renascimento", "Transformação", "Desapego", "Transmutação"],
+        acaoSugerida: "Desfazer-se de um hábito antigo, crença limitante ou objeto acumulado que não serve mais.",
+        afirmacao: "Fecho o passado com gratidão e me abro com alegria para o novo que renasce.",
+        simNao: "TALVEZ",
+        simNaoDesc: "O que você conhecia está mudando radicalmente; algo precisa morrer para o novo nascer.",
+        amor: "Transformação drástica na relação ou superação definitiva de um amor do passado.",
+        trabalho: "Término de um contrato ou rotina desgastada abrindo portas para uma nova carreira.",
+        arquetipoVida: "O Transmutador Fênix: regenerativo, resiliente, cirúrgico em deixar para trás o supérfluo.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M34 26 C56 20 74 36 68 56 C62 50 56 46 44 48 L34 26 Z" fill="#d4af37" fill-opacity="0.3" stroke="#d4af37" stroke-width="2"/>
-            <path d="M34 26 L66 82" stroke="#8257e5" stroke-width="3" stroke-linecap="round"/>
-            <circle cx="48" cy="62" r="3" fill="#ffd700"/>
+            <path d="M30 78 L65 24" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M65 24 C60 16 80 18 82 28 C84 36 74 38 65 24 Z" fill="#8257e5" stroke="#8257e5" stroke-width="1.5"/>
+            <circle cx="44" cy="58" r="4" fill="#ffd700"/>
+            <path d="M26 80 Q40 68 54 80" stroke="#9466ff" stroke-width="1.5"/>
         </svg>`
     },
     {
         id: 13,
         numero: "XIV",
         nome: "A Temperança",
-        direito: "Conciliação, adaptação, decisão sem pressa.",
-        invertido: "Perturbação, discordância.",
+        direito: "Moderação, equilíbrio emocional, paciência, serenidade e cura harmoniosa.",
+        invertido: "Desarmonia, excessos, impaciência, conflitos e falta de ritmo.",
         elemento: "Fogo / Sagitário",
-        palavrasChave: ["Harmonia", "Equilíbrio", "Moderação", "Cura"],
-        acaoSugerida: "Buscar o caminho do meio em qualquer conflito; equilibrar descanso e trabalho hoje.",
-        afirmacao: "Equilibro minhas energias e ajo com tranquilidade e harmonia.",
+        palavrasChave: ["Harmonia", "Equilíbrio", "Alquimia", "Paciência"],
+        acaoSugerida: "Praticar a moderação hoje: equilibrar horas de esforço com momentos de descanso consciente.",
+        afirmacao: "Sou fonte de paz e equilíbrio; harmonizo meus pensamentos com sabedoria.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! A moderação, paciência e diplomacia trarão o melhor resultado possível.",
+        amor: "Relação carinhosa, pacífica, cura de antigas feridas e união equilibrada.",
+        trabalho: "Cooperação tranquila no ambiente profissional, finanças protegidas e processos sem atritos.",
+        arquetipoVida: "O Pacificador Alquímico: equilibrador de conflitos, tolerante, generoso e curador nato.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M34 38 L44 38 L42 56 L36 56 Z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.2)"/>
-            <path d="M66 52 L56 52 L58 70 L64 70 Z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.2)"/>
-            <path d="M40 48 Q50 44 60 62" stroke="#8257e5" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3"/>
-            <path d="M26 30 L50 20 L74 30" stroke="#9466ff" stroke-width="1.5"/>
+            <path d="M35 34 C35 34 30 46 38 52 C44 56 46 48 46 48 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.2)"/>
+            <path d="M65 66 C65 66 70 54 62 48 C56 44 54 52 54 52 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.2)"/>
+            <path d="M42 46 Q50 50 58 54" stroke="#8257e5" stroke-width="2.5" stroke-dasharray="3 2"/>
+            <path d="M26 26 L42 36 M74 26 L58 36" stroke="#ffd700" stroke-width="1.5"/>
         </svg>`
     },
     {
         id: 14,
         numero: "XV",
         nome: "O Diabo",
-        direito: "Éxito material, influência, advertência.",
-        invertido: "Desordem, negócios escusos.",
+        direito: "Força magnética, paixão intensa, energia instintiva e triunfo material.",
+        invertido: "Libertação de dependências, quebra de ilusões e saída de um ciclo vicioso.",
         elemento: "Terra / Capricórnio",
-        palavrasChave: ["Ambição", "Apego", "Instintos", "Alerta"],
-        acaoSugerida: "Identificar onde você está preso por apegos ou compulsões e retomar o controle de suas escolhas.",
-        afirmacao: "Reconheço minhas sombras e mantenho o livre-arbítrio acima de qualquer amarra.",
+        palavrasChave: ["Paixão", "Magnetismo", "Apego", "Sombra"],
+        acaoSugerida: "Identificar onde você está agindo por medo ou apego e recuperar seu poder pessoal.",
+        afirmacao: "Reconheço minhas sombras e uso minha energia vital para criar o bem com liberdade.",
+        simNao: "NÃO",
+        simNaoDesc: "Não insista por ambição desmedida ou atalhos ilusórios. Analise o que o aprisiona.",
+        amor: "Atração física intensa e magnética, mas pede vigilância contra ciúmes e posse.",
+        trabalho: "Potencial de lucros elevados, porém exija total transparência em contratos.",
+        arquetipoVida: "O Despertador de Sombras: astuto, magnético e capaz de transmutar desejos materiais em força criativa.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 22 L62 42 L38 42 Z" stroke="#f75a68" stroke-width="2" fill="rgba(247,90,104,0.15)"/>
-            <path d="M50 42 L62 62 L38 62 Z" stroke="#8257e5" stroke-width="2" fill="rgba(130,87,229,0.15)"/>
-            <circle cx="50" cy="52" r="5" fill="#f75a68"/>
-            <path d="M34 74 L66 74" stroke="#a0a0a0" stroke-width="3" stroke-dasharray="4 4"/>
+            <path d="M50 25 L56 38 L70 38 L58 48 L62 62 L50 52 L38 62 L42 48 L30 38 L44 38 Z" stroke="#f75a68" stroke-width="1.5" fill="rgba(247,90,104,0.15)"/>
+            <circle cx="42" cy="46" r="3" fill="#ffd700"/>
+            <circle cx="58" cy="46" r="3" fill="#ffd700"/>
+            <path d="M36 74 C42 66 58 66 64 74" stroke="#8257e5" stroke-width="2.5"/>
         </svg>`
     },
     {
         id: 15,
         numero: "XVI",
         nome: "A Torre",
-        direito: "Interrupção brusca, choque, advertência.",
-        invertido: "Grande abalo, confusão.",
+        direito: "Queda de falsas ilusões, libertação repentina e desmoronamento de estruturas frágeis.",
+        invertido: "Prisão voluntária, adiamento do inevitável ou catástrofe evitada por pouco.",
         elemento: "Fogo / Marte",
-        palavrasChave: ["Libertação", "Ruptura", "Revelação", "Despertar"],
-        acaoSugerida: "Desapegar-se de ilusões e reconstruir suas bases com autenticidade após um imprevisto.",
-        afirmacao: "Tudo o que cai abre caminho para alicerces mais verdadeiros e sólidos.",
+        palavrasChave: ["Ruptura", "Revelação", "Libertação", "Verdade"],
+        acaoSugerida: "Aceitar uma mudança imprevista com coragem e reconstruir sobre bases autênticas.",
+        afirmacao: "A verdade me liberta de estruturas ilusórias; renasço mais forte e consciente.",
+        simNao: "NÃO",
+        simNaoDesc: "Não. A estrutura atual não se sustentará; o imprevisto chega para limpar o caminho.",
+        amor: "Ruptura de ilusões ou fim de um silêncio incômodo com verdades necessárias à tona.",
+        trabalho: "Mudança inesperada de rumo profissional; oportunidade de recomeçar em terreno firme.",
+        arquetipoVida: "O Libertador Radical: detesta superficialidades, quebra paradigmas e reconstrói com solidez.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M40 32 L36 78 L64 78 L60 32 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
-            <path d="M36 32 L50 22 L64 32" stroke="#d4af37" stroke-width="2"/>
-            <path d="M54 18 L46 36 L54 40 L44 58" stroke="#f75a68" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="48" cy="52" r="2" fill="#ffd700"/>
+            <path d="M38 78 L42 36 L58 36 L62 78 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
+            <path d="M42 36 L36 30 L50 22 L64 30 L58 36 Z" stroke="#ffd700" stroke-width="1.5" fill="rgba(255,215,0,0.3)"/>
+            <path d="M50 16 L46 26 L54 28 L48 38" stroke="#f75a68" stroke-width="2" stroke-linecap="round"/>
         </svg>`
     },
     {
         id: 16,
         numero: "XVII",
         nome: "A Estrela",
-        direito: "Inspiração, esperança, harmonia.",
-        invertido: "Harmonia rompida ou sem duração.",
+        direito: "Esperança viva, bênção cósmica, inspiração pura, cura e beleza.",
+        invertido: "Desesperança passageira, desânimo injustificado e falta de fé em si.",
         elemento: "Ar / Aquário",
-        palavrasChave: ["Esperança", "Inspiração", "Fé", "Harmonia"],
-        acaoSugerida: "Cultivar o otimismo, planejar seus objetivos a longo prazo e compartilhar gentileza.",
-        afirmacao: "Confio no fluxo luminoso do universo e renono minha esperança diariamente.",
+        palavrasChave: ["Esperança", "Inspiração", "Fé Cósmica", "Renovação"],
+        acaoSugerida: "Cultivar a gratidão e dar um passo ousado guiado pela sua maior inspiração.",
+        afirmacao: "Minha estrela brilha no céu; estou sob a proteção carinhosa do universo.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Um dos maiores presságios do Tarô; bênçãos e realização no horizonte.",
+        amor: "Amor generoso, cura de desilusões passadas, conexão de almas e ternura radiante.",
+        trabalho: "Sucesso com ideias criativas, visibilidade merecida e caminhos de abundância.",
+        arquetipoVida: "O Farol da Esperança: carismático, visionário, humanitário e irradiador de luz e consolo.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 18 L53 38 L72 38 L57 50 L63 70 L50 58 L37 70 L43 50 L28 38 L47 38 Z" fill="#ffd700" fill-opacity="0.3" stroke="#ffd700" stroke-width="2"/>
-            <circle cx="28" cy="30" r="2.5" fill="#9466ff"/>
-            <circle cx="72" cy="30" r="2.5" fill="#9466ff"/>
-            <circle cx="76" cy="65" r="2.5" fill="#9466ff"/>
-            <path d="M30 82 Q50 72 70 82" stroke="#8257e5" stroke-width="2"/>
+            <polygon points="50,20 54,34 68,34 57,43 61,56 50,47 39,56 43,43 32,34 46,34" fill="#ffd700" stroke="#d4af37" stroke-width="1"/>
+            <circle cx="28" cy="30" r="3" fill="#8257e5"/>
+            <circle cx="72" cy="30" r="3" fill="#8257e5"/>
+            <circle cx="24" cy="62" r="3" fill="#8257e5"/>
+            <circle cx="76" cy="62" r="3" fill="#8257e5"/>
+            <path d="M30 76 Q50 68 70 76" stroke="#9466ff" stroke-width="2"/>
         </svg>`
     },
     {
         id: 17,
         numero: "XVIII",
         nome: "A Lua",
-        direito: "Engano, confusão, segredo desvendado.",
-        invertido: "Instinto acentuado, confusão latente.",
+        direito: "Intuição sutil, imaginação fértil, revelação de mistérios inconscientes.",
+        invertido: "Ilusões desfeitas, medos superados, fim de armadilhas e clareza nas sombras.",
         elemento: "Água / Peixes",
-        palavrasChave: ["Subconsciente", "Ilusão", "Mistério", "Sentimentos"],
-        acaoSugerida: "Não agir sob efeito da dúvida ou boatos; esperar a névoa dissipar antes de decisões capitais.",
-        afirmacao: "Confio em minha visão profunda e discirno a verdade em meio às incertezas.",
+        palavrasChave: ["Inconsciente", "Ilusão", "Sonhos", "Clarividência"],
+        acaoSugerida: "Prestar atenção aos seus sonhos ou escrever sobre seus medos para trazê-los à luz.",
+        afirmacao: "Navego pelas águas profundas do inconsciente com coragem e lucidez.",
+        simNao: "TALVEZ",
+        simNaoDesc: "Cuidado com mal-entendidos e fantasias; espere a névoa dissipar antes de agir.",
+        amor: "Emoções à flor da pele, romantismo poético, mas requer cuidado com desconfianças infundadas.",
+        trabalho: "Excelente para artes e imaginação criativa; atenção redobrada a cláusulas contratuais.",
+        arquetipoVida: "O Místico dos Sonhos: hipersensível, empático, capaz de decifrar o invisível e curar emoções.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M56 22 A28 28 0 1 0 56 78 A34 34 0 0 1 56 22 Z" fill="#d4af37" fill-opacity="0.3" stroke="#d4af37" stroke-width="2"/>
-            <path d="M32 76 C40 70 44 70 52 76 C60 82 64 82 72 76" stroke="#8257e5" stroke-width="2"/>
-            <circle cx="34" cy="54" r="3" fill="#9466ff"/>
-            <circle cx="66" cy="54" r="3" fill="#9466ff"/>
+            <path d="M50 20 C66 20 80 34 80 50 C80 66 66 80 50 80 C56 70 60 60 60 50 C60 40 56 30 50 20 Z" fill="#ffd700" stroke="#d4af37" stroke-width="1.5"/>
+            <circle cx="34" cy="72" r="6" stroke="#8257e5" stroke-width="2"/>
+            <circle cx="66" cy="72" r="6" stroke="#8257e5" stroke-width="2"/>
+            <path d="M42 46 L58 46" stroke="#8257e5" stroke-width="1.5"/>
         </svg>`
     },
     {
         id: 18,
         numero: "XIX",
         nome: "O Sol",
-        direito: "Sucesso, clareza, vitalidade, afeto altruísta.",
-        invertido: "Contrariedade, tatear no escuro.",
+        direito: "Clareza total, alegria transbordante, sucesso pleno, vitalidade e verdade.",
+        invertido: "Sucesso atrasado, orgulho excessivo ou deslumbramento passageiro.",
         elemento: "Fogo / Sol",
-        palavrasChave: ["Vitalidade", "Clareza", "Alegria", "Sucesso"],
-        acaoSugerida: "Celebrar uma vitória recente, energizar suas tarefas e agir com transparência calorosa.",
-        afirmacao: "A luz do sucesso e da alegria brilha em todas as minhas ações de hoje.",
+        palavrasChave: ["Sucesso", "Vitalidade", "Alegria", "Celebração"],
+        acaoSugerida: "Celebrar uma vitória recente e compartilhar sua energia positiva com alguém próximo.",
+        afirmacao: "Sou pura vitalidade e luz; meu brilho ilumina o mundo com alegria autêntica.",
+        simNao: "SIM",
+        simNaoDesc: "Sim com louvor! O Arcano mais luminoso; triunfo, celebração e calor na sua questão.",
+        amor: "Harmonia completa, felicidade conjugal, casamento ou encontro com alma afim.",
+        trabalho: "Vitória consagrada, reconhecimento do seu talento e excelente retorno financeiro.",
+        arquetipoVida: "O Portador da Luz: alegre, motivador, caloroso, líder natural que espalha otimismo genuíno.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <circle cx="50" cy="50" r="18" fill="#ffd700" fill-opacity="0.25" stroke="#ffd700" stroke-width="2.5"/>
-            <path d="M50 18 L50 26 M50 74 L50 82 M18 50 L26 50 M74 50 L82 50" stroke="#ffd700" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M28 28 L34 34 M66 66 L72 72 M28 72 L34 66 M66 34 L72 28" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="50" cy="50" r="5" fill="#8257e5"/>
+            <circle cx="50" cy="50" r="18" fill="#ffd700" stroke="#d4af37" stroke-width="2"/>
+            <path d="M50 16 L50 26 M50 74 L50 84 M16 50 L26 50 M74 50 L84 50" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/>
+            <path d="M26 26 L33 33 M67 67 L74 74 M74 26 L67 33 M33 67 L26 74" stroke="#ffd700" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="44" cy="46" r="2.5" fill="#121214"/>
+            <circle cx="56" cy="46" r="2.5" fill="#121214"/>
+            <path d="M44 56 Q50 60 56 56" stroke="#121214" stroke-width="2" stroke-linecap="round"/>
         </svg>`
     },
     {
         id: 19,
         numero: "XX",
         nome: "O Julgamento",
-        direito: "Despertar, avaliação, estabilidade.",
-        invertido: "Erro a respeito de si mesmo.",
+        direito: "Despertar da alma, chamado da vocação, renascimento e colheita justa.",
+        invertido: "Resistência ao chamado, hesitação em perdoar e julgamento errôneo de si mesmo.",
         elemento: "Fogo / Plutão",
         palavrasChave: ["Despertar", "Chamado", "Libertação", "Avaliação"],
         acaoSugerida: "Fazer uma autoavaliação sincera e responder ao seu verdadeiro propósito sem adiar mais.",
-        afirmacao: "Ouço meu chamado superior e desperto para uma nova versão de mim.",
+        afirmacao: "Ouço meu chamado superior e desperto alegremente para uma nova versão de mim.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! A hora da libertação e do chamado positivo para um novo patamar chegou.",
+        amor: "Restauração de confiança, novo rumo libertador ou perdão mútuo que cura tudo.",
+        trabalho: "Chamado vocacional claro, reconhecimento de méritos passados e nova fase profissional.",
+        arquetipoVida: "O Despertador de Consciências: visionário, catalisador de renascimento pessoal e coletivo.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M38 32 L62 20 L62 44 Z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.2)"/>
@@ -365,12 +474,17 @@ const ARCANOS_DATA = [
         id: 20,
         numero: "XXI",
         nome: "O Mundo",
-        direito: "Realização, elevação, sucesso.",
-        invertido: "Ciladas, insucesso, triunfo negado.",
+        direito: "Realização plena, conquista total, integração cósmica, triunfo e êxito duradouro.",
+        invertido: "Conclusão que se arrasta, pequenas pendências para fechar o ciclo.",
         elemento: "Terra / Saturno",
         palavrasChave: ["Plenitude", "Conclusão", "Sucesso Total", "Harmonia"],
         acaoSugerida: "Concluir um ciclo ou tarefa com excelência e comemorar o caminho percorrido.",
-        afirmacao: "Estou em perfeita sintonia com a vida e celebro minhas conquistas.",
+        afirmacao: "Estou em perfeita sintonia com a vida e celebro minhas conquistas com plenitude.",
+        simNao: "SIM",
+        simNaoDesc: "Sim absoluto! Plenitude cósmica, realização de planos e encerramento com chave de ouro.",
+        amor: "Amor consumado, sentimento de completude mútua e planos de futuro realizados.",
+        trabalho: "Sucesso consagrado, projeção ampla, viagens a negócios e colheita abundante.",
+        arquetipoVida: "O Integrador Universal: conectado com o todo, cosmopolita, harmonioso e mestre da realização.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <ellipse cx="50" cy="50" rx="24" ry="32" stroke="#d4af37" stroke-width="2.5" fill="rgba(212,175,55,0.1)"/>
@@ -385,12 +499,17 @@ const ARCANOS_DATA = [
         id: 21,
         numero: "0",
         nome: "O Louco",
-        direito: "Partida, mudança, despreocupação.",
-        invertido: "Queda, interrupção, confusão.",
+        direito: "Partida corajosa, espontaneidade, liberdade interior, início sem amarras.",
+        invertido: "Imprudência cega, distração, fuga de responsabilidades e precipitação.",
         elemento: "Ar / Urano",
         palavrasChave: ["Novo Começo", "Espontaneidade", "Liberdade", "Fé"],
         acaoSugerida: "Ousar dar um passo inédito sem medo do desconhecido; abrir-se a novas aventuras.",
-        afirmacao: "Confio no infinito e inicio minha jornada com coração leve e livre.",
+        afirmacao: "Confio no infinito e inicio minha jornada com coração leve, puro e livre.",
+        simNao: "SIM",
+        simNaoDesc: "Sim! Se você tiver coragem de dar o salto de fé desapegado do medo.",
+        amor: "Novo romance apaixonante, leveza, espontaneidade e liberdade para ser quem você é.",
+        trabalho: "Início de um projeto pioneiro, inovação ousada e quebra de regras antiquadas.",
+        arquetipoVida: "O Peregrino da Liberdade: desbravador, autêntico, espontâneo, conectado com a pura fé cósmica.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
             <path d="M30 68 L64 34" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
@@ -405,4 +524,33 @@ const ARCANOS_DATA = [
 // Helper para obter arcano por ID
 function getArcanoById(id) {
     return ARCANOS_DATA.find(a => a.id === id);
+}
+
+// Helper para calcular Arcano de Nascimento a partir de uma data (YYYY-MM-DD ou DD/MM/AAAA)
+function calcularArcanoDeNascimento(dataNascimento) {
+    if (!dataNascimento) return ARCANOS_DATA[0];
+    
+    // Extrai números
+    const cleanNumbers = dataNascimento.replace(/\D/g, '');
+    if (cleanNumbers.length < 8) return ARCANOS_DATA[0];
+
+    // Soma todos os dígitos
+    let soma = 0;
+    for (let char of cleanNumbers) {
+        soma += parseInt(char, 10);
+    }
+
+    // Redução clássica do Tarô: se soma > 22, soma os dígitos novamente até ficar entre 1 e 22
+    while (soma > 22) {
+        let temp = 0;
+        soma.toString().split('').forEach(d => temp += parseInt(d, 10));
+        soma = temp;
+    }
+
+    // Se soma for 22, corresponde ao O Louco (id 21) ou O Mundo (id 20)
+    // Na tradição: 1 = Mago (id 0) ... 21 = Mundo (id 20), 22/0 = O Louco (id 21)
+    if (soma === 22 || soma === 0) {
+        return ARCANOS_DATA[21]; // O Louco
+    }
+    return ARCANOS_DATA[soma - 1] || ARCANOS_DATA[0];
 }
