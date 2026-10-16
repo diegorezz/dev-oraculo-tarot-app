@@ -33,13 +33,13 @@
       "id": "fa77cd8e-7213-4ed5-9464-355ead289d7a",
       "role": "user",
       "content": "Quero que aprimore o app para que hajam mais recursos funcionais e interativos, também com possibilidade de criar uma conta (sei que inicialmente não será possível desenvolver completamente até que possamos hospedar o site), mas quero fazer desse app um sistema bastante interativo e que gere retenção diária. Use como referência o seguinte site:\n\nhttps://www.otarot.net/",
-      "status": "pending",
+      "status": "cancelled",
       "model": "gemini-3.8-flash-high",
       "client_type": "gemini-bridge",
       "parent_message_id": null,
       "created_at": "2026-10-16T00:41:38.632Z",
       "sender": "ios",
-      "is_cancelled": false
+      "is_cancelled": true
     }
   ]
 }
