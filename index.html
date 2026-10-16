@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oráculo do Tarô & To-Do Sagrado | Arcanos Maiores</title>
-    <meta name="description" content="Oráculo dos Arcanos Maiores com tiragens de 1, 3 e 5 cartas e gestor integrado de tarefas e ações inspiradas.">
+    <title>Oráculo do Tarô & To-Do Sagrado | Arcanos Maiores & Retenção Cósmica</title>
+    <meta name="description" content="Oráculo interativo dos 22 Arcanos Maiores com tiragem de mesa interativa, ritual diário, Tarot do Amor, Sim ou Não, Cruz Céltica, perfil de usuário com Arcano de Nascimento e gestor sagrado de tarefas.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,34 +19,61 @@
     <header>
         <div class="top-bar">
             <div class="brand-badge">
-                <span>✦</span> Informativo Iniciático • Arcanos Maiores
+                <span>✦</span> Portal Iniciático • Arcanos & Ação Consciente
             </div>
+            
             <div class="top-actions">
+                <!-- Sequência Diária (Streak) -->
+                <button class="streak-badge" id="headerStreakBadge" onclick="openProfileModal('profile')" title="Sua sequência de dias consecutivos no Oráculo">
+                    🔥 <span id="headerStreakCount">1</span> dia(s)
+                </button>
+
+                <!-- Nível e XP -->
+                <button class="level-badge" id="headerLevelBadge" onclick="openProfileModal('profile')" title="Seu Nível Místico e Pontos de Sabedoria">
+                    ✨ <span id="headerLevelTitle">Aprendiz</span> (<span id="headerXpCount">0</span> XP)
+                </button>
+
+                <!-- Som Ambiente Meditativo (Drone Cósmico 432Hz) -->
+                <button id="toggleDroneBtn" class="icon-btn text-icon-btn" onclick="toggleAmbientDrone()" title="Ativar/Desativar Frequência Harmônica 432Hz">
+                    🧘 432Hz
+                </button>
+
+                <!-- Efeitos Sonoros -->
                 <button id="toggleAudioBtn" class="icon-btn" onclick="toggleAudio()" title="Ativar/Desativar Sons">
                     🔊
+                </button>
+
+                <!-- Botão de Perfil / Conta -->
+                <button id="userProfileBtn" class="user-profile-btn" onclick="openProfileModal()" title="Minha Conta & Perfil Astral">
+                    <span id="headerAvatarIcon" class="avatar-icon">🧙‍♂️</span>
+                    <span id="headerUserName" class="user-name">Viajante</span>
                 </button>
             </div>
         </div>
 
         <h1>Oráculo & Tarefas Sagradas</h1>
         <p class="subtitle">
-            Estudo simbólico e tiragens dos 22 Arcanos Maiores integrados a um gestor de ações conscientes e metas diárias.
+            Tiragens interativas com escolha manual de cartas, ritual matinal diário, perfil astral e gestor de ações conscientes.
         </p>
 
         <!-- Navegação por Abas -->
         <nav class="tabs-nav" aria-label="Navegação da Aplicação">
             <button class="tab-btn active" data-tab="oracle">
-                <span>🔮</span> Oráculo (Tiragens)
+                <span>🔮</span> Oráculo & Mesa
+            </button>
+            <button class="tab-btn" data-tab="daily" id="dailyTabBtn">
+                <span>☀️</span> Arcano do Dia
+                <span id="dailyNewBadge" class="badge-dot-glow" title="Ritual de hoje disponível!"></span>
             </button>
             <button class="tab-btn" data-tab="tasks">
                 <span>📋</span> Minhas Tarefas
                 <span id="tasksTabBadge" class="badge-count" style="display: none;">0</span>
             </button>
             <button class="tab-btn" data-tab="grimorio">
-                <span>📖</span> Grimório dos 22 Arcanos
+                <span>📖</span> Grimório & Alma
             </button>
             <button class="tab-btn" data-tab="history">
-                <span>📜</span> Histórico
+                <span>📜</span> Diário Cósmico
             </button>
         </nav>
     </header>
@@ -55,76 +82,141 @@
     <main class="main-wrapper">
 
         <!-- ============================================== -->
-        <!-- ABA 1: ORÁCULO / CONSULTA DE TARÔ             -->
+        <!-- ABA 1: ORÁCULO & MESA INTERATIVA              -->
         <!-- ============================================== -->
         <section id="tab-oracle" class="tab-content active">
             <div class="glass-panel">
-                <form class="oracle-form" onsubmit="event.preventDefault(); realizarTiragem();">
+                <form class="oracle-form" id="oracleMainForm" onsubmit="event.preventDefault(); iniciarTiragemEscolhida();">
                     
+                    <!-- Seleção do Método de Tiragem (Inspirado no oTarot.net) -->
+                    <div class="form-group">
+                        <label for="spreadType">
+                            <span>✦</span> Escolha a Consulta Desejada:
+                        </label>
+                        <select id="spreadType" onchange="atualizarDicasPergunta()">
+                            <option value="cruz-celtica" selected>🔮 Cruz Céltica Completa (10 Cartas - O Mais Completo)</option>
+                            <option value="5">👑 Método Sagrado de 5 Cartas (Raiz, Momento, Desafio, Conselho, Síntese)</option>
+                            <option value="amor">💖 Tarot do Amor & Relações (3 Cartas: Você, O Outro, Futuro da União)</option>
+                            <option value="trabalho">💼 Prosperidade & Carreira (3 Cartas: Cenário, Desafio, Chave do Sucesso)</option>
+                            <option value="simnao">⚡ Tarot Sim ou Não (1 Carta - Resposta Clara & Termômetro Intuitivo)</option>
+                            <option value="3">🌱 Tríade da Jornada (3 Cartas: Situação Atual, Atenção, Orientação)</option>
+                            <option value="1">✨ Reflexão Rápida (1 Arcano de Orientação)</option>
+                        </select>
+                    </div>
+
                     <!-- Campo de Pergunta -->
                     <div class="form-group">
                         <label for="question">
-                            <span>✦</span> Qual a sua pergunta ou foco para a consulta?
+                            <span>✦</span> Qual a sua dúvida, foco ou intenção para o Oráculo?
                         </label>
                         <div class="input-container">
                             <input 
                                 type="text" 
                                 id="question" 
-                                placeholder="Ex: O que preciso compreender sobre meu momento atual e o que devo focar hoje?"
+                                placeholder="Ex: O que preciso compreender sobre o meu caminho e qual ação focar agora?"
                                 autocomplete="off"
                                 required
                             >
                         </div>
                         
-                        <!-- Sugestões Rápidas de Foco -->
-                        <div class="suggestion-chips">
-                            <span class="chip" data-question="O que preciso compreender sobre meu momento atual?">✦ Momento Atual</span>
-                            <span class="chip" data-question="Qual conselho para destravar meu trabalho e metas hoje?">⚡ Trabalho & Ação</span>
-                            <span class="chip" data-question="Como equilibrar minhas emoções e ter clareza nas decisões?">🌱 Equilíbrio & Clareza</span>
-                            <span class="chip" data-question="Qual energia rege o meu dia e qual ação devo tomar?">☀️ Arcano do Dia</span>
+                        <!-- Categorias de Sugestões Rápidas -->
+                        <div class="chips-categories-row">
+                            <span class="chips-category-label">Sugestões de Foco:</span>
+                            <div class="suggestion-chips" id="suggestionChipsContainer">
+                                <!-- Chips inseridos dinamicamente por JS conforme tipo de tiragem -->
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Seleção do Método de Tiragem -->
-                    <div class="form-group">
-                        <label for="spreadType">
-                            <span>✦</span> Escolha o Método de Tiragem:
-                        </label>
-                        <select id="spreadType">
-                            <option value="5" selected>Método Sagrado de 5 Cartas (Raiz, Momento, Obstáculo, Conselho, Arcano Chave)</option>
-                            <option value="3">Método de 3 Cartas (A Situação, O que pede atenção, A Orientação)</option>
-                            <option value="1">Arcano do Dia (1 Carta - Foco & Ação Prática)</option>
-                            <option value="simnao">Oráculo de Decisão Rápida (1 Carta - Conselho Direto)</option>
-                        </select>
+                    <!-- Botões de Disparo: Mesa Interativa vs Sorteio Rápido -->
+                    <div class="oracle-action-buttons">
+                        <button type="button" class="btn-primary btn-large-glow" onclick="abrirMesaInterativa()">
+                            <span>✨</span> Abrir Mesa Cósmica & Escolher Cartas
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="realizarTiragemInstantanea()" title="Sorteio automático sem ritual da mesa">
+                            <span>⚡</span> Tiragem Rápida Instantânea
+                        </button>
                     </div>
-
-                    <!-- Botão de Disparo -->
-                    <button type="submit" class="btn-primary" id="btnTiragem">
-                        <span>✨</span> Realizar Tiragem do Oráculo
-                    </button>
                 </form>
 
-                <!-- Resultados da Tiragem -->
+                <!-- ============================================== -->
+                <!-- MESA CÓSMICA INTERATIVA DE CARTAS (O TAROT STYLE) -->
+                <!-- ============================================== -->
+                <div id="interactiveDeckSection" class="interactive-deck-container" style="display: none;">
+                    <div class="deck-header-bar">
+                        <div class="deck-prompt-info">
+                            <span class="pulse-sparkle">✦</span>
+                            <span id="deckSelectionPrompt">Passe o cursor sobre as cartas e escolha com a sua intuição:</span>
+                        </div>
+                        
+                        <div class="deck-controls">
+                            <button type="button" class="btn-small-gold" onclick="embaralharMesaVisual()">
+                                <span>🔀</span> Embaralhar Baralho
+                            </button>
+                            <button type="button" class="btn-small-secondary" onclick="completarEscolhaAutomatica()">
+                                <span>⚡</span> Escolher Restantes
+                            </button>
+                            <button type="button" class="btn-small-ghost" onclick="fecharMesaInterativa()">
+                                <span>✕</span> Fechar Mesa
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bandeja de Cartas Selecionadas até o momento -->
+                    <div class="picked-slots-tray" id="pickedSlotsTray"></div>
+
+                    <!-- A Mesa com as 22 Cartas em leque/grid 3D -->
+                    <div class="interactive-deck-board" id="interactiveDeckBoard"></div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- RESULTADOS DA TIRAGEM REVELADA                -->
+                <!-- ============================================== -->
                 <div id="resultsContainer" class="results-container" style="display: none;">
                     
                     <!-- Cabeçalho Informativo da Tiragem Realizada -->
                     <div id="spreadInfo" class="spread-header-info"></div>
 
+                    <!-- Banner Especial para Tiragem Sim ou Não -->
+                    <div id="simNaoBanner" class="sim-nao-banner" style="display: none;"></div>
+
                     <!-- Grade com as Cartas 3D -->
                     <div id="results" class="spread-results"></div>
 
-                    <!-- Barra de Ação para Transformar em Tarefas -->
-                    <div id="readingActionBar" class="reading-action-bar" style="display: none;">
+                    <!-- Diário / Anotações Pessoais da Leitura -->
+                    <div class="reading-journal-box">
+                        <div class="journal-box-title">
+                            <span>📝</span> Diário Cósmico • Suas Impressões Pessoais
+                        </div>
+                        <p class="journal-box-desc">
+                            O que ressoou mais forte em você nesta consulta? Suas anotações ficam salvas no seu histórico.
+                        </p>
+                        <textarea 
+                            id="readingJournalInput" 
+                            class="reading-journal-textarea" 
+                            placeholder="Escreva aqui suas reflexões, sentimentos e percepções sobre essa tiragem..."
+                            oninput="salvarAnotacaoLeituraAtual()"
+                        ></textarea>
+                    </div>
+
+                    <!-- Barra de Ação da Leitura -->
+                    <div id="readingActionBar" class="reading-action-bar">
                         <div class="reading-summary-text">
-                            <h4>Transforme a Sabedoria em Ação</h4>
-                            <p>Adicione os conselhos das cartas sorteadas diretamente à sua lista diária de tarefas.</p>
+                            <h4>Transforme a Sabedoria em Ação Prática</h4>
+                            <p>Adicione os conselhos das cartas sorteadas diretamente à sua lista de tarefas conscientes.</p>
                         </div>
                         <div class="reading-buttons">
-                            <button type="button" class="btn-gold" onclick="addAllReadingAsTasks()">
-                                <span>🪄</span> Adicionar Conselhos como Tarefas
+                            <button type="button" id="btnToggleFavoriteReading" class="btn-secondary" onclick="toggleFavoritoLeituraAtual()">
+                                <span id="favIconText">⭐</span> Salvar nos Favoritos
                             </button>
-                            <button type="button" class="btn-secondary" onclick="switchTab('tasks')">
-                                <span>📋</span> Ver Minhas Tarefas
+                            <button type="button" class="btn-gold" onclick="addAllReadingAsTasks()">
+                                <span>🪄</span> Adicionar Conselhos como Tarefas (+XP)
+                            </button>
+                            <button type="button" class="btn-secondary" onclick="compartilharLeituraAtual()">
+                                <span>📤</span> Compartilhar Consulta
+                            </button>
+                            <button type="button" class="btn-secondary" onclick="abrirNovaConsulta()">
+                                <span>🔄</span> Nova Consulta
                             </button>
                         </div>
                     </div>
@@ -134,7 +226,106 @@
         </section>
 
         <!-- ============================================== -->
-        <!-- ABA 2: GESTOR DE TAREFAS (TO-DO APP)          -->
+        <!-- ABA 2: RITUAL MATINAL & ARCANO DO DIA (RETENÇÃO)-->
+        <!-- ============================================== -->
+        <section id="tab-daily" class="tab-content">
+            <div class="glass-panel daily-panel">
+                
+                <div class="daily-top-badge">
+                    <span>☀️</span> Ritual de Presença • Consulta Diária dos 22 Arcanos
+                </div>
+
+                <div class="daily-date-header">
+                    <h2 id="dailyDateTitle">Arcano do Dia</h2>
+                    <p id="dailyDateSubtitle">Sua bússola oracular para orientar a energia, mente e decisões de hoje.</p>
+                </div>
+
+                <!-- Estado 1: Se ainda não tirou a carta de hoje -->
+                <div id="dailyLockedState" class="daily-locked-box">
+                    <div class="daily-sacred-card-seal">
+                        <div class="sacred-seal-rings">
+                            <div class="seal-inner-star">✦</div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="daily-locked-title">O Véu do Dia Aguarda Sua Intenção</h3>
+                    <p class="daily-locked-desc">
+                        Tire sua carta diária todos os dias para manter sua sequência de sabedoria (Streak 🔥), ganhar +30 XP cósmico e receber sua missão e mantram matinal.
+                    </p>
+
+                    <button type="button" class="btn-primary btn-large-glow" onclick="realizarRitualArcanoDoDia()">
+                        <span>☀️</span> Revelar Meu Arcano de Hoje (+30 XP)
+                    </button>
+                </div>
+
+                <!-- Estado 2: Se já tirou a carta de hoje -->
+                <div id="dailyRevealedState" class="daily-revealed-box" style="display: none;">
+                    
+                    <div class="daily-showcase-row">
+                        <!-- Carta em destaque -->
+                        <div class="daily-card-container" id="dailyCardContainer"></div>
+
+                        <!-- Detalhes e Orientação do Dia -->
+                        <div class="daily-details-col">
+                            <div class="daily-guidance-card">
+                                <h4><span>✦</span> Energia Regente de Hoje</h4>
+                                <p id="dailyEnergyText" class="daily-text-highlight"></p>
+                            </div>
+
+                            <div class="daily-guidance-card quest-card">
+                                <h4><span>🎯</span> Desafio Consciente do Dia</h4>
+                                <p id="dailyQuestText"></p>
+                                <button type="button" class="btn-small-gold" id="btnDailyQuestToTask" onclick="adicionarMissaoDiariaComoTarefa()">
+                                    <span>➕</span> Adicionar às Minhas Tarefas de Hoje
+                                </button>
+                            </div>
+
+                            <div class="daily-guidance-card mantra-card">
+                                <h4><span>🧘</span> Afirmação & Mantram do Dia</h4>
+                                <p id="dailyMantraText" class="mantra-text"></p>
+                                <button type="button" class="btn-small-secondary" onclick="copiarMantraDoDia()">
+                                    <span>📋</span> Copiar Afirmação
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Humor & Check-in Astral Diário -->
+                    <div class="daily-mood-checkin">
+                        <h4>Como você se sente sintonizado com este Arcano hoje?</h4>
+                        <div class="mood-options">
+                            <button type="button" class="mood-btn" data-mood="inspirado" onclick="registrarHumorDiario('inspirado', '🌟 Inspirado & Focado')">
+                                🌟 Inspirado
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="sereno" onclick="registrarHumorDiario('sereno', '🧘 Sereno & Confiante')">
+                                🧘 Sereno
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="acao" onclick="registrarHumorDiario('acao', '⚡ Pronto para Ação')">
+                                ⚡ Em Ação
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="reflexivo" onclick="registrarHumorDiario('reflexivo', '🌙 Reflexivo & Introspectivo')">
+                                🌙 Reflexivo
+                            </button>
+                            <button type="button" class="mood-btn" data-mood="superando" onclick="registrarHumorDiario('superando', '🛡️ Superando Desafios')">
+                                🛡️ Superando
+                            </button>
+                        </div>
+                        <div id="dailyMoodSavedFeedback" class="mood-feedback-text"></div>
+                    </div>
+
+                    <!-- Cronômetro de renovação diária -->
+                    <div class="daily-countdown-footer">
+                        <span>⏳ Próximo Arcano do Dia disponível em:</span>
+                        <strong id="dailyCountdownTimer">--:--:--</strong>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================== -->
+        <!-- ABA 3: GESTOR DE TAREFAS SAGRADAS (TO-DO)      -->
         <!-- ============================================== -->
         <section id="tab-tasks" class="tab-content">
             <div class="glass-panel todo-container">
@@ -154,7 +345,7 @@
                         <span class="stat-value" style="color: var(--warning);" id="statPendingTasks">0</span>
                     </div>
                     <div class="stat-card">
-                        <span class="stat-label">Progresso Diário</span>
+                        <span class="stat-label">Progresso Consciente</span>
                         <span class="stat-value" id="statProgressPercent">0%</span>
                         <div class="stat-progress">
                             <div class="stat-progress-bar" id="statProgressBar" style="width: 0%;"></div>
@@ -235,15 +426,31 @@
         </section>
 
         <!-- ============================================== -->
-        <!-- ABA 3: GRIMÓRIO DOS 22 ARCANOS MAIORES         -->
+        <!-- ABA 4: GRIMÓRIO & ARCANO DE NASCIMENTO (ALMA)  -->
         <!-- ============================================== -->
         <section id="tab-grimorio" class="tab-content">
             <div class="glass-panel">
+                
+                <!-- Calculadora de Arcano de Nascimento -->
+                <div class="soul-card-calculator-box">
+                    <div class="calc-icon">🧭</div>
+                    <div class="calc-text">
+                        <h3>Descubra o Arcano Regente da Sua Alma</h3>
+                        <p>A numerologia sagrada do Tarô revela o arquétipo que rege seus maiores dons e propósito de vida.</p>
+                    </div>
+                    <div class="calc-action">
+                        <input type="date" id="birthdateCalcInput" class="calc-date-input" title="Sua Data de Nascimento">
+                        <button type="button" class="btn-gold" onclick="calcularEVisualizarArcanoAlma()">
+                            <span>✦</span> Revelar Arcano da Alma
+                        </button>
+                    </div>
+                </div>
+
                 <div class="grimorio-header">
                     <div>
-                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Grimório dos Arcanos Maiores</h2>
+                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Grimório dos 22 Arcanos</h2>
                         <p style="color: var(--text-muted); font-size: 0.9rem;">
-                            Consulte os símbolos, conselhos de luz, sombra e ações práticas dos 22 arquetipos.
+                            Consulte os símbolos, amor, carreira, oráculo Sim/Não e conselhos práticos dos 22 arquétipos.
                         </p>
                     </div>
                     
@@ -257,26 +464,47 @@
                     </div>
                 </div>
 
+                <!-- Filtros por Elemento -->
+                <div class="element-filters-row">
+                    <button type="button" class="elem-filter-btn active" data-elem="all" onclick="filtrarGrimorioPorElemento('all')">Todos</button>
+                    <button type="button" class="elem-filter-btn" data-elem="Fogo" onclick="filtrarGrimorioPorElemento('Fogo')">🔥 Fogo</button>
+                    <button type="button" class="elem-filter-btn" data-elem="Água" onclick="filtrarGrimorioPorElemento('Água')">💧 Água</button>
+                    <button type="button" class="elem-filter-btn" data-elem="Ar" onclick="filtrarGrimorioPorElemento('Ar')">🌪️ Ar</button>
+                    <button type="button" class="elem-filter-btn" data-elem="Terra" onclick="filtrarGrimorioPorElemento('Terra')">🌱 Terra</button>
+                </div>
+
                 <!-- Grid dos 22 Arcanos -->
                 <div id="grimorioGrid" class="grimorio-grid"></div>
             </div>
         </section>
 
         <!-- ============================================== -->
-        <!-- ABA 4: HISTÓRICO DE LEITURAS                   -->
+        <!-- ABA 5: HISTÓRICO & DIÁRIO CÓSMICO             -->
         <!-- ============================================== -->
         <section id="tab-history" class="tab-content">
             <div class="glass-panel">
                 <div class="history-header">
                     <div>
-                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Histórico de Leituras</h2>
+                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Diário Cósmico & Histórico</h2>
                         <p style="color: var(--text-muted); font-size: 0.9rem;">
-                            Registro das suas consultas e orientações passadas salvas neste navegador.
+                            Registro completo das suas consultas, favoritos e impressões pessoais salvas com carinho.
                         </p>
                     </div>
-                    <button class="btn-secondary" onclick="clearHistory()" style="color: var(--danger); border-color: rgba(247, 90, 104, 0.4);">
-                        <span>🗑️</span> Limpar Histórico
-                    </button>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button class="btn-secondary" onclick="exportarDadosBackup()" title="Baixar arquivo de backup">
+                            <span>📥</span> Exportar Dados
+                        </button>
+                        <button class="btn-secondary" onclick="clearHistory()" style="color: var(--danger); border-color: rgba(247, 90, 104, 0.4);">
+                            <span>🗑️</span> Limpar Histórico
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filtros do Histórico -->
+                <div class="history-filters-bar">
+                    <button type="button" class="filter-pill active" data-hist-filter="all" onclick="filtrarHistorico('all')">Todas as Consultas</button>
+                    <button type="button" class="filter-pill" data-hist-filter="favorites" onclick="filtrarHistorico('favorites')">⭐ Favoritas</button>
+                    <button type="button" class="filter-pill" data-hist-filter="daily" onclick="filtrarHistorico('daily')">☀️ Arcano do Dia</button>
                 </div>
 
                 <!-- Lista de Leituras Anteriores -->
@@ -285,8 +513,8 @@
                 <!-- Estado Vazio do Histórico -->
                 <div id="historyEmptyState" class="empty-state" style="display: none;">
                     <div class="empty-icon">📜</div>
-                    <h3>Nenhuma leitura registrada ainda</h3>
-                    <p>Realize sua primeira consulta no Oráculo para registrar aqui suas reflexões.</p>
+                    <h3>Nenhuma leitura registrada nesta visualização</h3>
+                    <p>Realize sua primeira consulta no Oráculo ou tire sua carta do dia para compor seu diário astral.</p>
                     <button class="btn-primary" onclick="switchTab('oracle')" style="margin-top: 10px;">
                         <span>🔮</span> Consultar o Oráculo
                     </button>
@@ -297,7 +525,206 @@
     </main>
 
     <!-- ============================================== -->
-    <!-- MODAL DE DETALHES DO ARCANO                    -->
+    <!-- MODAL DE CONTA & PERFIL MÍSTICO               -->
+    <!-- ============================================== -->
+    <div id="profileModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-content profile-modal-card">
+            <button class="modal-close-btn" onclick="closeProfileModal()">✕</button>
+
+            <!-- Abas do Modal de Conta -->
+            <div class="profile-modal-tabs">
+                <button type="button" class="prof-tab-btn active" id="profTabBtnProfile" onclick="switchProfileModalTab('profile')">Meu Perfil Astral</button>
+                <button type="button" class="prof-tab-btn" id="profTabBtnAuth" onclick="switchProfileModalTab('auth')">Criar Conta / Entrar</button>
+            </div>
+
+            <!-- Conteúdo 1: Perfil do Usuário Conectado -->
+            <div id="profSectionProfile" class="prof-section-content active">
+                
+                <!-- Topo com Avatar e Nome -->
+                <div class="profile-card-hero">
+                    <div class="profile-avatar-wrapper">
+                        <div class="avatar-large" id="profAvatarDisplay">🧙‍♂️</div>
+                        <div class="avatar-picker-mini" title="Trocar Avatar">
+                            <span onclick="selecionarAvatarRapido('🧙‍♂️')">🧙‍♂️</span>
+                            <span onclick="selecionarAvatarRapido('🔮')">🔮</span>
+                            <span onclick="selecionarAvatarRapido('🌙')">🌙</span>
+                            <span onclick="selecionarAvatarRapido('☀️')">☀️</span>
+                            <span onclick="selecionarAvatarRapido('🦅')">🦅</span>
+                            <span onclick="selecionarAvatarRapido('🪐')">🪐</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-hero-info">
+                        <h3 id="profNameDisplay">Viajante Astral</h3>
+                        <p id="profEmailDisplay" class="profile-email-text">Conta Convidado (Local)</p>
+                        
+                        <!-- Barra de Nível e XP -->
+                        <div class="level-progress-box">
+                            <div class="level-label-row">
+                                <span class="level-badge-tag" id="profLevelTitleTag">Aprendiz do Véu</span>
+                                <span class="level-xp-text" id="profXpText">0 / 100 XP</span>
+                            </div>
+                            <div class="stat-progress">
+                                <div class="stat-progress-bar xp-bar" id="profXpProgressBar" style="width: 10%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arcano da Alma / Carta de Nascimento -->
+                <div class="profile-soul-card-highlight" id="profSoulCardBox">
+                    <div class="soul-card-badge">✦ Arcano Regente de Alma</div>
+                    <div class="soul-card-content-row">
+                        <div class="soul-card-svg" id="profSoulCardSvg"></div>
+                        <div class="soul-card-info">
+                            <h4 id="profSoulCardName">O Mago</h4>
+                            <p id="profSoulCardDesc">Arquétipo do poder criador e iniciativa para manifestar propósitos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estatísticas de Retenção e Gamificação -->
+                <div class="profile-stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">Sequência de Dias</span>
+                        <span class="stat-value" id="profStreakStat" style="color: var(--warning);">🔥 1</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Total de Consultas</span>
+                        <span class="stat-value" id="profReadingsCount">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Tarefas Sagradas</span>
+                        <span class="stat-value" id="profTasksCompletedCount" style="color: var(--success);">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Conquistas</span>
+                        <span class="stat-value" id="profBadgesCount" style="color: var(--gold-light);">1 / 7</span>
+                    </div>
+                </div>
+
+                <!-- Galeria de Conquistas Místicas -->
+                <div class="profile-achievements-box">
+                    <h4><span>🏆</span> Selos & Conquistas Desbloqueadas</h4>
+                    <div class="badges-grid" id="profileBadgesGrid"></div>
+                </div>
+
+                <!-- Ações de Gerenciamento da Conta e Dados -->
+                <div class="profile-footer-actions">
+                    <button type="button" class="btn-secondary" onclick="exportarDadosBackup()">
+                        <span>📥</span> Salvar Backup (JSON)
+                    </button>
+                    <label class="btn-secondary" style="margin: 0; cursor: pointer;">
+                        <span>📤</span> Restaurar Backup
+                        <input type="file" id="importBackupInput" style="display: none;" accept=".json" onchange="importarDadosBackup(event)">
+                    </label>
+                    <button type="button" class="btn-secondary" onclick="desconectarOuResetarConta()" style="color: var(--danger); border-color: rgba(247, 90, 104, 0.4);">
+                        <span>🚪</span> Sair / Nova Conta
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Conteúdo 2: Formulário de Autenticação / Criação de Conta -->
+            <div id="profSectionAuth" class="prof-section-content">
+                <div class="auth-toggle-buttons">
+                    <button type="button" class="auth-toggle-btn active" id="authModeRegisterBtn" onclick="toggleAuthMode('register')">Criar Minha Conta</button>
+                    <button type="button" class="auth-toggle-btn" id="authModeLoginBtn" onclick="toggleAuthMode('login')">Já Tenho Conta (Entrar)</button>
+                </div>
+
+                <!-- Form Cadastro -->
+                <form id="registerForm" onsubmit="event.preventDefault(); submeterCadastro();">
+                    <div class="form-group">
+                        <label for="regName">Seu Nome ou Nome Místico:</label>
+                        <input type="text" id="regName" placeholder="Ex: Morgana, Daniel, Serena" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regEmail">Seu E-mail:</label>
+                        <input type="email" id="regEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regBirthdate">Data de Nascimento (Para calcular seu Arcano da Alma):</label>
+                        <input type="date" id="regBirthdate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="regPassword">Crie uma Senha / PIN:</label>
+                        <input type="password" id="regPassword" placeholder="Mínimo 4 caracteres" required minlength="4">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Escolha seu Avatar Místico:</label>
+                        <div class="avatar-selection-row">
+                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🧙‍♂️" checked> <span>🧙‍♂️</span></label>
+                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🔮"> <span>🔮</span></label>
+                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🌙"> <span>🌙</span></label>
+                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="☀️"> <span>☀️</span></label>
+                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🦅"> <span>🦅</span></label>
+                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🪐"> <span>🪐</span></label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
+                        <span>✨</span> Criar Conta & Salvar Dados
+                    </button>
+                </form>
+
+                <!-- Form Login -->
+                <form id="loginForm" style="display: none;" onsubmit="event.preventDefault(); submeterLogin();">
+                    <div class="form-group">
+                        <label for="loginEmail">E-mail Cadastrado:</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">Senha ou PIN:</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
+                        <span>🔑</span> Entrar na Minha Conta
+                    </button>
+                </form>
+
+                <p style="text-align: center; font-size: 0.8rem; color: var(--text-dim); margin-top: 15px;">
+                    ✦ Sistema de conta com persistência imediata no seu dispositivo e pronto para sincronização com nuvem quando o site for hospedado.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL DE RESPIRAÇÃO & MEDITAÇÃO PRÉ-TIRAGEM    -->
+    <!-- ============================================== -->
+    <div id="breathModal" class="modal-overlay" role="dialog" aria-modal="true">
+        <div class="modal-content breath-modal-card">
+            <div class="breath-visual-container">
+                <div class="breath-orb-outer">
+                    <div class="breath-orb-core"></div>
+                </div>
+            </div>
+            
+            <h3 id="breathPhaseTitle" class="breath-title">Inspire serenamente...</h3>
+            <p id="breathPhaseDesc" class="breath-desc">
+                Feche os olhos por alguns instantes e sintonize seu coração com a sua pergunta.
+            </p>
+
+            <div class="breath-actions">
+                <button type="button" class="btn-primary" onclick="concluirRespiracaoEIrParaMesa()">
+                    <span>✨</span> Estou Pronto • Escolher as Cartas
+                </button>
+                <button type="button" class="btn-secondary" onclick="concluirRespiracaoEIrParaMesa()">
+                    Pular Ritual
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- MODAL DE DETALHES DO ARCANO (GRIMÓRIO)         -->
     <!-- ============================================== -->
     <div id="arcanoModal" class="modal-overlay" role="dialog" aria-modal="true">
         <div id="arcanoModalContent" class="modal-content"></div>
