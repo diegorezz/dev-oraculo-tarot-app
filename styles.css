@@ -1319,7 +1319,1244 @@ input[type="text"]:focus, select:focus, textarea:focus {
     opacity: 1;
 }
 
-/* Responsividade */
+/* ========================================================
+   NOVOS COMPONENTES: CABEÇALHO, PERFIL, STREAK E XP
+   ======================================================== */
+.streak-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.4);
+    border-radius: 20px;
+    font-size: 0.82rem;
+    color: #fbbf24;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.streak-badge:hover {
+    background: rgba(245, 158, 11, 0.25);
+    border-color: #f59e0b;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+    transform: translateY(-1px);
+}
+
+.level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(130, 87, 229, 0.18);
+    border: 1px solid rgba(130, 87, 229, 0.4);
+    border-radius: 20px;
+    font-size: 0.82rem;
+    color: #c4b5fd;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.level-badge:hover {
+    border-color: var(--accent-hover);
+    box-shadow: 0 0 12px var(--accent-glow);
+    transform: translateY(-1px);
+}
+
+.text-icon-btn {
+    width: auto !important;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    color: var(--text-muted);
+}
+
+.text-icon-btn.active {
+    color: var(--gold-light);
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.18);
+    box-shadow: 0 0 14px var(--gold-glow);
+}
+
+.user-profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px 4px 6px;
+    background: var(--surface-glass);
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    color: var(--text-color);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.user-profile-btn:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 14px var(--gold-glow);
+    transform: translateY(-1px);
+}
+
+.avatar-icon {
+    font-size: 1.15rem;
+    background: rgba(212, 175, 55, 0.2);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge-dot-glow {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    box-shadow: 0 0 8px var(--gold);
+    display: inline-block;
+    animation: pulseGlowDot 1.6s infinite ease-in-out;
+}
+
+@keyframes pulseGlowDot {
+    0%, 100% { transform: scale(0.8); opacity: 0.7; }
+    50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px var(--gold-light); }
+}
+
+/* ========================================================
+   ORÁCULO & MESA CÓSMICA INTERATIVA (ESTILO OTAROT.NET)
+   ======================================================== */
+.chips-categories-row {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.chips-category-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.oracle-action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-large-glow {
+    padding: 14px 28px !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    flex: 1;
+    min-width: 260px;
+    box-shadow: 0 6px 24px var(--accent-glow);
+}
+
+.btn-small-gold {
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-small-gold:hover {
+    background: var(--gold);
+    color: #0c0c10;
+    box-shadow: 0 0 12px var(--gold-glow);
+}
+
+.btn-small-secondary {
+    background: var(--surface-glass);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-small-secondary:hover {
+    border-color: var(--accent-color);
+    color: #fff;
+}
+
+.btn-small-ghost {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-small-ghost:hover {
+    color: var(--danger);
+}
+
+/* Mesa Interativa */
+.interactive-deck-container {
+    margin-top: 25px;
+    background: radial-gradient(circle at 50% 30%, #201a3d 0%, #110f1f 65%, #090812 100%);
+    border: 2px solid rgba(212, 175, 55, 0.35);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7), 0 12px 35px rgba(0, 0, 0, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.deck-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    padding-bottom: 15px;
+}
+
+.deck-prompt-info {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pulse-sparkle {
+    animation: pulseGlowDot 1.4s infinite;
+    color: var(--gold);
+}
+
+.deck-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Bandeja dos slots escolhidos */
+.picked-slots-tray {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 8px 4px 18px;
+    margin-bottom: 15px;
+    scrollbar-width: thin;
+}
+
+.picked-slot-chip {
+    flex: 0 0 auto;
+    min-width: 140px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px dashed rgba(212, 175, 55, 0.3);
+    border-radius: var(--border-radius-md);
+    padding: 10px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.picked-slot-chip.current-target {
+    border-color: var(--gold-light);
+    border-style: solid;
+    background: rgba(212, 175, 55, 0.12);
+    box-shadow: 0 0 14px var(--gold-glow);
+    animation: targetSlotPulse 2s infinite;
+}
+
+@keyframes targetSlotPulse {
+    0%, 100% { border-color: var(--gold); }
+    50% { border-color: #fff; box-shadow: 0 0 18px var(--gold-light); }
+}
+
+.picked-slot-chip.filled {
+    border-color: var(--success);
+    border-style: solid;
+    background: rgba(42, 203, 120, 0.12);
+}
+
+.picked-slot-chip .slot-pos-label {
+    font-size: 0.72rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.picked-slot-chip .slot-card-status {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.picked-slot-chip.filled .slot-card-status {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* A mesa com as 22 cartas viradas para baixo */
+.interactive-deck-board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 10px;
+    perspective: 1000px;
+    min-height: 240px;
+}
+
+.deck-card-item {
+    width: 68px;
+    height: 108px;
+    background: linear-gradient(135deg, #1b1731 0%, #0d0c18 100%);
+    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s, border-color 0.25s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deck-card-item:hover:not(.picked) {
+    transform: translateY(-16px) scale(1.12);
+    border-color: var(--gold-light);
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.7), 0 0 20px var(--gold-glow);
+    z-index: 10;
+}
+
+.deck-card-pattern {
+    width: 82%;
+    height: 86%;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    background: radial-gradient(circle, rgba(130, 87, 229, 0.15) 0%, transparent 80%);
+}
+
+.deck-card-item.picked {
+    opacity: 0.2;
+    transform: scale(0.9);
+    cursor: default;
+    border-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.deck-card-item.shuffling {
+    animation: shuffleFly 0.6s ease-in-out;
+}
+
+@keyframes shuffleFly {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    30% { transform: translate(calc(var(--rand-x, 10) * 1px), calc(var(--rand-y, 10) * 1px)) rotate(calc(var(--rand-r, 10) * 1deg)); }
+    70% { transform: translate(calc(var(--rand-x, -10) * -1px), calc(var(--rand-y, -10) * -1px)) rotate(calc(var(--rand-r, -10) * -1deg)); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* ========================================================
+   BANNER SIM OU NÃO
+   ======================================================== */
+.sim-nao-banner {
+    width: 100%;
+    margin-bottom: 25px;
+    border-radius: var(--border-radius-md);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: rgba(20, 19, 30, 0.9);
+    border: 2px solid var(--gold);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+}
+
+.sim-nao-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    padding: 6px 20px;
+    border-radius: 30px;
+    letter-spacing: 2px;
+}
+
+.sim-nao-badge.sim {
+    background: rgba(42, 203, 120, 0.2);
+    color: #4ade80;
+    border: 2px solid #22c55e;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+}
+
+.sim-nao-badge.nao {
+    background: rgba(247, 90, 104, 0.2);
+    color: #f87171;
+    border: 2px solid #ef4444;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.sim-nao-badge.talvez {
+    background: rgba(130, 87, 229, 0.25);
+    color: #c4b5fd;
+    border: 2px solid #8257e5;
+    box-shadow: 0 0 20px rgba(130, 87, 229, 0.4);
+}
+
+.sim-nao-text {
+    flex: 1;
+    min-width: 240px;
+}
+
+.sim-nao-text h4 {
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+}
+
+.sim-nao-text p {
+    font-size: 0.92rem;
+    color: #e2e0ea;
+}
+
+/* Diário da Leitura na aba Oráculo */
+.reading-journal-box {
+    margin-top: 25px;
+    background: rgba(15, 14, 22, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+}
+
+.journal-box-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.journal-box-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.reading-journal-textarea {
+    width: 100%;
+    min-height: 80px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: #fff;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+    transition: var(--transition);
+}
+
+.reading-journal-textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 12px var(--gold-glow);
+}
+
+/* ========================================================
+   ABA 2: RITUAL MATINAL & ARCANO DO DIA
+   ======================================================== */
+.daily-panel {
+    text-align: center;
+}
+
+.daily-top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 20px;
+    color: var(--gold-light);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.daily-date-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.daily-date-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+/* Estado bloqueado / selo sagrado */
+.daily-locked-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.daily-sacred-card-seal {
+    width: 140px;
+    height: 140px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.sacred-seal-rings {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px dashed var(--gold);
+    animation: rotateSeal 20s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px var(--gold-glow);
+}
+
+@keyframes rotateSeal {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.seal-inner-star {
+    font-size: 3rem;
+    color: var(--gold-light);
+    animation: pulseStar 2s ease-in-out infinite;
+}
+
+@keyframes pulseStar {
+    0%, 100% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 15px var(--gold)); }
+}
+
+.daily-locked-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.daily-locked-desc {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Estado Revelado */
+.daily-revealed-box {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.daily-showcase-row {
+    display: flex;
+    gap: 30px;
+    align-items: stretch;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.daily-card-container {
+    flex: 0 0 260px;
+    margin: 0 auto;
+}
+
+.daily-details-col {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.daily-guidance-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 18px 20px;
+}
+
+.daily-guidance-card h4 {
+    font-size: 0.88rem;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.daily-guidance-card p {
+    font-size: 0.95rem;
+    color: #e5e2ee;
+    line-height: 1.5;
+}
+
+.daily-guidance-card.quest-card {
+    border-color: rgba(130, 87, 229, 0.4);
+    background: rgba(130, 87, 229, 0.08);
+}
+
+.daily-guidance-card.quest-card button {
+    margin-top: 12px;
+}
+
+.daily-guidance-card.mantra-card {
+    border-color: rgba(212, 175, 55, 0.4);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.mantra-text {
+    font-style: italic;
+    color: var(--gold-light) !important;
+    font-weight: 500;
+}
+
+.daily-guidance-card.mantra-card button {
+    margin-top: 12px;
+}
+
+/* Check-in de humor diário */
+.daily-mood-checkin {
+    background: rgba(20, 19, 30, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.daily-mood-checkin h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.mood-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.mood-btn {
+    background: var(--surface-glass);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.mood-btn:hover {
+    border-color: var(--gold);
+    color: #fff;
+}
+
+.mood-btn.active {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--gold);
+    color: var(--gold-light);
+    box-shadow: 0 0 14px var(--gold-glow);
+}
+
+.mood-feedback-text {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--success);
+}
+
+.daily-countdown-footer {
+    text-align: center;
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.daily-countdown-footer strong {
+    color: var(--gold-light);
+    font-family: monospace;
+    font-size: 1.05rem;
+}
+
+/* ========================================================
+   ABA 4: CALCULADORA DE ARCANO DE NASCIMENTO & GRIMÓRIO
+   ======================================================== */
+.soul-card-calculator-box {
+    background: linear-gradient(135deg, rgba(130, 87, 229, 0.15) 0%, rgba(212, 175, 55, 0.15) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: var(--border-radius-md);
+    padding: 22px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.calc-icon {
+    font-size: 2.2rem;
+}
+
+.calc-text {
+    flex: 1;
+    min-width: 250px;
+}
+
+.calc-text h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.calc-text p {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+}
+
+.calc-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.calc-date-input {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: #fff;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+}
+
+.calc-date-input:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+.element-filters-row {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0 20px;
+    flex-wrap: wrap;
+}
+
+.elem-filter-btn {
+    background: var(--surface-glass);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.elem-filter-btn:hover {
+    border-color: var(--accent-color);
+    color: #fff;
+}
+
+.elem-filter-btn.active {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* ========================================================
+   ABA 5: HISTÓRICO & FILTROS DE DIÁRIO
+   ======================================================== */
+.history-filters-bar {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0 20px;
+    flex-wrap: wrap;
+}
+
+.history-item-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.history-fav-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-dim);
+    transition: var(--transition);
+}
+
+.history-fav-btn.active {
+    color: var(--gold-light);
+    filter: drop-shadow(0 0 6px var(--gold));
+}
+
+.history-notes-preview {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.25);
+    border-left: 2px solid var(--gold);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #dedbe5;
+    font-style: italic;
+}
+
+/* ========================================================
+   MODAL DE PERFIL & SISTEMA DE CONTAS
+   ======================================================== */
+.profile-modal-card {
+    max-width: 650px !important;
+}
+
+.profile-modal-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.prof-tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: var(--border-radius-sm);
+}
+
+.prof-tab-btn:hover {
+    color: #fff;
+}
+
+.prof-tab-btn.active {
+    color: var(--gold-light);
+    background: rgba(212, 175, 55, 0.12);
+}
+
+.prof-section-content {
+    display: none;
+}
+
+.prof-section-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Hero do Perfil */
+.profile-card-hero {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.profile-avatar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.avatar-large {
+    font-size: 3.2rem;
+    background: rgba(130, 87, 229, 0.2);
+    border: 2px solid var(--gold);
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.avatar-picker-mini {
+    display: flex;
+    gap: 4px;
+}
+
+.avatar-picker-mini span {
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: var(--transition);
+}
+
+.avatar-picker-mini span:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.profile-hero-info {
+    flex: 1;
+}
+
+.profile-hero-info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.profile-email-text {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+.level-progress-box {
+    margin-top: 5px;
+}
+
+.level-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    margin-bottom: 4px;
+}
+
+.level-badge-tag {
+    color: var(--accent-hover);
+    font-weight: 700;
+}
+
+.level-xp-text {
+    color: var(--gold);
+    font-weight: 600;
+}
+
+.stat-progress-bar.xp-bar {
+    background: linear-gradient(90deg, #8257e5 0%, #ffd700 100%);
+}
+
+/* Destaque do Arcano da Alma */
+.profile-soul-card-highlight {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(130, 87, 229, 0.12) 100%);
+    border: 1px solid var(--gold);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.soul-card-badge {
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.soul-card-content-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.soul-card-svg {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.soul-card-svg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.soul-card-info h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.soul-card-info p {
+    font-size: 0.85rem;
+    color: #dedbe5;
+    line-height: 1.4;
+}
+
+/* Grid de estatísticas */
+.profile-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Galeria de Selos / Badges */
+.profile-achievements-box {
+    margin-bottom: 20px;
+}
+
+.profile-achievements-box h4 {
+    font-size: 0.88rem;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+}
+
+.achievement-badge-card {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 10px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.achievement-badge-card.unlocked {
+    border-color: rgba(212, 175, 55, 0.5);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+.achievement-badge-card.locked {
+    opacity: 0.45;
+    filter: grayscale(80%);
+}
+
+.achievement-badge-card .badge-icon {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+}
+
+.achievement-badge-card .badge-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.achievement-badge-card .badge-desc {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+}
+
+.profile-footer-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border-color);
+    padding-top: 18px;
+}
+
+/* Formulários de Auth */
+.auth-toggle-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 4px;
+    border-radius: 25px;
+}
+
+.auth-toggle-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.auth-toggle-btn.active {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 2px 10px var(--accent-glow);
+}
+
+.avatar-selection-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.avatar-radio {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.avatar-radio input {
+    margin: 0;
+}
+
+.avatar-radio:hover {
+    border-color: var(--gold);
+}
+
+/* ========================================================
+   MODAL DE RESPIRAÇÃO GUIADA
+   ======================================================== */
+.breath-modal-card {
+    text-align: center;
+    max-width: 440px !important;
+    padding: 35px 25px !important;
+}
+
+.breath-visual-container {
+    width: 140px;
+    height: 140px;
+    margin: 10px auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breath-orb-outer {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(130, 87, 229, 0.5) 0%, rgba(212, 175, 55, 0.2) 70%, transparent 100%);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 35px var(--gold-glow);
+    animation: breathCycle 8s infinite ease-in-out;
+}
+
+.breath-orb-core {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #ffd700;
+    box-shadow: 0 0 20px #ffd700;
+    animation: corePulse 8s infinite ease-in-out;
+}
+
+@keyframes breathCycle {
+    0%, 100% { transform: scale(0.7); opacity: 0.6; }
+    40%, 60% { transform: scale(1.35); opacity: 1; box-shadow: 0 0 50px var(--gold); }
+}
+
+@keyframes corePulse {
+    0%, 100% { transform: scale(0.6); }
+    40%, 60% { transform: scale(1.4); }
+}
+
+.breath-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+}
+
+.breath-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.breath-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ========================================================
+   RESPONSIVIDADE GERAL
+   ======================================================== */
 @media (max-width: 768px) {
     body {
         padding: 10px 10px 60px;
@@ -1329,8 +2566,18 @@ input[type="text"]:focus, select:focus, textarea:focus {
         padding: 15px 5px 10px;
     }
 
+    .top-bar {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .top-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     .glass-panel {
-        padding: 20px 15px;
+        padding: 20px 14px;
     }
 
     .card-wrapper {
@@ -1353,5 +2600,28 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
     .modal-content {
         padding: 20px;
+    }
+
+    .daily-showcase-row {
+        flex-direction: column;
+    }
+
+    .daily-card-container {
+        width: 100%;
+        max-width: 240px;
+    }
+
+    .profile-card-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .interactive-deck-board {
+        gap: 6px;
+    }
+
+    .deck-card-item {
+        width: 54px;
+        height: 88px;
     }
 }
