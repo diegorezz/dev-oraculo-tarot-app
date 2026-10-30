@@ -1,3 +1,9 @@
+/* Ilustrações do Tarot de Marselha (pasta cartas/); se a imagem faltar, mostra o ícone antigo */
+function cartaImg(c, mini) {
+    const n = String(c.id).padStart(2, '0');
+    return `<img class="carta-img" src="cartas/${mini ? 'mini/' : ''}${n}.webp" alt="${c.nome}" loading="lazy" decoding="async" draggable="false" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="carta-fallback" style="display:none">${c.iconeSvg}</span>`;
+}
+
 // ========================================================
 // APLICAÇÃO: ORÁCULO DO TARÔ & GESTOR DE TAREFAS SAGRADAS
 // MESA INTERATIVA (ESTILO OTAROT.NET), RITUAL MATINAL,
@@ -536,7 +542,7 @@ function renderProfileModalContent() {
     const soulCardName = document.getElementById('profSoulCardName');
     const soulCardDesc = document.getElementById('profSoulCardDesc');
 
-    if (soulCardSvg) soulCardSvg.innerHTML = soulCard.iconeSvg;
+    if (soulCardSvg) soulCardSvg.innerHTML = cartaImg(soulCard, true);
     if (soulCardName) soulCardName.textContent = `${soulCard.numero}. ${soulCard.nome}`;
     if (soulCardDesc) soulCardDesc.textContent = soulCard.arquetipoVida || soulCard.direito;
 
@@ -769,8 +775,8 @@ function renderDailyTab() {
                 <div class="card-face back ${invertida ? 'inverted' : ''}">
                     <div class="card-inner-frame">
                         <div class="card-top-number">${card.numero}</div>
-                        <div class="card-svg-container ${invertida ? 'inverted' : ''}">
-                            ${card.iconeSvg}
+                        <div class="card-svg-container card-art ${invertida ? 'inverted' : ''}">
+                            ${cartaImg(card)}
                         </div>
                         <div class="card-name-title">${card.nome}</div>
                         <div class="card-status-badge ${invertida ? 'inverted' : 'upright'}">
@@ -1367,8 +1373,8 @@ function exibirResultadosDaTiragem(pergunta, tipoTiragem, tituloTiragem, cartasT
                         <div class="card-inner-frame">
                             <div class="card-top-number">${c.numero}</div>
                             
-                            <div class="card-svg-container ${item.invertida ? 'inverted' : ''}">
-                                ${c.iconeSvg}
+                            <div class="card-svg-container card-art ${item.invertida ? 'inverted' : ''}">
+                                ${cartaImg(c)}
                             </div>
                             
                             <div class="card-name-title">${c.nome}</div>
@@ -1734,7 +1740,7 @@ function renderGrimorio(filterQuery = '') {
     grid.innerHTML = filtered.map(c => `
         <div class="grimorio-card-item" onclick="openArcanoModal(${c.id})">
             <div class="grimorio-card-number">${c.numero}</div>
-            <div class="grimorio-card-svg">${c.iconeSvg}</div>
+            <div class="grimorio-card-svg">${cartaImg(c, true)}</div>
             <div class="grimorio-card-title">${c.nome}</div>
             <div class="grimorio-card-element">${c.elemento}</div>
         </div>
@@ -1773,7 +1779,7 @@ function openArcanoModal(arcanoId, isSoulCardModal = false) {
     modalContent.innerHTML = `
         <button class="modal-close-btn" onclick="closeArcanoModal()">✕</button>
         <div class="modal-card-header">
-            <div class="modal-card-svg">${arcano.iconeSvg}</div>
+            <div class="modal-card-svg">${cartaImg(arcano)}</div>
             <div class="modal-title">${arcano.numero}. ${arcano.nome}</div>
             <div class="modal-subtitle">Elemento / Regência: ${arcano.elemento}</div>
             <div class="modal-tags">
