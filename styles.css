@@ -1,38 +1,34 @@
 :root {
-    --bg-color: #0c0c10;
-    --bg-gradient: radial-gradient(circle at 50% 10%, #1c1833 0%, #0d0c14 60%, #060608 100%);
-    --card-bg: rgba(24, 23, 34, 0.85);
-    --card-bg-solid: #1a1926;
-    --card-hover: rgba(35, 33, 50, 0.95);
-    --surface-glass: rgba(255, 255, 255, 0.04);
-    --surface-glass-border: rgba(212, 175, 55, 0.2);
-    --surface-glass-border-focus: rgba(212, 175, 55, 0.6);
-    
-    --text-color: #f0edf6;
-    --text-muted: #a49fb6;
-    --text-dim: #716c84;
-    
-    --gold: #d4af37;
-    --gold-light: #ffd700;
-    --gold-glow: rgba(212, 175, 55, 0.35);
-    --gold-dark: #91751d;
-    
-    --accent-color: #8257e5;
-    --accent-hover: #986df2;
-    --accent-glow: rgba(130, 87, 229, 0.4);
-    
-    --danger: #f75a68;
-    --danger-glow: rgba(247, 90, 104, 0.3);
-    --success: #2acb78;
-    --success-glow: rgba(42, 203, 120, 0.3);
-    --warning: #f59e0b;
-    
-    --border-color: #2b283d;
-    --border-radius-sm: 8px;
-    --border-radius-md: 14px;
-    --border-radius-lg: 20px;
+    --bg-color: #efe6d2;
+    --bg-gradient: radial-gradient(ellipse at 50% 0%, #f5eedd 0%, #efe6d2 55%, #e8dec6 100%);
+    --card-bg: rgba(247, 242, 231, 0.96);
+    --card-bg-solid: #f7f2e7;
+    --card-hover: #fbf8f0;
+    --surface-glass: rgba(143, 127, 94, 0.08);
+    --surface-glass-border: rgba(143, 127, 94, 0.4);
+    --surface-glass-border-focus: #99463c;
+    --text-color: #3a3530;
+    --text-muted: #6b6457;
+    --text-dim: #8f7f5e;
+    --gold: #c99a2e;
+    --gold-light: #d9ae48;
+    --gold-glow: rgba(201, 154, 46, 0.25);
+    --gold-dark: #8f6a14;
+    --accent-color: #99463c;
+    --accent-hover: #7f372f;
+    --accent-glow: rgba(153, 70, 60, 0.22);
+    --danger: #a33b32;
+    --danger-glow: rgba(163, 59, 50, 0.2);
+    --success: #5c7a4e;
+    --success-glow: rgba(92, 122, 78, 0.2);
+    --warning: #b8821e;
+    --border-color: #bca779;
+    --border-radius-sm: 2px;
+    --border-radius-md: 3px;
+    --border-radius-lg: 4px;
     --transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+
 
 * {
     box-sizing: border-box;
@@ -41,7 +37,7 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background: var(--bg-gradient);
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -65,14 +61,14 @@ body {
     pointer-events: none;
     z-index: 0;
     background-image: 
-        radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 150px 180px, #ffd700, rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 280px 70px, #a884fc, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 420px 220px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 600px 120px, #ffd700, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 780px 280px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 920px 80px, #d4af37, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 1100px 200px, #ffffff, rgba(0,0,0,0));
+        radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(58, 53, 48, 0)),
+        radial-gradient(1px 1px at 150px 180px, #d9ae48, rgba(58, 53, 48, 0)),
+        radial-gradient(1.5px 1.5px at 280px 70px, #b06256, rgba(58, 53, 48, 0)),
+        radial-gradient(1px 1px at 420px 220px, #ffffff, rgba(58, 53, 48, 0)),
+        radial-gradient(1.5px 1.5px at 600px 120px, #d9ae48, rgba(58, 53, 48, 0)),
+        radial-gradient(1px 1px at 780px 280px, #ffffff, rgba(58, 53, 48, 0)),
+        radial-gradient(2px 2px at 920px 80px, #c99a2e, rgba(58, 53, 48, 0)),
+        radial-gradient(1px 1px at 1100px 200px, #ffffff, rgba(58, 53, 48, 0));
     background-repeat: repeat;
     background-size: 1000px 350px;
     opacity: 0.45;
@@ -100,11 +96,11 @@ header {
     align-items: center;
     gap: 8px;
     padding: 6px 14px;
-    background: rgba(130, 87, 229, 0.15);
-    border: 1px solid rgba(130, 87, 229, 0.4);
+    background: rgba(153, 70, 60, 0.15);
+    border: 1px solid rgba(153, 70, 60, 0.4);
     border-radius: 20px;
     font-size: 0.8rem;
-    color: #c4b5fd;
+    color: #b06256;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     font-weight: 600;
@@ -130,21 +126,21 @@ header {
 }
 
 .icon-btn:hover {
-    color: var(--gold-light);
+    color: var(--accent-color);
     border-color: var(--gold);
     box-shadow: 0 0 12px var(--gold-glow);
     transform: translateY(-2px);
 }
 
 h1 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: clamp(1.8rem, 4vw, 2.7rem);
     font-weight: 700;
-    color: #fff;
+    color: var(--text-color);
     letter-spacing: 1.5px;
     margin-bottom: 8px;
-    text-shadow: 0 2px 10px rgba(130, 87, 229, 0.4);
-    background: linear-gradient(135deg, #ffffff 30%, #f3e5ab 70%, #d4af37 100%);
+    text-shadow: 0 2px 10px rgba(153, 70, 60, 0.4);
+    background: linear-gradient(135deg, #ffffff 30%, #d9ae48 70%, #c99a2e 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -157,7 +153,7 @@ h1 {
 }
 
 .iniciatico-tag {
-    color: var(--gold);
+    color: var(--gold-dark);
     font-weight: 500;
 }
 
@@ -190,11 +186,11 @@ h1 {
 .tab-btn:hover {
     color: var(--text-color);
     border-color: var(--accent-color);
-    background: rgba(130, 87, 229, 0.12);
+    background: rgba(153, 70, 60, 0.12);
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, #8257e5 0%, #6833e4 100%);
+    background: linear-gradient(135deg, #99463c 0%, #99463c 100%);
     color: #ffffff;
     border-color: transparent;
     box-shadow: 0 4px 20px var(--accent-glow);
@@ -202,7 +198,7 @@ h1 {
 
 .badge-count {
     background: var(--gold);
-    color: #121214;
+    color: #f7f2e7;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 2px 8px;
@@ -238,7 +234,7 @@ h1 {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-lg);
     padding: 30px;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 16px 36px rgba(58, 53, 48, 0.225);
     backdrop-filter: blur(16px);
     position: relative;
     overflow: hidden;
@@ -251,7 +247,7 @@ h1 {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(201, 154, 46, 0.5), transparent);
 }
 
 /* Formulário de Consulta do Tarô */
@@ -287,7 +283,7 @@ input[type="text"], select, textarea {
     padding: 14px 16px;
     border-radius: var(--border-radius-md);
     border: 1px solid var(--border-color);
-    background: rgba(14, 13, 20, 0.85);
+    background: rgba(247, 242, 231, 0.85);
     color: var(--text-color);
     font-size: 1rem;
     font-family: inherit;
@@ -298,7 +294,7 @@ input[type="text"], select, textarea {
 input[type="text"]:focus, select:focus, textarea:focus {
     border-color: var(--gold);
     box-shadow: 0 0 0 3px var(--gold-glow);
-    background: rgba(18, 17, 26, 0.95);
+    background: rgba(247, 242, 231, 0.95);
 }
 
 .clear-input-btn {
@@ -325,8 +321,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .chip {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(143, 127, 94, 0.05);
+    border: 1px solid rgba(143, 127, 94, 0.1);
     color: var(--text-muted);
     font-size: 0.82rem;
     padding: 6px 12px;
@@ -336,15 +332,15 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .chip:hover {
-    background: rgba(212, 175, 55, 0.15);
+    background: rgba(201, 154, 46, 0.15);
     border-color: var(--gold);
-    color: var(--gold-light);
+    color: var(--accent-color);
     transform: translateY(-1px);
 }
 
 /* Botões Principais */
 .btn-primary {
-    background: linear-gradient(135deg, #8257e5 0%, #6833e4 100%);
+    background: linear-gradient(135deg, #99463c 0%, #99463c 100%);
     color: #ffffff;
     border: none;
     padding: 16px 24px;
@@ -363,9 +359,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #9466ff 0%, #7542ea 100%);
+    background: linear-gradient(135deg, #99463c 0%, #99463c 100%);
     transform: translateY(-2px);
-    box-shadow: 0 8px 26px rgba(130, 87, 229, 0.6);
+    box-shadow: 0 8px 26px rgba(153, 70, 60, 0.6);
 }
 
 .btn-secondary {
@@ -384,13 +380,13 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(143, 127, 94, 0.08);
     border-color: var(--text-muted);
 }
 
 .btn-gold {
-    background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
-    color: #0c0c10;
+    background: linear-gradient(135deg, #c99a2e 0%, #c99a2e 100%);
+    color: #f7f2e7;
     border: none;
     padding: 10px 18px;
     border-radius: var(--border-radius-md);
@@ -405,9 +401,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .btn-gold:hover {
-    background: linear-gradient(135deg, #ffd700 0%, #d4af37 100%);
+    background: linear-gradient(135deg, #d9ae48 0%, #c99a2e 100%);
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.5);
+    box-shadow: 0 6px 18px rgba(201, 154, 46, 0.5);
 }
 
 /* Área de Tiragem e Cartas */
@@ -421,14 +417,14 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .spread-header-info {
     text-align: center;
     padding: 16px;
-    background: rgba(130, 87, 229, 0.08);
-    border: 1px dashed rgba(130, 87, 229, 0.3);
+    background: rgba(153, 70, 60, 0.08);
+    border: 1px dashed rgba(153, 70, 60, 0.3);
     border-radius: var(--border-radius-md);
 }
 
 .spread-header-info h3 {
-    font-family: 'Cinzel', serif;
-    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--accent-color);
     font-size: 1.25rem;
     margin-bottom: 4px;
 }
@@ -460,7 +456,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     text-align: center;
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--gold-dark);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
@@ -497,12 +493,12 @@ input[type="text"]:focus, select:focus, textarea:focus {
     display: flex;
     flex-direction: column;
     padding: 14px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 25px rgba(58, 53, 48, 0.3);
 }
 
 /* Frente da Carta (Verso Místico antes de virar) */
 .card-face.front {
-    background: radial-gradient(circle at 50% 50%, #201a38 0%, #100d1e 100%);
+    background: radial-gradient(circle at 50% 50%, #f7f2e7 0%, #f7f2e7 100%);
     border: 2px solid var(--gold);
     align-items: center;
     justify-content: center;
@@ -514,7 +510,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .card-back-pattern {
     width: 100%;
     height: 100%;
-    border: 1px dashed rgba(212, 175, 55, 0.4);
+    border: 1px dashed rgba(201, 154, 46, 0.4);
     border-radius: calc(var(--border-radius-md) - 4px);
     display: flex;
     flex-direction: column;
@@ -539,7 +535,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .card-back-hint {
     font-size: 0.75rem;
-    color: var(--gold);
+    color: var(--gold-dark);
     margin-top: 12px;
     font-weight: 600;
     text-transform: uppercase;
@@ -548,7 +544,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 /* Verso Revelado da Carta */
 .card-face.back {
-    background: #171522;
+    background: #f7f2e7;
     border: 2px solid var(--gold);
     transform: rotateY(180deg);
     display: flex;
@@ -557,7 +553,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     text-align: center;
     justify-content: space-between;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(130, 87, 229, 0.25);
+    box-shadow: 0 0 20px rgba(153, 70, 60, 0.25);
 }
 
 .card-face.back.inverted {
@@ -568,7 +564,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .card-inner-frame {
     width: 100%;
     height: 100%;
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    border: 1px solid rgba(201, 154, 46, 0.3);
     border-radius: calc(var(--border-radius-md) - 4px);
     padding: 10px;
     display: flex;
@@ -578,9 +574,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .card-top-number {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 0.85rem;
-    color: var(--gold);
+    color: var(--gold-dark);
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -602,10 +598,10 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .card-name-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-color);
     margin-top: 2px;
 }
 
@@ -620,24 +616,24 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .card-status-badge.upright {
-    background: rgba(212, 175, 55, 0.2);
-    color: var(--gold-light);
-    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: rgba(201, 154, 46, 0.2);
+    color: var(--accent-color);
+    border: 1px solid rgba(201, 154, 46, 0.4);
 }
 
 .card-status-badge.inverted {
-    background: rgba(247, 90, 104, 0.2);
-    color: #ff8b94;
-    border: 1px solid rgba(247, 90, 104, 0.4);
+    background: rgba(163, 59, 50, 0.2);
+    color: #a33b32;
+    border: 1px solid rgba(163, 59, 50, 0.4);
 }
 
 .card-meaning-text {
     font-size: 0.78rem;
-    color: #d1ccd8;
+    color: #6b6457;
     line-height: 1.35;
     margin: 4px 0;
     text-align: center;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(58, 53, 48, 0.125);
     padding: 6px;
     border-radius: 6px;
     width: 100%;
@@ -652,9 +648,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
     margin-top: 6px;
     padding: 6px 8px;
     font-size: 0.75rem;
-    background: rgba(130, 87, 229, 0.2);
-    border: 1px solid rgba(130, 87, 229, 0.5);
-    color: #e0d6ff;
+    background: rgba(153, 70, 60, 0.2);
+    border: 1px solid rgba(153, 70, 60, 0.5);
+    color: #b06256;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
@@ -667,7 +663,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .card-action-btn:hover {
     background: var(--accent-color);
-    color: #ffffff;
+    color: var(--text-color);
     border-color: var(--accent-hover);
 }
 
@@ -679,8 +675,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
     align-items: center;
     gap: 15px;
     padding: 20px;
-    background: rgba(212, 175, 55, 0.06);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    background: rgba(201, 154, 46, 0.06);
+    border: 1px solid rgba(201, 154, 46, 0.2);
     border-radius: var(--border-radius-md);
     margin-top: 10px;
 }
@@ -691,8 +687,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .reading-summary-text h4 {
-    font-family: 'Cinzel', serif;
-    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--accent-color);
     font-size: 1.05rem;
     margin-bottom: 4px;
 }
@@ -724,7 +720,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .stat-card {
-    background: rgba(14, 13, 22, 0.7);
+    background: rgba(247, 242, 231, 0.7);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 18px 20px;
@@ -742,15 +738,15 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .stat-value {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-color);
 }
 
 .stat-progress {
     height: 6px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(143, 127, 94, 0.1);
     border-radius: 3px;
     overflow: hidden;
     margin-top: 4px;
@@ -758,14 +754,14 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .stat-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #8257e5, #d4af37);
+    background: linear-gradient(90deg, #99463c, #c99a2e);
     border-radius: 3px;
     transition: width 0.4s ease;
 }
 
 /* Formulário de Nova Tarefa */
 .new-task-card {
-    background: rgba(18, 17, 28, 0.9);
+    background: rgba(247, 242, 231, 0.9);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 20px;
@@ -829,7 +825,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .filter-pill.active {
-    background: rgba(130, 87, 229, 0.2);
+    background: rgba(153, 70, 60, 0.2);
     border-color: var(--accent-color);
     color: #fff;
 }
@@ -843,7 +839,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .task-item {
-    background: rgba(18, 17, 26, 0.7);
+    background: rgba(247, 242, 231, 0.7);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 14px 18px;
@@ -854,14 +850,14 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .task-item:hover {
-    border-color: rgba(130, 87, 229, 0.4);
-    background: rgba(22, 20, 32, 0.9);
+    border-color: rgba(153, 70, 60, 0.4);
+    background: rgba(247, 242, 231, 0.9);
     transform: translateX(3px);
 }
 
 .task-item.completed {
     opacity: 0.6;
-    background: rgba(14, 13, 20, 0.5);
+    background: rgba(247, 242, 231, 0.5);
 }
 
 .task-checkbox-custom {
@@ -875,7 +871,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     justify-content: center;
     flex-shrink: 0;
     transition: var(--transition);
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(58, 53, 48, 0.15);
 }
 
 .task-item.completed .task-checkbox-custom {
@@ -931,33 +927,33 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .badge-category {
-    background: rgba(130, 87, 229, 0.15);
-    color: #c4b5fd;
-    border: 1px solid rgba(130, 87, 229, 0.3);
+    background: rgba(153, 70, 60, 0.15);
+    color: #b06256;
+    border: 1px solid rgba(153, 70, 60, 0.3);
 }
 
 .badge-priority-alta {
-    background: rgba(247, 90, 104, 0.15);
-    color: #ff8b94;
-    border: 1px solid rgba(247, 90, 104, 0.3);
+    background: rgba(163, 59, 50, 0.15);
+    color: #a33b32;
+    border: 1px solid rgba(163, 59, 50, 0.3);
 }
 
 .badge-priority-media {
-    background: rgba(245, 158, 11, 0.15);
-    color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: rgba(201, 154, 46, 0.15);
+    color: var(--gold-dark);
+    border: 1px solid rgba(201, 154, 46, 0.3);
 }
 
 .badge-priority-baixa {
-    background: rgba(42, 203, 120, 0.15);
-    color: #6ee7b7;
-    border: 1px solid rgba(42, 203, 120, 0.3);
+    background: rgba(92, 122, 78, 0.15);
+    color: #5c7a4e;
+    border: 1px solid rgba(92, 122, 78, 0.3);
 }
 
 .badge-arcano-origin {
-    background: rgba(212, 175, 55, 0.15);
-    color: var(--gold-light);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(201, 154, 46, 0.15);
+    color: var(--accent-color);
+    border: 1px solid rgba(201, 154, 46, 0.3);
     display: inline-flex;
     align-items: center;
     gap: 3px;
@@ -981,7 +977,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .task-delete-btn:hover {
     color: var(--danger);
-    background: rgba(247, 90, 104, 0.15);
+    background: rgba(163, 59, 50, 0.15);
 }
 
 /* Estado Vazio */
@@ -1001,7 +997,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .empty-state h3 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     color: var(--text-color);
 }
 
@@ -1049,7 +1045,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .grimorio-card-item {
-    background: rgba(18, 17, 26, 0.8);
+    background: rgba(247, 242, 231, 0.8);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 16px;
@@ -1066,13 +1062,13 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .grimorio-card-item:hover {
     border-color: var(--gold);
     transform: translateY(-4px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), 0 0 15px var(--gold-glow);
-    background: rgba(25, 23, 38, 0.95);
+    box-shadow: 0 10px 24px rgba(58, 53, 48, 0.25), 0 0 15px var(--gold-glow);
+    background: rgba(247, 242, 231, 0.95);
 }
 
 .grimorio-card-number {
-    font-family: 'Cinzel', serif;
-    color: var(--gold);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--gold-dark);
     font-size: 0.85rem;
     font-weight: 700;
 }
@@ -1089,10 +1085,10 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .grimorio-card-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 0.95rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 4px;
 }
 
@@ -1118,7 +1114,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .history-item {
-    background: rgba(18, 17, 28, 0.7);
+    background: rgba(247, 242, 231, 0.7);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 18px 22px;
@@ -1129,7 +1125,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .history-item:hover {
-    border-color: rgba(130, 87, 229, 0.4);
+    border-color: rgba(153, 70, 60, 0.4);
 }
 
 .history-item-top {
@@ -1142,7 +1138,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .history-question {
     font-size: 1.05rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .history-date {
@@ -1157,7 +1153,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .history-mini-card {
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(58, 53, 48, 0.175);
     border: 1px solid var(--border-color);
     padding: 6px 10px;
     border-radius: 8px;
@@ -1168,8 +1164,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .history-mini-card.inverted {
-    border-color: rgba(247, 90, 104, 0.4);
-    color: #ff8b94;
+    border-color: rgba(163, 59, 50, 0.4);
+    color: #a33b32;
 }
 
 /* ========================================================
@@ -1181,7 +1177,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(5, 5, 8, 0.82);
+    background: rgba(247, 242, 231, 0.82);
     backdrop-filter: blur(8px);
     display: none;
     align-items: center;
@@ -1196,7 +1192,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .modal-content {
-    background: #181625;
+    background: #f7f2e7;
     border: 2px solid var(--gold);
     border-radius: var(--border-radius-lg);
     width: 100%;
@@ -1205,7 +1201,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     overflow-y: auto;
     padding: 30px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px var(--gold-glow);
+    box-shadow: 0 20px 50px rgba(58, 53, 48, 0.35), 0 0 30px var(--gold-glow);
 }
 
 .modal-close-btn {
@@ -1221,7 +1217,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .modal-close-btn:hover {
-    color: #fff;
+    color: var(--text-color);
     transform: rotate(90deg);
 }
 
@@ -1245,20 +1241,20 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .modal-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.6rem;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .modal-subtitle {
-    color: var(--gold);
+    color: var(--gold-dark);
     font-size: 0.9rem;
     font-weight: 600;
 }
 
 .modal-section {
     margin-bottom: 18px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(58, 53, 48, 0.125);
     padding: 14px;
     border-radius: var(--border-radius-md);
     border: 1px solid var(--border-color);
@@ -1266,7 +1262,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .modal-section h4 {
     font-size: 0.88rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1277,7 +1273,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .modal-section p {
     font-size: 0.92rem;
-    color: #d1ccd8;
+    color: #6b6457;
     line-height: 1.5;
 }
 
@@ -1299,12 +1295,12 @@ input[type="text"]:focus, select:focus, textarea:focus {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    background: #1e1b2f;
+    background: #f7f2e7;
     border: 1px solid var(--gold);
-    color: #fff;
+    color: var(--text-color);
     padding: 14px 20px;
     border-radius: var(--border-radius-md);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--gold-glow);
+    box-shadow: 0 10px 30px rgba(58, 53, 48, 0.3), 0 0 15px var(--gold-glow);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1327,20 +1323,20 @@ input[type="text"]:focus, select:focus, textarea:focus {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    background: rgba(245, 158, 11, 0.15);
-    border: 1px solid rgba(245, 158, 11, 0.4);
+    background: rgba(201, 154, 46, 0.15);
+    border: 1px solid rgba(201, 154, 46, 0.4);
     border-radius: 20px;
     font-size: 0.82rem;
-    color: #fbbf24;
+    color: var(--gold-dark);
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
 }
 
 .streak-badge:hover {
-    background: rgba(245, 158, 11, 0.25);
-    border-color: #f59e0b;
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+    background: rgba(201, 154, 46, 0.25);
+    border-color: #c99a2e;
+    box-shadow: 0 0 12px rgba(201, 154, 46, 0.35);
     transform: translateY(-1px);
 }
 
@@ -1349,11 +1345,11 @@ input[type="text"]:focus, select:focus, textarea:focus {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    background: rgba(130, 87, 229, 0.18);
-    border: 1px solid rgba(130, 87, 229, 0.4);
+    background: rgba(153, 70, 60, 0.18);
+    border: 1px solid rgba(153, 70, 60, 0.4);
     border-radius: 20px;
     font-size: 0.82rem;
-    color: #c4b5fd;
+    color: #b06256;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
@@ -1375,9 +1371,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .text-icon-btn.active {
-    color: var(--gold-light);
+    color: var(--accent-color);
     border-color: var(--gold);
-    background: rgba(212, 175, 55, 0.18);
+    background: rgba(201, 154, 46, 0.18);
     box-shadow: 0 0 14px var(--gold-glow);
 }
 
@@ -1404,7 +1400,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .avatar-icon {
     font-size: 1.15rem;
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(201, 154, 46, 0.2);
     width: 28px;
     height: 28px;
     border-radius: 50%;
@@ -1463,9 +1459,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .btn-small-gold {
-    background: rgba(212, 175, 55, 0.15);
+    background: rgba(201, 154, 46, 0.15);
     border: 1px solid var(--gold);
-    color: var(--gold-light);
+    color: var(--accent-color);
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -1479,7 +1475,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .btn-small-gold:hover {
     background: var(--gold);
-    color: #0c0c10;
+    color: #f7f2e7;
     box-shadow: 0 0 12px var(--gold-glow);
 }
 
@@ -1500,7 +1496,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .btn-small-secondary:hover {
     border-color: var(--accent-color);
-    color: #fff;
+    color: var(--text-color);
 }
 
 .btn-small-ghost {
@@ -1520,11 +1516,11 @@ input[type="text"]:focus, select:focus, textarea:focus {
 /* Mesa Interativa */
 .interactive-deck-container {
     margin-top: 25px;
-    background: radial-gradient(circle at 50% 30%, #201a3d 0%, #110f1f 65%, #090812 100%);
-    border: 2px solid rgba(212, 175, 55, 0.35);
+    background: radial-gradient(circle at 50% 30%, #f7f2e7 0%, #f7f2e7 65%, #f7f2e7 100%);
+    border: 2px solid rgba(201, 154, 46, 0.35);
     border-radius: var(--border-radius-lg);
     padding: 24px;
-    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7), 0 12px 35px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 0 50px rgba(58, 53, 48, 0.35), 0 12px 35px rgba(58, 53, 48, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -1536,14 +1532,14 @@ input[type="text"]:focus, select:focus, textarea:focus {
     margin-bottom: 20px;
     flex-wrap: wrap;
     gap: 12px;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid rgba(201, 154, 46, 0.2);
     padding-bottom: 15px;
 }
 
 .deck-prompt-info {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.05rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1551,7 +1547,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .pulse-sparkle {
     animation: pulseGlowDot 1.4s infinite;
-    color: var(--gold);
+    color: var(--gold-dark);
 }
 
 .deck-controls {
@@ -1574,8 +1570,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .picked-slot-chip {
     flex: 0 0 auto;
     min-width: 140px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px dashed rgba(212, 175, 55, 0.3);
+    background: rgba(143, 127, 94, 0.04);
+    border: 1px dashed rgba(201, 154, 46, 0.3);
     border-radius: var(--border-radius-md);
     padding: 10px;
     text-align: center;
@@ -1585,7 +1581,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .picked-slot-chip.current-target {
     border-color: var(--gold-light);
     border-style: solid;
-    background: rgba(212, 175, 55, 0.12);
+    background: rgba(201, 154, 46, 0.12);
     box-shadow: 0 0 14px var(--gold-glow);
     animation: targetSlotPulse 2s infinite;
 }
@@ -1598,12 +1594,12 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .picked-slot-chip.filled {
     border-color: var(--success);
     border-style: solid;
-    background: rgba(42, 203, 120, 0.12);
+    background: rgba(92, 122, 78, 0.12);
 }
 
 .picked-slot-chip .slot-pos-label {
     font-size: 0.72rem;
-    color: var(--gold);
+    color: var(--gold-dark);
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 4px;
@@ -1615,7 +1611,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .picked-slot-chip.filled .slot-card-status {
-    color: #fff;
+    color: var(--text-color);
     font-weight: 600;
 }
 
@@ -1633,12 +1629,12 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .deck-card-item {
     width: 68px;
     height: 108px;
-    background: linear-gradient(135deg, #1b1731 0%, #0d0c18 100%);
-    border: 1.5px solid rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, #f7f2e7 0%, #f7f2e7 100%);
+    border: 1.5px solid rgba(201, 154, 46, 0.4);
     border-radius: 8px;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 6px 14px rgba(58, 53, 48, 0.25);
     transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s, border-color 0.25s;
     user-select: none;
     display: flex;
@@ -1649,28 +1645,28 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .deck-card-item:hover:not(.picked) {
     transform: translateY(-16px) scale(1.12);
     border-color: var(--gold-light);
-    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.7), 0 0 20px var(--gold-glow);
+    box-shadow: 0 16px 28px rgba(58, 53, 48, 0.35), 0 0 20px var(--gold-glow);
     z-index: 10;
 }
 
 .deck-card-pattern {
     width: 82%;
     height: 86%;
-    border: 1px solid rgba(212, 175, 55, 0.25);
+    border: 1px solid rgba(201, 154, 46, 0.25);
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--gold);
-    background: radial-gradient(circle, rgba(130, 87, 229, 0.15) 0%, transparent 80%);
+    color: var(--gold-dark);
+    background: radial-gradient(circle, rgba(153, 70, 60, 0.15) 0%, transparent 80%);
 }
 
 .deck-card-item.picked {
     opacity: 0.2;
     transform: scale(0.9);
     cursor: default;
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(143, 127, 94, 0.1);
     pointer-events: none;
 }
 
@@ -1698,13 +1694,13 @@ input[type="text"]:focus, select:focus, textarea:focus {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 16px;
-    background: rgba(20, 19, 30, 0.9);
+    background: rgba(247, 242, 231, 0.9);
     border: 2px solid var(--gold);
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 28px rgba(58, 53, 48, 0.25);
 }
 
 .sim-nao-badge {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.8rem;
     font-weight: 800;
     padding: 6px 20px;
@@ -1713,24 +1709,24 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .sim-nao-badge.sim {
-    background: rgba(42, 203, 120, 0.2);
-    color: #4ade80;
-    border: 2px solid #22c55e;
-    box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    background: rgba(92, 122, 78, 0.2);
+    color: #5c7a4e;
+    border: 2px solid #5c7a4e;
+    box-shadow: 0 0 20px rgba(92, 122, 78, 0.4);
 }
 
 .sim-nao-badge.nao {
-    background: rgba(247, 90, 104, 0.2);
-    color: #f87171;
-    border: 2px solid #ef4444;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    background: rgba(163, 59, 50, 0.2);
+    color: #a33b32;
+    border: 2px solid #a33b32;
+    box-shadow: 0 0 20px rgba(163, 59, 50, 0.4);
 }
 
 .sim-nao-badge.talvez {
-    background: rgba(130, 87, 229, 0.25);
-    color: #c4b5fd;
-    border: 2px solid #8257e5;
-    box-shadow: 0 0 20px rgba(130, 87, 229, 0.4);
+    background: rgba(153, 70, 60, 0.25);
+    color: #b06256;
+    border: 2px solid #99463c;
+    box-shadow: 0 0 20px rgba(153, 70, 60, 0.4);
 }
 
 .sim-nao-text {
@@ -1740,28 +1736,28 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .sim-nao-text h4 {
     font-size: 1rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     margin-bottom: 4px;
 }
 
 .sim-nao-text p {
     font-size: 0.92rem;
-    color: #e2e0ea;
+    color: #8f7f5e;
 }
 
 /* Diário da Leitura na aba Oráculo */
 .reading-journal-box {
     margin-top: 25px;
-    background: rgba(15, 14, 22, 0.8);
+    background: rgba(247, 242, 231, 0.8);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 20px;
 }
 
 .journal-box-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.05rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1777,10 +1773,10 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .reading-journal-textarea {
     width: 100%;
     min-height: 80px;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(58, 53, 48, 0.175);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
-    color: #fff;
+    color: var(--text-color);
     padding: 12px;
     font-family: inherit;
     font-size: 0.9rem;
@@ -1806,10 +1802,10 @@ input[type="text"]:focus, select:focus, textarea:focus {
     align-items: center;
     gap: 6px;
     padding: 6px 16px;
-    background: rgba(212, 175, 55, 0.12);
-    border: 1px solid rgba(212, 175, 55, 0.35);
+    background: rgba(201, 154, 46, 0.12);
+    border: 1px solid rgba(201, 154, 46, 0.35);
     border-radius: 20px;
-    color: var(--gold-light);
+    color: var(--accent-color);
     font-size: 0.82rem;
     text-transform: uppercase;
     font-weight: 700;
@@ -1817,9 +1813,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .daily-date-header h2 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 6px;
 }
 
@@ -1869,7 +1865,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .seal-inner-star {
     font-size: 3rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     animation: pulseStar 2s ease-in-out infinite;
 }
 
@@ -1879,9 +1875,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .daily-locked-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.4rem;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
@@ -1921,7 +1917,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .daily-guidance-card {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(58, 53, 48, 0.15);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 18px 20px;
@@ -1929,7 +1925,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .daily-guidance-card h4 {
     font-size: 0.88rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 8px;
@@ -1940,13 +1936,13 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .daily-guidance-card p {
     font-size: 0.95rem;
-    color: #e5e2ee;
+    color: #b06256;
     line-height: 1.5;
 }
 
 .daily-guidance-card.quest-card {
-    border-color: rgba(130, 87, 229, 0.4);
-    background: rgba(130, 87, 229, 0.08);
+    border-color: rgba(153, 70, 60, 0.4);
+    background: rgba(153, 70, 60, 0.08);
 }
 
 .daily-guidance-card.quest-card button {
@@ -1954,13 +1950,13 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .daily-guidance-card.mantra-card {
-    border-color: rgba(212, 175, 55, 0.4);
-    background: rgba(212, 175, 55, 0.08);
+    border-color: rgba(201, 154, 46, 0.4);
+    background: rgba(201, 154, 46, 0.08);
 }
 
 .mantra-text {
     font-style: italic;
-    color: var(--gold-light) !important;
+    color: var(--accent-color) !important;
     font-weight: 500;
 }
 
@@ -1970,7 +1966,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 /* Check-in de humor diário */
 .daily-mood-checkin {
-    background: rgba(20, 19, 30, 0.7);
+    background: rgba(247, 242, 231, 0.7);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 20px;
@@ -1979,9 +1975,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .daily-mood-checkin h4 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1rem;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 15px;
 }
 
@@ -2006,13 +2002,13 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .mood-btn:hover {
     border-color: var(--gold);
-    color: #fff;
+    color: var(--text-color);
 }
 
 .mood-btn.active {
-    background: rgba(212, 175, 55, 0.2);
+    background: rgba(201, 154, 46, 0.2);
     border-color: var(--gold);
-    color: var(--gold-light);
+    color: var(--accent-color);
     box-shadow: 0 0 14px var(--gold-glow);
 }
 
@@ -2025,7 +2021,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .daily-countdown-footer {
     text-align: center;
     padding: 14px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(58, 53, 48, 0.125);
     border-radius: var(--border-radius-sm);
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -2036,7 +2032,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .daily-countdown-footer strong {
-    color: var(--gold-light);
+    color: var(--accent-color);
     font-family: monospace;
     font-size: 1.05rem;
 }
@@ -2045,8 +2041,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
    ABA 4: CALCULADORA DE ARCANO DE NASCIMENTO & GRIMÓRIO
    ======================================================== */
 .soul-card-calculator-box {
-    background: linear-gradient(135deg, rgba(130, 87, 229, 0.15) 0%, rgba(212, 175, 55, 0.15) 100%);
-    border: 1px solid rgba(212, 175, 55, 0.4);
+    background: linear-gradient(135deg, rgba(153, 70, 60, 0.15) 0%, rgba(201, 154, 46, 0.15) 100%);
+    border: 1px solid rgba(201, 154, 46, 0.4);
     border-radius: var(--border-radius-md);
     padding: 22px;
     margin-bottom: 25px;
@@ -2066,9 +2062,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .calc-text h3 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.15rem;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 4px;
 }
 
@@ -2085,10 +2081,10 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .calc-date-input {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(58, 53, 48, 0.2);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
-    color: #fff;
+    color: var(--text-color);
     padding: 10px 14px;
     font-size: 0.9rem;
 }
@@ -2119,7 +2115,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .elem-filter-btn:hover {
     border-color: var(--accent-color);
-    color: #fff;
+    color: var(--text-color);
 }
 
 .elem-filter-btn.active {
@@ -2155,18 +2151,18 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .history-fav-btn.active {
-    color: var(--gold-light);
+    color: var(--accent-color);
     filter: drop-shadow(0 0 6px var(--gold));
 }
 
 .history-notes-preview {
     margin-top: 10px;
     padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(58, 53, 48, 0.125);
     border-left: 2px solid var(--gold);
     border-radius: 4px;
     font-size: 0.85rem;
-    color: #dedbe5;
+    color: #8f7f5e;
     font-style: italic;
 }
 
@@ -2198,12 +2194,12 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .prof-tab-btn:hover {
-    color: #fff;
+    color: var(--text-color);
 }
 
 .prof-tab-btn.active {
-    color: var(--gold-light);
-    background: rgba(212, 175, 55, 0.12);
+    color: var(--accent-color);
+    background: rgba(201, 154, 46, 0.12);
 }
 
 .prof-section-content {
@@ -2220,7 +2216,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     display: flex;
     gap: 20px;
     align-items: center;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(58, 53, 48, 0.125);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: 18px;
@@ -2236,7 +2232,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .avatar-large {
     font-size: 3.2rem;
-    background: rgba(130, 87, 229, 0.2);
+    background: rgba(153, 70, 60, 0.2);
     border: 2px solid var(--gold);
     width: 75px;
     height: 75px;
@@ -2269,9 +2265,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .profile-hero-info h3 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.35rem;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 2px;
 }
 
@@ -2298,17 +2294,17 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .level-xp-text {
-    color: var(--gold);
+    color: var(--gold-dark);
     font-weight: 600;
 }
 
 .stat-progress-bar.xp-bar {
-    background: linear-gradient(90deg, #8257e5 0%, #ffd700 100%);
+    background: linear-gradient(90deg, #99463c 0%, #d9ae48 100%);
 }
 
 /* Destaque do Arcano da Alma */
 .profile-soul-card-highlight {
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(130, 87, 229, 0.12) 100%);
+    background: linear-gradient(135deg, rgba(201, 154, 46, 0.12) 0%, rgba(153, 70, 60, 0.12) 100%);
     border: 1px solid var(--gold);
     border-radius: var(--border-radius-md);
     padding: 16px;
@@ -2317,7 +2313,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .soul-card-badge {
     font-size: 0.75rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 8px;
@@ -2341,15 +2337,15 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .soul-card-info h4 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.1rem;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 2px;
 }
 
 .soul-card-info p {
     font-size: 0.85rem;
-    color: #dedbe5;
+    color: #8f7f5e;
     line-height: 1.4;
 }
 
@@ -2368,7 +2364,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 
 .profile-achievements-box h4 {
     font-size: 0.88rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-bottom: 10px;
@@ -2384,7 +2380,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .achievement-badge-card {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(58, 53, 48, 0.125);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
     padding: 10px;
@@ -2393,8 +2389,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .achievement-badge-card.unlocked {
-    border-color: rgba(212, 175, 55, 0.5);
-    background: rgba(212, 175, 55, 0.08);
+    border-color: rgba(201, 154, 46, 0.5);
+    background: rgba(201, 154, 46, 0.08);
 }
 
 .achievement-badge-card.locked {
@@ -2410,7 +2406,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
 .achievement-badge-card .badge-name {
     font-size: 0.78rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 2px;
 }
 
@@ -2432,7 +2428,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(58, 53, 48, 0.125);
     padding: 4px;
     border-radius: 25px;
 }
@@ -2468,7 +2464,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     display: flex;
     align-items: center;
     gap: 4px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(143, 127, 94, 0.05);
     padding: 6px 12px;
     border-radius: 20px;
     border: 1px solid var(--border-color);
@@ -2506,7 +2502,7 @@ input[type="text"]:focus, select:focus, textarea:focus {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(130, 87, 229, 0.5) 0%, rgba(212, 175, 55, 0.2) 70%, transparent 100%);
+    background: radial-gradient(circle, rgba(153, 70, 60, 0.5) 0%, rgba(201, 154, 46, 0.2) 70%, transparent 100%);
     border: 2px solid var(--gold);
     display: flex;
     align-items: center;
@@ -2519,8 +2515,8 @@ input[type="text"]:focus, select:focus, textarea:focus {
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background: #ffd700;
-    box-shadow: 0 0 20px #ffd700;
+    background: #d9ae48;
+    box-shadow: 0 0 20px #d9ae48;
     animation: corePulse 8s infinite ease-in-out;
 }
 
@@ -2535,9 +2531,9 @@ input[type="text"]:focus, select:focus, textarea:focus {
 }
 
 .breath-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.4rem;
-    color: var(--gold-light);
+    color: var(--accent-color);
     margin-bottom: 8px;
 }
 

@@ -2,13 +2,15 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#efe6d2">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oráculo do Tarô & To-Do Sagrado | Arcanos Maiores & Retenção Cósmica</title>
     <meta name="description" content="Oráculo interativo dos 22 Arcanos Maiores com tiragem de mesa interativa, ritual diário, Tarot do Amor, Sim ou Não, Cruz Céltica, perfil de usuário com Arcano de Nascimento e gestor sagrado de tarefas.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tema-papiro.css">
 </head>
 <body>
 
@@ -448,7 +450,7 @@
 
                 <div class="grimorio-header">
                     <div>
-                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Grimório dos 22 Arcanos</h2>
+                        <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; color: var(--gold-light);">Grimório dos 22 Arcanos</h2>
                         <p style="color: var(--text-muted); font-size: 0.9rem;">
                             Consulte os símbolos, amor, carreira, oráculo Sim/Não e conselhos práticos dos 22 arquétipos.
                         </p>
@@ -485,7 +487,7 @@
             <div class="glass-panel">
                 <div class="history-header">
                     <div>
-                        <h2 style="font-family: 'Cinzel', serif; color: var(--gold-light);">Diário Cósmico & Histórico</h2>
+                        <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; color: var(--gold-light);">Diário Cósmico & Histórico</h2>
                         <p style="color: var(--text-muted); font-size: 0.9rem;">
                             Registro completo das suas consultas, favoritos e impressões pessoais salvas com carinho.
                         </p>
@@ -494,7 +496,7 @@
                         <button class="btn-secondary" onclick="exportarDadosBackup()" title="Baixar arquivo de backup">
                             <span>📥</span> Exportar Dados
                         </button>
-                        <button class="btn-secondary" onclick="clearHistory()" style="color: var(--danger); border-color: rgba(247, 90, 104, 0.4);">
+                        <button class="btn-secondary" onclick="clearHistory()" style="color: var(--danger); border-color: rgba(163, 59, 50, 0.4);">
                             <span>🗑️</span> Limpar Histórico
                         </button>
                     </div>
@@ -618,7 +620,7 @@
                         <span>📤</span> Restaurar Backup
                         <input type="file" id="importBackupInput" style="display: none;" accept=".json" onchange="importarDadosBackup(event)">
                     </label>
-                    <button type="button" class="btn-secondary" onclick="desconectarOuResetarConta()" style="color: var(--danger); border-color: rgba(247, 90, 104, 0.4);">
+                    <button type="button" class="btn-secondary" onclick="desconectarOuResetarConta()" style="color: var(--danger); border-color: rgba(163, 59, 50, 0.4);">
                         <span>🚪</span> Sair / Nova Conta
                     </button>
                 </div>

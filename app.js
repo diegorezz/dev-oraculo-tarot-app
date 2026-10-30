@@ -1385,7 +1385,7 @@ function exibirResultadosDaTiragem(pergunta, tipoTiragem, tituloTiragem, cartasT
                                 <button type="button" class="card-action-btn" onclick="event.stopPropagation(); addTaskFromCard(${idx})">
                                     <span>➕</span> Tarefa
                                 </button>
-                                <button type="button" class="card-action-btn" style="background: rgba(255,255,255,0.06); border-color: var(--border-color);" onclick="event.stopPropagation(); openArcanoModal(${c.id})">
+                                <button type="button" class="card-action-btn" style="background: rgba(143, 127, 94, 0.06); border-color: var(--border-color);" onclick="event.stopPropagation(); openArcanoModal(${c.id})">
                                     <span>📖</span> Grimório
                                 </button>
                             </div>
@@ -1782,7 +1782,7 @@ function openArcanoModal(arcanoId, isSoulCardModal = false) {
         </div>
 
         ${isSoulCardModal ? `
-            <div class="modal-section" style="border-color: var(--gold); background: rgba(212, 175, 55, 0.12);">
+            <div class="modal-section" style="border-color: var(--gold); background: rgba(201, 154, 46, 0.12);">
                 <h4><span style="color: var(--gold-light);">✦</span> Seu Arquétipo da Alma / Propósito de Vida</h4>
                 <p><strong>${arcano.arquetipoVida}</strong></p>
             </div>

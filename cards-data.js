@@ -22,12 +22,12 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Criador e Comunicador: dotado de imenso talento para transformar ideias em realidade prática.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/>
-            <path d="M50 16 L53 30 L67 33 L53 36 L50 50 L47 36 L33 33 L47 30 Z" fill="#ffd700"/>
-            <path d="M30 65 Q40 52 50 65 T70 65" stroke="#8257e5" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <circle cx="50" cy="65" r="4" fill="#ffd700"/>
-            <path d="M25 80 L75 80" stroke="#d4af37" stroke-width="2"/>
-            <path d="M38 74 L42 80 L34 80 Z" fill="#9466ff"/>
-            <circle cx="62" cy="76" r="3" fill="#e0c068"/>
+            <path d="M50 16 L53 30 L67 33 L53 36 L50 50 L47 36 L33 33 L47 30 Z" fill="#d9ae48"/>
+            <path d="M30 65 Q40 52 50 65 T70 65" stroke="#99463c" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="50" cy="65" r="4" fill="#d9ae48"/>
+            <path d="M25 80 L75 80" stroke="#c99a2e" stroke-width="2"/>
+            <path d="M38 74 L42 80 L34 80 Z" fill="#99463c"/>
+            <circle cx="62" cy="76" r="3" fill="#d9ae48"/>
         </svg>`
     },
     {
@@ -47,11 +47,11 @@ const ARCANOS_DATA = [
         arquetipoVida: "A Guardiã dos Mistérios: profunda, serena, intuitiva e dotada de perspicácia espiritual única.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 20 C35 32 35 68 50 80 C65 68 65 32 50 20 Z" fill="rgba(130, 87, 229, 0.2)" stroke="#8257e5" stroke-width="2"/>
-            <circle cx="50" cy="50" r="14" fill="#d4af37" fill-opacity="0.2" stroke="#d4af37" stroke-width="2"/>
-            <path d="M36 42 Q50 32 64 42" stroke="#9466ff" stroke-width="2" fill="none"/>
-            <circle cx="50" cy="50" r="4" fill="#ffd700"/>
-            <path d="M24 30 L24 70 M76 30 L76 70" stroke="#a0a0a0" stroke-width="3" stroke-linecap="round"/>
+            <path d="M50 20 C35 32 35 68 50 80 C65 68 65 32 50 20 Z" fill="rgba(153, 70, 60, 0.2)" stroke="#99463c" stroke-width="2"/>
+            <circle cx="50" cy="50" r="14" fill="#c99a2e" fill-opacity="0.2" stroke="#c99a2e" stroke-width="2"/>
+            <path d="M36 42 Q50 32 64 42" stroke="#99463c" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="50" r="4" fill="#d9ae48"/>
+            <path d="M24 30 L24 70 M76 30 L76 70" stroke="#6b6457" stroke-width="3" stroke-linecap="round"/>
         </svg>`
     },
     {
@@ -71,9 +71,9 @@ const ARCANOS_DATA = [
         arquetipoVida: "A Mestra da Abundância: calorosa, criativa, nutridora e geradora de prosperidade e beleza.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 18 L60 38 L82 40 L65 54 L70 76 L50 64 L30 76 L35 54 L18 40 L40 38 Z" stroke="#d4af37" stroke-width="1.5" fill="rgba(212,175,55,0.15)"/>
-            <circle cx="50" cy="48" r="8" fill="#8257e5"/>
-            <path d="M50 64 L50 84 M42 74 L58 74" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+            <path d="M50 18 L60 38 L82 40 L65 54 L70 76 L50 64 L30 76 L35 54 L18 40 L40 38 Z" stroke="#c99a2e" stroke-width="1.5" fill="rgba(201, 154, 46, 0.15)"/>
+            <circle cx="50" cy="48" r="8" fill="#99463c"/>
+            <path d="M50 64 L50 84 M42 74 L58 74" stroke="#c99a2e" stroke-width="2" stroke-linecap="round"/>
         </svg>`
     },
     {
@@ -93,10 +93,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Construtor e Soberano: determinado, pragmático, protetor e arquiteto de bases sólidas.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <rect x="32" y="32" width="36" height="36" rx="4" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
-            <path d="M26 26 L50 40 L74 26 L65 50 L50 46 L35 50 Z" fill="#8257e5"/>
-            <circle cx="50" cy="50" r="5" fill="#ffd700"/>
-            <path d="M50 68 L50 82" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+            <rect x="32" y="32" width="36" height="36" rx="4" stroke="#c99a2e" stroke-width="2" fill="rgba(201, 154, 46, 0.1)"/>
+            <path d="M26 26 L50 40 L74 26 L65 50 L50 46 L35 50 Z" fill="#99463c"/>
+            <circle cx="50" cy="50" r="5" fill="#d9ae48"/>
+            <path d="M50 68 L50 82" stroke="#c99a2e" stroke-width="3" stroke-linecap="round"/>
         </svg>`
     },
     {
@@ -116,9 +116,9 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Mentor e Farol Moral: conciliador, portador de ensinamentos perenes e guardião de valores.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 20 L50 80 M34 36 L66 36 M38 48 L62 48 M42 60 L58 60" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="50" cy="24" r="5" fill="#8257e5"/>
-            <path d="M30 78 Q50 70 70 78" stroke="#9466ff" stroke-width="2"/>
+            <path d="M50 20 L50 80 M34 36 L66 36 M38 48 L62 48 M42 60 L58 60" stroke="#c99a2e" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="50" cy="24" r="5" fill="#99463c"/>
+            <path d="M30 78 Q50 70 70 78" stroke="#99463c" stroke-width="2"/>
         </svg>`
     },
     {
@@ -138,9 +138,9 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Buscador da União: sensível, diplomático, motivado pelo amor sincero e harmonia social.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 34 C44 24 30 24 26 36 C22 48 38 64 50 76 C62 64 78 48 74 36 C70 24 56 24 50 34 Z" fill="rgba(130, 87, 229, 0.3)" stroke="#8257e5" stroke-width="2"/>
-            <path d="M50 22 L52 28 L58 30 L52 32 L50 38 L48 32 L42 30 L48 28 Z" fill="#ffd700"/>
-            <circle cx="50" cy="52" r="4" fill="#ffd700"/>
+            <path d="M50 34 C44 24 30 24 26 36 C22 48 38 64 50 76 C62 64 78 48 74 36 C70 24 56 24 50 34 Z" fill="rgba(153, 70, 60, 0.3)" stroke="#99463c" stroke-width="2"/>
+            <path d="M50 22 L52 28 L58 30 L52 32 L50 38 L48 32 L42 30 L48 28 Z" fill="#d9ae48"/>
+            <circle cx="50" cy="52" r="4" fill="#d9ae48"/>
         </svg>`
     },
     {
@@ -160,11 +160,11 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Triunfador Determinado: focado, disciplinado, resiliente e condutor das próprias rédeas.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M30 46 L70 46 L62 74 L38 74 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.15)"/>
-            <circle cx="34" cy="76" r="8" stroke="#8257e5" stroke-width="2"/>
-            <circle cx="66" cy="76" r="8" stroke="#8257e5" stroke-width="2"/>
-            <path d="M50 24 L56 36 L44 36 Z" fill="#ffd700"/>
-            <path d="M44 46 L44 36 M56 46 L56 36" stroke="#d4af37" stroke-width="1.5"/>
+            <path d="M30 46 L70 46 L62 74 L38 74 Z" stroke="#c99a2e" stroke-width="2" fill="rgba(201, 154, 46, 0.15)"/>
+            <circle cx="34" cy="76" r="8" stroke="#99463c" stroke-width="2"/>
+            <circle cx="66" cy="76" r="8" stroke="#99463c" stroke-width="2"/>
+            <path d="M50 24 L56 36 L44 36 Z" fill="#d9ae48"/>
+            <path d="M44 46 L44 36 M56 46 L56 36" stroke="#c99a2e" stroke-width="1.5"/>
         </svg>`
     },
     {
@@ -184,11 +184,11 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Guardião da Equidade: lúcido, imparcial, focado na verdade e no equilíbrio harmônico.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 20 L50 80" stroke="#d4af37" stroke-width="2"/>
-            <path d="M26 36 L74 36" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M26 36 L20 54 L32 54 Z" stroke="#8257e5" stroke-width="1.5" fill="rgba(130,87,229,0.2)"/>
-            <path d="M74 36 L68 54 L80 54 Z" stroke="#8257e5" stroke-width="1.5" fill="rgba(130,87,229,0.2)"/>
-            <path d="M46 72 L50 82 L54 72 Z" fill="#ffd700"/>
+            <path d="M50 20 L50 80" stroke="#c99a2e" stroke-width="2"/>
+            <path d="M26 36 L74 36" stroke="#c99a2e" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M26 36 L20 54 L32 54 Z" stroke="#99463c" stroke-width="1.5" fill="rgba(153, 70, 60, 0.2)"/>
+            <path d="M74 36 L68 54 L80 54 Z" stroke="#99463c" stroke-width="1.5" fill="rgba(153, 70, 60, 0.2)"/>
+            <path d="M46 72 L50 82 L54 72 Z" fill="#d9ae48"/>
         </svg>`
     },
     {
@@ -208,11 +208,11 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Sábio Peregrino: reflexivo, paciente, autossuficiente e portador da lâmpada da verdade.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M35 78 L45 28 L55 28 L65 78 Z" stroke="#8257e5" stroke-width="2" fill="rgba(130,87,229,0.15)"/>
-            <circle cx="50" cy="22" r="8" fill="#d4af37"/>
-            <path d="M62 45 L72 50 L72 65 L62 60 Z" stroke="#ffd700" stroke-width="1.5" fill="rgba(255,215,0,0.3)"/>
+            <path d="M35 78 L45 28 L55 28 L65 78 Z" stroke="#99463c" stroke-width="2" fill="rgba(153, 70, 60, 0.15)"/>
+            <circle cx="50" cy="22" r="8" fill="#c99a2e"/>
+            <path d="M62 45 L72 50 L72 65 L62 60 Z" stroke="#d9ae48" stroke-width="1.5" fill="rgba(217, 174, 72, 0.3)"/>
             <circle cx="67" cy="56" r="3" fill="#ffffff"/>
-            <path d="M28 80 L32 40" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+            <path d="M28 80 L32 40" stroke="#c99a2e" stroke-width="2" stroke-linecap="round"/>
         </svg>`
     },
     {
@@ -232,10 +232,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Agente da Sincronicidade: dinâmico, adaptável e sempre sintonizado com o fluxo do destino.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <circle cx="50" cy="50" r="28" stroke="#d4af37" stroke-width="2.5"/>
-            <circle cx="50" cy="50" r="10" stroke="#ffd700" stroke-width="2" fill="rgba(130,87,229,0.2)"/>
-            <path d="M50 22 L50 40 M50 60 L50 78 M22 50 L40 50 M60 50 L78 50" stroke="#d4af37" stroke-width="2"/>
-            <path d="M30 30 L43 43 M57 57 L70 70 M70 30 L57 43 M43 57 L30 70" stroke="#8257e5" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="28" stroke="#c99a2e" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="10" stroke="#d9ae48" stroke-width="2" fill="rgba(153, 70, 60, 0.2)"/>
+            <path d="M50 22 L50 40 M50 60 L50 78 M22 50 L40 50 M60 50 L78 50" stroke="#c99a2e" stroke-width="2"/>
+            <path d="M30 30 L43 43 M57 57 L70 70 M70 30 L57 43 M43 57 L30 70" stroke="#99463c" stroke-width="1.5"/>
         </svg>`
     },
     {
@@ -255,10 +255,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Domador Sereno: corajoso, magnético, compassivo e mestre no autocontrole e empatia.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M36 34 C30 24 20 34 26 44 C34 54 44 34 50 34 C56 34 66 54 74 44 C80 34 70 24 64 34 C58 44 42 24 36 34 Z" stroke="#ffd700" stroke-width="2" fill="none"/>
-            <path d="M35 56 C40 52 60 52 65 56 C70 60 70 76 50 78 C30 76 30 60 35 56 Z" fill="rgba(130,87,229,0.2)" stroke="#8257e5" stroke-width="2"/>
-            <circle cx="44" cy="64" r="3" fill="#ffd700"/>
-            <circle cx="56" cy="64" r="3" fill="#ffd700"/>
+            <path d="M36 34 C30 24 20 34 26 44 C34 54 44 34 50 34 C56 34 66 54 74 44 C80 34 70 24 64 34 C58 44 42 24 36 34 Z" stroke="#d9ae48" stroke-width="2" fill="none"/>
+            <path d="M35 56 C40 52 60 52 65 56 C70 60 70 76 50 78 C30 76 30 60 35 56 Z" fill="rgba(153, 70, 60, 0.2)" stroke="#99463c" stroke-width="2"/>
+            <circle cx="44" cy="64" r="3" fill="#d9ae48"/>
+            <circle cx="56" cy="64" r="3" fill="#d9ae48"/>
         </svg>`
     },
     {
@@ -278,9 +278,9 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Visionário Iluminado: capaz de enxergar o mundo sob prismas que ninguém mais percebe.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M25 24 L75 24 M50 24 L50 38" stroke="#d4af37" stroke-width="2.5"/>
-            <path d="M50 38 L50 68 M40 54 L60 54 M50 68 L36 82 M50 68 L64 82" stroke="#8257e5" stroke-width="2"/>
-            <circle cx="50" cy="38" r="6" fill="#ffd700"/>
+            <path d="M25 24 L75 24 M50 24 L50 38" stroke="#c99a2e" stroke-width="2.5"/>
+            <path d="M50 38 L50 68 M40 54 L60 54 M50 68 L36 82 M50 68 L64 82" stroke="#99463c" stroke-width="2"/>
+            <circle cx="50" cy="38" r="6" fill="#d9ae48"/>
         </svg>`
     },
     {
@@ -300,10 +300,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Transmutador Fênix: regenerativo, resiliente, cirúrgico em deixar para trás o supérfluo.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M30 78 L65 24" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M65 24 C60 16 80 18 82 28 C84 36 74 38 65 24 Z" fill="#8257e5" stroke="#8257e5" stroke-width="1.5"/>
-            <circle cx="44" cy="58" r="4" fill="#ffd700"/>
-            <path d="M26 80 Q40 68 54 80" stroke="#9466ff" stroke-width="1.5"/>
+            <path d="M30 78 L65 24" stroke="#c99a2e" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M65 24 C60 16 80 18 82 28 C84 36 74 38 65 24 Z" fill="#99463c" stroke="#99463c" stroke-width="1.5"/>
+            <circle cx="44" cy="58" r="4" fill="#d9ae48"/>
+            <path d="M26 80 Q40 68 54 80" stroke="#99463c" stroke-width="1.5"/>
         </svg>`
     },
     {
@@ -323,10 +323,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Pacificador Alquímico: equilibrador de conflitos, tolerante, generoso e curador nato.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M35 34 C35 34 30 46 38 52 C44 56 46 48 46 48 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.2)"/>
-            <path d="M65 66 C65 66 70 54 62 48 C56 44 54 52 54 52 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.2)"/>
-            <path d="M42 46 Q50 50 58 54" stroke="#8257e5" stroke-width="2.5" stroke-dasharray="3 2"/>
-            <path d="M26 26 L42 36 M74 26 L58 36" stroke="#ffd700" stroke-width="1.5"/>
+            <path d="M35 34 C35 34 30 46 38 52 C44 56 46 48 46 48 Z" stroke="#c99a2e" stroke-width="2" fill="rgba(201, 154, 46, 0.2)"/>
+            <path d="M65 66 C65 66 70 54 62 48 C56 44 54 52 54 52 Z" stroke="#c99a2e" stroke-width="2" fill="rgba(201, 154, 46, 0.2)"/>
+            <path d="M42 46 Q50 50 58 54" stroke="#99463c" stroke-width="2.5" stroke-dasharray="3 2"/>
+            <path d="M26 26 L42 36 M74 26 L58 36" stroke="#d9ae48" stroke-width="1.5"/>
         </svg>`
     },
     {
@@ -346,10 +346,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Despertador de Sombras: astuto, magnético e capaz de transmutar desejos materiais em força criativa.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 25 L56 38 L70 38 L58 48 L62 62 L50 52 L38 62 L42 48 L30 38 L44 38 Z" stroke="#f75a68" stroke-width="1.5" fill="rgba(247,90,104,0.15)"/>
-            <circle cx="42" cy="46" r="3" fill="#ffd700"/>
-            <circle cx="58" cy="46" r="3" fill="#ffd700"/>
-            <path d="M36 74 C42 66 58 66 64 74" stroke="#8257e5" stroke-width="2.5"/>
+            <path d="M50 25 L56 38 L70 38 L58 48 L62 62 L50 52 L38 62 L42 48 L30 38 L44 38 Z" stroke="#a33b32" stroke-width="1.5" fill="rgba(163, 59, 50, 0.15)"/>
+            <circle cx="42" cy="46" r="3" fill="#d9ae48"/>
+            <circle cx="58" cy="46" r="3" fill="#d9ae48"/>
+            <path d="M36 74 C42 66 58 66 64 74" stroke="#99463c" stroke-width="2.5"/>
         </svg>`
     },
     {
@@ -369,9 +369,9 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Libertador Radical: detesta superficialidades, quebra paradigmas e reconstrói com solidez.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M38 78 L42 36 L58 36 L62 78 Z" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,0.1)"/>
-            <path d="M42 36 L36 30 L50 22 L64 30 L58 36 Z" stroke="#ffd700" stroke-width="1.5" fill="rgba(255,215,0,0.3)"/>
-            <path d="M50 16 L46 26 L54 28 L48 38" stroke="#f75a68" stroke-width="2" stroke-linecap="round"/>
+            <path d="M38 78 L42 36 L58 36 L62 78 Z" stroke="#c99a2e" stroke-width="2" fill="rgba(201, 154, 46, 0.1)"/>
+            <path d="M42 36 L36 30 L50 22 L64 30 L58 36 Z" stroke="#d9ae48" stroke-width="1.5" fill="rgba(217, 174, 72, 0.3)"/>
+            <path d="M50 16 L46 26 L54 28 L48 38" stroke="#a33b32" stroke-width="2" stroke-linecap="round"/>
         </svg>`
     },
     {
@@ -391,12 +391,12 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Farol da Esperança: carismático, visionário, humanitário e irradiador de luz e consolo.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <polygon points="50,20 54,34 68,34 57,43 61,56 50,47 39,56 43,43 32,34 46,34" fill="#ffd700" stroke="#d4af37" stroke-width="1"/>
-            <circle cx="28" cy="30" r="3" fill="#8257e5"/>
-            <circle cx="72" cy="30" r="3" fill="#8257e5"/>
-            <circle cx="24" cy="62" r="3" fill="#8257e5"/>
-            <circle cx="76" cy="62" r="3" fill="#8257e5"/>
-            <path d="M30 76 Q50 68 70 76" stroke="#9466ff" stroke-width="2"/>
+            <polygon points="50,20 54,34 68,34 57,43 61,56 50,47 39,56 43,43 32,34 46,34" fill="#d9ae48" stroke="#c99a2e" stroke-width="1"/>
+            <circle cx="28" cy="30" r="3" fill="#99463c"/>
+            <circle cx="72" cy="30" r="3" fill="#99463c"/>
+            <circle cx="24" cy="62" r="3" fill="#99463c"/>
+            <circle cx="76" cy="62" r="3" fill="#99463c"/>
+            <path d="M30 76 Q50 68 70 76" stroke="#99463c" stroke-width="2"/>
         </svg>`
     },
     {
@@ -416,10 +416,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Místico dos Sonhos: hipersensível, empático, capaz de decifrar o invisível e curar emoções.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M50 20 C66 20 80 34 80 50 C80 66 66 80 50 80 C56 70 60 60 60 50 C60 40 56 30 50 20 Z" fill="#ffd700" stroke="#d4af37" stroke-width="1.5"/>
-            <circle cx="34" cy="72" r="6" stroke="#8257e5" stroke-width="2"/>
-            <circle cx="66" cy="72" r="6" stroke="#8257e5" stroke-width="2"/>
-            <path d="M42 46 L58 46" stroke="#8257e5" stroke-width="1.5"/>
+            <path d="M50 20 C66 20 80 34 80 50 C80 66 66 80 50 80 C56 70 60 60 60 50 C60 40 56 30 50 20 Z" fill="#d9ae48" stroke="#c99a2e" stroke-width="1.5"/>
+            <circle cx="34" cy="72" r="6" stroke="#99463c" stroke-width="2"/>
+            <circle cx="66" cy="72" r="6" stroke="#99463c" stroke-width="2"/>
+            <path d="M42 46 L58 46" stroke="#99463c" stroke-width="1.5"/>
         </svg>`
     },
     {
@@ -439,12 +439,12 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Portador da Luz: alegre, motivador, caloroso, líder natural que espalha otimismo genuíno.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <circle cx="50" cy="50" r="18" fill="#ffd700" stroke="#d4af37" stroke-width="2"/>
-            <path d="M50 16 L50 26 M50 74 L50 84 M16 50 L26 50 M74 50 L84 50" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/>
-            <path d="M26 26 L33 33 M67 67 L74 74 M74 26 L67 33 M33 67 L26 74" stroke="#ffd700" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="44" cy="46" r="2.5" fill="#121214"/>
-            <circle cx="56" cy="46" r="2.5" fill="#121214"/>
-            <path d="M44 56 Q50 60 56 56" stroke="#121214" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="18" fill="#d9ae48" stroke="#c99a2e" stroke-width="2"/>
+            <path d="M50 16 L50 26 M50 74 L50 84 M16 50 L26 50 M74 50 L84 50" stroke="#d9ae48" stroke-width="3" stroke-linecap="round"/>
+            <path d="M26 26 L33 33 M67 67 L74 74 M74 26 L67 33 M33 67 L26 74" stroke="#d9ae48" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="44" cy="46" r="2.5" fill="#f7f2e7"/>
+            <circle cx="56" cy="46" r="2.5" fill="#f7f2e7"/>
+            <path d="M44 56 Q50 60 56 56" stroke="#f7f2e7" stroke-width="2" stroke-linecap="round"/>
         </svg>`
     },
     {
@@ -464,10 +464,10 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Despertador de Consciências: visionário, catalisador de renascimento pessoal e coletivo.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M38 32 L62 20 L62 44 Z" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.2)"/>
-            <path d="M62 32 L78 32" stroke="#d4af37" stroke-width="2"/>
-            <path d="M28 76 L36 58 M50 76 L50 56 M72 76 L64 58" stroke="#8257e5" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="50" cy="24" r="3" fill="#ffd700"/>
+            <path d="M38 32 L62 20 L62 44 Z" stroke="#d9ae48" stroke-width="2" fill="rgba(217, 174, 72, 0.2)"/>
+            <path d="M62 32 L78 32" stroke="#c99a2e" stroke-width="2"/>
+            <path d="M28 76 L36 58 M50 76 L50 56 M72 76 L64 58" stroke="#99463c" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="50" cy="24" r="3" fill="#d9ae48"/>
         </svg>`
     },
     {
@@ -487,12 +487,12 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Integrador Universal: conectado com o todo, cosmopolita, harmonioso e mestre da realização.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <ellipse cx="50" cy="50" rx="24" ry="32" stroke="#d4af37" stroke-width="2.5" fill="rgba(212,175,55,0.1)"/>
-            <circle cx="50" cy="50" r="8" fill="#8257e5"/>
-            <circle cx="28" cy="24" r="3" fill="#ffd700"/>
-            <circle cx="72" cy="24" r="3" fill="#ffd700"/>
-            <circle cx="28" cy="76" r="3" fill="#ffd700"/>
-            <circle cx="72" cy="76" r="3" fill="#ffd700"/>
+            <ellipse cx="50" cy="50" rx="24" ry="32" stroke="#c99a2e" stroke-width="2.5" fill="rgba(201, 154, 46, 0.1)"/>
+            <circle cx="50" cy="50" r="8" fill="#99463c"/>
+            <circle cx="28" cy="24" r="3" fill="#d9ae48"/>
+            <circle cx="72" cy="24" r="3" fill="#d9ae48"/>
+            <circle cx="28" cy="76" r="3" fill="#d9ae48"/>
+            <circle cx="72" cy="76" r="3" fill="#d9ae48"/>
         </svg>`
     },
     {
@@ -512,11 +512,11 @@ const ARCANOS_DATA = [
         arquetipoVida: "O Peregrino da Liberdade: desbravador, autêntico, espontâneo, conectado com a pura fé cósmica.",
         iconeSvg: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="2"/>
-            <path d="M30 68 L64 34" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="68" cy="30" r="7" stroke="#ffd700" stroke-width="2" fill="rgba(255,215,0,0.3)"/>
-            <path d="M40 76 Q52 70 60 76 T74 72" stroke="#8257e5" stroke-width="2" fill="none"/>
-            <circle cx="50" cy="46" r="4" fill="#9466ff"/>
-            <path d="M26 80 L36 68" stroke="#d4af37" stroke-width="2"/>
+            <path d="M30 68 L64 34" stroke="#c99a2e" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="68" cy="30" r="7" stroke="#d9ae48" stroke-width="2" fill="rgba(217, 174, 72, 0.3)"/>
+            <path d="M40 76 Q52 70 60 76 T74 72" stroke="#99463c" stroke-width="2" fill="none"/>
+            <circle cx="50" cy="46" r="4" fill="#99463c"/>
+            <path d="M26 80 L36 68" stroke="#c99a2e" stroke-width="2"/>
         </svg>`
     }
 ];

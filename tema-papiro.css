@@ -1,0 +1,61 @@
+/* Tema Papiro — paleta e tipografia do Guia Tarot Iniciático
+   Papel #efe6d2 · painel #f7f2e7 · tinta #3a3530 · dourado #c99a2e · tijolo #99463c */
+body { background: var(--bg-gradient); background-color: var(--bg-color); font-size: 17px; line-height: 1.65; }
+.star-bg { display: none; }
+h1, h2, h3, h4, .modal-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; color: var(--text-color); letter-spacing: .01em; }
+h1 { text-shadow: none; background: none; -webkit-text-fill-color: var(--text-color); color: var(--text-color); }
+p, li, label, input, textarea, select, button { font-family: 'Source Serif 4', Georgia, serif; }
+em, .subtitle, .reading-summary-text { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 1.08em; }
+
+/* Painéis: papel claro com moldura dupla, como as caixas do guia */
+.glass-panel, .modal-content, .stat-card, .new-task-card, .task-item, .history-item, .grimorio-card-item {
+    background: var(--card-bg-solid); border: 1px solid var(--border-color);
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    box-shadow: inset 0 0 0 4px var(--card-bg-solid), inset 0 0 0 5px rgba(143,127,94,.45);
+}
+.task-item, .history-item, .grimorio-card-item { box-shadow: none; }
+.glass-panel::before { display: none; }
+.modal-overlay { background: rgba(58,53,48,.55); -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* Título de seção com filete dourado */
+.tab-content h2::after, .modal-title::after { content: ""; display: block; width: 28px; height: 3px; background: var(--gold); margin-top: 8px; }
+.top-bar, .tabs-nav { border-color: rgba(143,127,94,.4); }
+.top-bar, header { background: transparent; }
+.brand-badge, .iniciatico-tag { background: none; border: 0; color: var(--text-dim); letter-spacing: .14em; }
+
+/* Abas */
+.tab-btn { color: var(--text-muted); background: transparent; border-radius: 0; }
+.tab-btn:hover { color: var(--text-color); background: rgba(143,127,94,.1); }
+.tab-btn.active { color: var(--text-color); background: transparent; border-bottom: 2px solid var(--accent-color); box-shadow: none; }
+
+/* Botões */
+.btn-primary { background: var(--accent-color); color: #f7f2e7; border: 1px solid var(--accent-hover); box-shadow: none; text-shadow: none; }
+.btn-primary:hover { background: var(--accent-hover); box-shadow: none; transform: none; }
+.btn-gold { background: var(--gold); color: var(--text-color); border: 1px solid var(--gold-dark); box-shadow: none; }
+.btn-gold:hover { background: var(--gold-light); box-shadow: none; }
+.btn-secondary, .icon-btn, .chip, .filter-pill, .card-action-btn { background: transparent; color: var(--text-color); border: 1px solid var(--border-color); }
+.btn-secondary:hover, .icon-btn:hover, .chip:hover, .filter-pill:hover, .filter-pill.active { background: rgba(153,70,60,.08); border-color: var(--accent-color); color: var(--text-color); }
+
+/* Campos */
+input, textarea, select { background: #fbf8f0; color: var(--text-color); border: 1px solid var(--border-color); border-radius: 2px; }
+input::placeholder, textarea::placeholder { color: var(--text-dim); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(153,70,60,.18); }
+:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+
+/* Cartas: verso (antes de virar) em tijolo com moldura dourada; face revelada em papel */
+.card-face.front { background: #99463c; border: 1px solid #7f372f; box-shadow: inset 0 0 0 5px #99463c, inset 0 0 0 6px var(--gold), 0 2px 10px rgba(58,53,48,.22); }
+.card-back-pattern { border-color: rgba(217,174,72,.6); }
+.card-back-hint { color: #e6c36a; }
+.card-face.back { background: #f7f2e7; border: 1px solid var(--text-dim); box-shadow: 0 2px 10px rgba(58,53,48,.18); }
+.card-face.back.inverted { border-color: var(--danger); }
+.card-inner-frame { border-color: rgba(143,127,94,.55); }
+.card-name-title, .card-top-number { color: var(--text-color); }
+.card-svg-container, .modal-card-svg, .grimorio-card-svg { color: var(--accent-color); }
+.tab-content h2 { color: var(--text-color); background: none; -webkit-text-fill-color: var(--text-color); }
+
+/* Avisos e marcadores */
+.modal-section { background: rgba(143,127,94,.08); border-left: 3px solid var(--gold); }
+.toast-notification { background: var(--text-color); color: #f7f2e7; border: 0; box-shadow: 0 4px 16px rgba(58,53,48,.3); }
+.streak-badge, .level-badge { background: transparent; color: var(--text-color); border: 1px solid var(--border-color); }
+::selection { background: rgba(201,154,46,.35); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
