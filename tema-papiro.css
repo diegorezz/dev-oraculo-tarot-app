@@ -102,3 +102,26 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--a
     .card-wrapper { width: 100%; max-width: 240px; }
 }
 .card-meaning-text { background: rgba(143,127,94,.12); }
+
+/* ===== Carta com altura flexível: cresce com o conteúdo, nada escapa da moldura ===== */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+.card-wrapper { min-height: 0; }
+.tarot-card { display: grid; min-height: 380px; }
+.card-face { position: relative; grid-area: 1 / 1; height: auto; min-height: 100%; top: auto; left: auto; }
+.card-face .card-inner-frame { flex: 1 1 auto; height: auto; }
+@media (max-width: 768px) {
+    .card-wrapper { min-height: 0; }
+    .tarot-card { min-height: 360px; }
+}
+
+/* ===== Ilustrações do Tarot de Marselha ===== */
+.carta-img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 2px 8px rgba(58,53,48,.28); user-select: none; -webkit-user-drag: none; }
+.carta-fallback svg { width: 100%; height: 100%; }
+.card-svg-container.card-art { width: 100%; height: auto; margin: 2px 0 6px; }
+.card-svg-container.card-art .carta-img { width: auto; max-width: 100%; max-height: 340px; margin: 0 auto; }
+.card-inner-frame:has(.card-art) { padding: 8px; }
+.card-inner-frame:has(.card-art) .card-top-number { display: none; }
+.grimorio-card-svg { width: 100%; max-width: 104px; height: auto; margin: 8px 0; }
+.modal-card-svg { width: min(190px, 52vw); height: auto; margin: 0 auto 8px; }
+.soul-card-svg { width: 54px; height: auto; }
+.soul-card-svg .carta-img { border-radius: 3px; box-shadow: none; }
