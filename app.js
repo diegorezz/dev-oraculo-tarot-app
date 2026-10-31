@@ -317,6 +317,8 @@ function initUserAndStreak() {
         const savedUsers = localStorage.getItem(STORAGE_KEYS.USERS);
         if (savedUsers) {
             AppState.usersList = JSON.parse(savedUsers);
+            // Segurança: remove senhas em texto puro do sistema antigo
+            AppState.usersList.forEach(u => { delete u.password; });
         }
 
         const activeId = localStorage.getItem(STORAGE_KEYS.ACTIVE_USER_ID);
@@ -392,6 +394,7 @@ function salvarUsuarioAtual() {
         }
         localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(AppState.usersList));
         localStorage.setItem(STORAGE_KEYS.ACTIVE_USER_ID, AppState.user.id);
+        if (typeof Nuvem !== 'undefined') Nuvem.agendarSalvar();
     } catch(e) {
         console.error('Erro ao salvar usuário:', e);
     }
@@ -582,7 +585,87 @@ function selecionarAvatarRapido(avatar) {
     showToast(`Avatar alterado para ${avatar}`);
 }
 
-function submeterCadastro() {
+// ========================================================
+// CONTAS REAIS (Supabase Auth) — cadastro, login, logout, senha
+// ========================================================
+function contaIndisponivel() {
+    if (!Nuvem.disponivel()) {
+        showToast('Serviço de contas indisponível no momento. Verifique sua conexão e recarregue a página.');
+        return true;
+    }
+    return false;
+}
+
+// Traz os dados da nuvem para o armazenamento local (que o resto do app já lê)
+async function sincronizarComNuvem() {
+    const r = await Nuvem.carregar();
+    if (r.status === 'erro') {
+        showToast('Não foi possível carregar seus dados da nuvem. Tente recarregar a página.');
+        return 'erro';
+    }
+    const authUser = Nuvem.session.user;
+
+    if (r.status === 'ok') {
+        const d = r.dados;
+        const perfil = Object.assign({}, d.perfil || {});
+        delete perfil.password;
+        perfil.id = authUser.id;
+        perfil.email = authUser.email;
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify([perfil]));
+        localStorage.setItem(STORAGE_KEYS.ACTIVE_USER_ID, authUser.id);
+        if (Array.isArray(d.tarefas)) localStorage.setItem(STORAGE_KEYS.TASKS, JSON.stringify(d.tarefas));
+        if (Array.isArray(d.historico)) localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(d.historico));
+        if (d.diario) localStorage.setItem(STORAGE_KEYS.DAILY, JSON.stringify(d.diario));
+        else localStorage.removeItem(STORAGE_KEYS.DAILY);
+    } else {
+        // Primeira vez desta conta: cria o perfil inicial (tarefas/histórico locais são aproveitados)
+        const meta = authUser.user_metadata || {};
+        const nasc = meta.birthdate || '2000-01-01';
+        const alma = calcularArcanoDeNascimento(nasc);
+        const perfil = Object.assign({}, DEFAULT_USER, {
+            id: authUser.id,
+            name: meta.name || 'Viajante Astral',
+            email: authUser.email,
+            birthdate: nasc,
+            avatar: meta.avatar || DEFAULT_USER.avatar,
+            soulCardId: alma.id,
+            xp: 50, // Bônus de boas-vindas
+            level: 1,
+            levelTitle: 'Aprendiz do Véu',
+            streak: 1,
+            lastVisitDate: new Date().toISOString().split('T')[0],
+            badges: ['despertar'],
+            humorHistory: []
+        });
+        localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify([perfil]));
+        localStorage.setItem(STORAGE_KEYS.ACTIVE_USER_ID, authUser.id);
+    }
+    return r.status;
+}
+
+// Recarrega o estado em memória a partir do armazenamento local e redesenha a tela
+function recarregarInterfaceCompleta() {
+    AppState.usersList = [];
+    AppState.user = null;
+    AppState.tasks = [];
+    AppState.history = [];
+    AppState.dailyData = null;
+
+    initUserAndStreak();
+    loadStoredTasks();
+    loadStoredHistory();
+    loadDailyData();
+
+    renderTasks();
+    renderGrimorio();
+    renderHistory();
+    renderProfileModalContent();
+    atualizarHeaderUserUI();
+}
+
+async function submeterCadastro() {
+    if (contaIndisponivel()) return;
+
     const name = document.getElementById('regName').value.trim();
     const email = document.getElementById('regEmail').value.trim().toLowerCase();
     const birthdate = document.getElementById('regBirthdate').value;
@@ -593,64 +676,149 @@ function submeterCadastro() {
         showToast('Preencha todos os campos obrigatórios.');
         return;
     }
+    if (password.length < 6) {
+        showToast('A senha precisa ter no mínimo 6 caracteres.');
+        return;
+    }
 
-    const soulCard = calcularArcanoDeNascimento(birthdate);
+    const { data, error } = await Nuvem.client.auth.signUp({
+        email,
+        password,
+        options: {
+            data: { name, birthdate, avatar },
+            emailRedirectTo: window.location.origin + window.location.pathname
+        }
+    });
 
-    const newUser = {
-        id: 'usr_' + Date.now(),
-        name: name,
-        email: email,
-        password: password,
-        birthdate: birthdate,
-        avatar: avatar,
-        soulCardId: soulCard.id,
-        xp: 50, // Bônus de boas-vindas
-        level: 1,
-        levelTitle: 'Aprendiz do Véu',
-        streak: 1,
-        lastVisitDate: new Date().toISOString().split('T')[0],
-        readingsCount: AppState.history.length,
-        tasksCompletedCount: AppState.tasks.filter(t => t.completed).length,
-        badges: ['despertar'],
-        humorHistory: []
-    };
+    if (error) {
+        showToast(traduzirErroAuth(error));
+        return;
+    }
 
-    AppState.user = newUser;
-    salvarUsuarioAtual();
-    renderProfileModalContent();
-    atualizarHeaderUserUI();
+    // Com confirmação de e-mail ligada, e-mail repetido volta "sucesso" sem identidades
+    if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+        showToast('Este e-mail já tem conta. Use "Já Tenho Conta".');
+        toggleAuthMode('login');
+        return;
+    }
+
+    if (!data.session) {
+        // Confirmação de e-mail exigida
+        showToast('Quase lá! Enviamos um link de confirmação para o seu e-mail. Confirme e depois entre.');
+        toggleAuthMode('login');
+        document.getElementById('loginEmail').value = email;
+        return;
+    }
+
+    Nuvem.session = data.session;
+    const st = await sincronizarComNuvem();
+    if (st === 'erro') return;
+    recarregarInterfaceCompleta();
+    await Nuvem.salvarAgora();
     switchProfileModalTab('profile');
     playLevelUpSound();
-    showToast(`Conta criada com sucesso! Seu Arcano da Alma é ${soulCard.nome} ✦`);
+    const alma = calcularArcanoDeNascimento(birthdate);
+    showToast(`Conta criada com sucesso! Seu Arcano da Alma é ${alma.nome} ✦`);
 }
 
-function submeterLogin() {
+async function submeterLogin() {
+    if (contaIndisponivel()) return;
+
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value;
-
-    const found = AppState.usersList.find(u => u.email === email && u.password === password);
-    if (found) {
-        AppState.user = found;
-        localStorage.setItem(STORAGE_KEYS.ACTIVE_USER_ID, found.id);
-        atualizarStreakDiario();
-        salvarUsuarioAtual();
-        renderProfileModalContent();
-        atualizarHeaderUserUI();
-        switchProfileModalTab('profile');
-        playMysticChime(660, 1);
-        showToast(`Bem-vindo(a) de volta, ${found.name}!`);
-    } else {
-        showToast('E-mail ou senha não encontrados.');
+    if (!email || !password) {
+        showToast('Informe e-mail e senha.');
+        return;
     }
+
+    const { data, error } = await Nuvem.client.auth.signInWithPassword({ email, password });
+    if (error) {
+        showToast(traduzirErroAuth(error));
+        return;
+    }
+
+    Nuvem.session = data.session;
+    const st = await sincronizarComNuvem();
+    if (st === 'erro') return;
+    recarregarInterfaceCompleta();
+    await Nuvem.salvarAgora();
+    document.getElementById('loginPassword').value = '';
+    switchProfileModalTab('profile');
+    playMysticChime(660, 1);
+    showToast(`Bem-vindo(a) de volta, ${AppState.user.name}!`);
 }
 
-function desconectarOuResetarConta() {
-    if (confirm('Deseja sair desta conta neste navegador? Seus dados permanecerão salvos localmente.')) {
-        localStorage.removeItem(STORAGE_KEYS.ACTIVE_USER_ID);
-        initUserAndStreak();
-        renderProfileModalContent();
-        showToast('Você saiu da conta.');
+async function esqueciSenha() {
+    if (contaIndisponivel()) return;
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    if (!email) {
+        showToast('Digite seu e-mail no campo acima e toque em "Esqueci minha senha" de novo.');
+        return;
     }
+    const { error } = await Nuvem.client.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + window.location.pathname
+    });
+    if (error) {
+        showToast(traduzirErroAuth(error));
+        return;
+    }
+    showToast('Se esse e-mail tiver conta, enviamos um link para criar uma nova senha.');
+}
+
+async function definirNovaSenha() {
+    const nova = window.prompt('Digite sua nova senha (mínimo 6 caracteres):');
+    if (!nova) return;
+    if (nova.length < 6) {
+        showToast('A senha precisa ter no mínimo 6 caracteres.');
+        return;
+    }
+    const { error } = await Nuvem.client.auth.updateUser({ password: nova });
+    if (error) {
+        showToast(traduzirErroAuth(error));
+        return;
+    }
+    Nuvem.recuperandoSenha = false;
+    showToast('Senha alterada com sucesso! ✦');
+}
+
+function limparDadosLocaisDaConta() {
+    [STORAGE_KEYS.USERS, STORAGE_KEYS.ACTIVE_USER_ID, STORAGE_KEYS.TASKS,
+     STORAGE_KEYS.HISTORY, STORAGE_KEYS.DAILY].forEach(k => localStorage.removeItem(k));
+}
+
+async function desconectarOuResetarConta() {
+    if (!Nuvem.session) {
+        showToast('Você está no modo convidado. Crie uma conta para salvar seus dados na nuvem.');
+        switchProfileModalTab('auth');
+        return;
+    }
+    if (!confirm('Deseja sair da sua conta? Seus dados ficam guardados na nuvem.')) return;
+
+    await Nuvem.salvarAgora();
+    await Nuvem.client.auth.signOut();
+    Nuvem.session = null;
+    limparDadosLocaisDaConta();
+    recarregarInterfaceCompleta();
+    showToast('Você saiu da conta.');
+}
+
+async function excluirMinhaConta() {
+    if (!Nuvem.session) return;
+    if (!confirm('Excluir sua conta apaga TODOS os seus dados na nuvem, de forma definitiva. Deseja continuar?')) return;
+    if (!confirm('Tem certeza? Esta ação não pode ser desfeita.')) return;
+
+    const { error } = await Nuvem.client.rpc('excluir_minha_conta');
+    if (error) {
+        console.error(error);
+        showToast('Não foi possível excluir a conta agora. Tente novamente.');
+        return;
+    }
+    clearTimeout(Nuvem._timer);
+    await Nuvem.client.auth.signOut();
+    Nuvem.session = null;
+    limparDadosLocaisDaConta();
+    recarregarInterfaceCompleta();
+    showToast('Sua conta e seus dados foram excluídos.');
 }
 
 // Backup & Restauração JSON
@@ -694,6 +862,11 @@ function importarDadosBackup(event) {
             }
             if (data.user) {
                 AppState.user = data.user;
+                delete AppState.user.password;
+                if (Nuvem.session) {
+                    AppState.user.id = Nuvem.session.user.id;
+                    AppState.user.email = Nuvem.session.user.email;
+                }
                 salvarUsuarioAtual();
             }
             if (data.daily) {
@@ -733,6 +906,7 @@ function loadDailyData() {
 function salvarDailyData() {
     try {
         localStorage.setItem(STORAGE_KEYS.DAILY, JSON.stringify(AppState.dailyData));
+        if (typeof Nuvem !== 'undefined') Nuvem.agendarSalvar();
     } catch(e) {}
 }
 
@@ -1559,6 +1733,7 @@ function loadStoredTasks() {
 function saveTasks() {
     try {
         localStorage.setItem(STORAGE_KEYS.TASKS, JSON.stringify(AppState.tasks));
+        if (typeof Nuvem !== 'undefined') Nuvem.agendarSalvar();
         updateTaskStats();
         updateTaskTabBadge();
     } catch (e) {
@@ -1870,6 +2045,7 @@ function loadStoredHistory() {
 function saveHistory() {
     try {
         localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(AppState.history));
+        if (typeof Nuvem !== 'undefined') Nuvem.agendarSalvar();
     } catch (e) {
         console.error('Erro ao salvar histórico:', e);
     }
@@ -2059,13 +2235,19 @@ function embaralhar(array) {
 // ========================================================
 // INICIALIZAÇÃO DA APLICAÇÃO (DOM READY)
 // ========================================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Carrega Sons
     try {
         const savedAudio = localStorage.getItem(STORAGE_KEYS.AUDIO);
         if (savedAudio !== null) AppState.audioEnabled = JSON.parse(savedAudio);
         updateAudioButtonUI();
     } catch(e) {}
+
+    // Contas na nuvem: se houver sessão ativa, traz os dados da conta
+    await Nuvem.iniciar();
+    if (Nuvem.session) {
+        await sincronizarComNuvem();
+    }
 
     // Inicializa Usuário, Tarefas, Histórico e Arcano do Dia
     initUserAndStreak();
@@ -2077,6 +2259,10 @@ document.addEventListener('DOMContentLoaded', () => {
     renderGrimorio();
     renderHistory();
     atualizarDicasPergunta();
+
+    // Conta na nuvem: garante gravação inicial e trata link de "esqueci a senha"
+    if (Nuvem.session) Nuvem.salvarAgora();
+    if (Nuvem.recuperandoSenha) setTimeout(definirNovaSenha, 400);
 
     // Eventos das Abas Principais
     document.querySelectorAll('.tabs-nav .tab-btn').forEach(btn => {
