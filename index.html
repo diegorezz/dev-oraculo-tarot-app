@@ -46,9 +46,15 @@
                 </button>
 
                 <!-- Botão de Perfil / Conta -->
-                <button id="userProfileBtn" class="user-profile-btn" onclick="openProfileModal()" title="Minha Conta & Perfil Astral">
-                    <span id="headerAvatarIcon" class="avatar-icon">🧙‍♂️</span>
-                    <span id="headerUserName" class="user-name">Viajante</span>
+                <button id="userProfileBtn" class="user-profile-btn is-guest" onclick="abrirContaOuPerfil()" title="Entrar ou criar conta" aria-label="Entrar ou criar conta">
+                    <span class="user-guest-view">
+                        <svg class="user-guest-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+                        <span>Entrar / Criar conta</span>
+                    </span>
+                    <span class="user-logged-view">
+                        <span id="headerAvatarIcon" class="avatar-icon">🧙‍♂️</span>
+                        <span id="headerUserName" class="user-name">Viajante</span>
+                    </span>
                 </button>
             </div>
         </div>
@@ -634,69 +640,89 @@
             <div id="profSectionAuth" class="prof-section-content">
                 <div class="auth-toggle-buttons">
                     <button type="button" class="auth-toggle-btn active" id="authModeRegisterBtn" onclick="toggleAuthMode('register')">Criar Minha Conta</button>
-                    <button type="button" class="auth-toggle-btn" id="authModeLoginBtn" onclick="toggleAuthMode('login')">Já Tenho Conta (Entrar)</button>
+                    <button type="button" class="auth-toggle-btn" id="authModeLoginBtn" onclick="toggleAuthMode('login')">Já Tenho Conta</button>
                 </div>
 
+                <button type="button" class="auth-google-btn" onclick="entrarComGoogle()"><svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Continuar com o Google</span></button>
+                <div class="auth-divider"><span>ou use seu e-mail</span></div>
+
                 <!-- Form Cadastro -->
-                <form id="registerForm" onsubmit="event.preventDefault(); submeterCadastro();">
+                <form id="registerForm" class="auth-form" onsubmit="event.preventDefault(); submeterCadastro();">
                     <div class="form-group">
-                        <label for="regName">Seu Nome ou Nome Místico:</label>
-                        <input type="text" id="regName" placeholder="Ex: Morgana, Daniel, Serena" required>
+                        <label for="regName">Seu nome ou nome místico</label>
+                        <input type="text" id="regName" placeholder="Ex: Morgana, Daniel, Serena" autocomplete="name" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="regEmail">Seu E-mail:</label>
-                        <input type="email" id="regEmail" placeholder="seu@email.com" required>
+                        <label for="regEmail">E-mail</label>
+                        <input type="email" id="regEmail" placeholder="seu@email.com" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="regBirthdate">Data de Nascimento (Para calcular seu Arcano da Alma):</label>
-                        <input type="date" id="regBirthdate" required>
+                        <label for="regBirthdate">Data de nascimento</label>
+                        <input type="date" id="regBirthdate" autocomplete="bday" required>
+                        <p class="auth-hint">Usada apenas para calcular o seu Arcano da Alma.</p>
                     </div>
 
                     <div class="form-group">
-                        <label for="regPassword">Crie uma Senha:</label>
-                        <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Escolha seu Avatar Místico:</label>
-                        <div class="avatar-selection-row">
-                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🧙‍♂️" checked> <span>🧙‍♂️</span></label>
-                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🔮"> <span>🔮</span></label>
-                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🌙"> <span>🌙</span></label>
-                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="☀️"> <span>☀️</span></label>
-                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🦅"> <span>🦅</span></label>
-                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🪐"> <span>🪐</span></label>
+                        <label for="regPassword">Senha</label>
+                        <div class="pw-field">
+                            <input type="password" id="regPassword" placeholder="Crie uma senha" autocomplete="new-password" required oninput="atualizarRegrasSenha()">
+                            <button type="button" class="pw-toggle" onclick="alternarVisibilidadeSenha(this)" aria-label="Mostrar senha" aria-pressed="false"><svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12A3 3 0 1 1 9.88 9.88"/><path d="M1 1l22 22"/></svg></button>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
-                        <span>✨</span> Criar Conta & Salvar Dados
+                    <ul class="pw-rules" id="pwRules" aria-live="polite">
+                        <li data-regra="len">Mínimo de 8 caracteres</li>
+                        <li data-regra="letra">Pelo menos uma letra</li>
+                        <li data-regra="numero">Pelo menos um número</li>
+                    </ul>
+
+                    <div class="form-group">
+                        <label for="regPasswordConfirm">Confirmar senha</label>
+                        <div class="pw-field">
+                            <input type="password" id="regPasswordConfirm" placeholder="Repita a senha" autocomplete="new-password" required oninput="atualizarRegrasSenha()">
+                            <button type="button" class="pw-toggle" onclick="alternarVisibilidadeSenha(this)" aria-label="Mostrar senha" aria-pressed="false"><svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12A3 3 0 1 1 9.88 9.88"/><path d="M1 1l22 22"/></svg></button>
+                        </div>
+                    </div>
+                    <p class="auth-hint pw-match" id="pwMatch" aria-live="polite"></p>
+
+                    <div class="form-group">
+                        <label>Escolha seu avatar místico</label>
+                        <div class="avatar-selection-row">
+                            <label class="avatar-radio"><input type="radio" name="regAvatar" value="🧙‍♂️" checked aria-label="Avatar 🧙‍♂️"><span>🧙‍♂️</span></label><label class="avatar-radio"><input type="radio" name="regAvatar" value="🔮" aria-label="Avatar 🔮"><span>🔮</span></label><label class="avatar-radio"><input type="radio" name="regAvatar" value="🌙" aria-label="Avatar 🌙"><span>🌙</span></label><label class="avatar-radio"><input type="radio" name="regAvatar" value="☀️" aria-label="Avatar ☀️"><span>☀️</span></label><label class="avatar-radio"><input type="radio" name="regAvatar" value="🦅" aria-label="Avatar 🦅"><span>🦅</span></label><label class="avatar-radio"><input type="radio" name="regAvatar" value="🪐" aria-label="Avatar 🪐"><span>🪐</span></label>
+                        </div>
+                    </div>
+
+                    <p class="auth-msg" id="authMsgRegister" role="alert"></p>
+                    <button type="submit" class="btn-primary auth-submit">
+                        <span>✨</span> Criar conta e salvar dados
                     </button>
                 </form>
 
                 <!-- Form Login -->
-                <form id="loginForm" style="display: none;" onsubmit="event.preventDefault(); submeterLogin();">
+                <form id="loginForm" class="auth-form" style="display: none;" onsubmit="event.preventDefault(); submeterLogin();">
                     <div class="form-group">
-                        <label for="loginEmail">E-mail Cadastrado:</label>
-                        <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                        <label for="loginEmail">E-mail cadastrado</label>
+                        <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="loginPassword">Senha:</label>
-                        <input type="password" id="loginPassword" placeholder="Sua senha" required autocomplete="current-password">
+                        <label for="loginPassword">Senha</label>
+                        <div class="pw-field">
+                            <input type="password" id="loginPassword" placeholder="Sua senha" autocomplete="current-password" required>
+                            <button type="button" class="pw-toggle" onclick="alternarVisibilidadeSenha(this)" aria-label="Mostrar senha" aria-pressed="false"><svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12A3 3 0 1 1 9.88 9.88"/><path d="M1 1l22 22"/></svg></button>
+                        </div>
+                        <button type="button" class="auth-link-btn" onclick="esqueciSenha()">Esqueci minha senha</button>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">
-                        <span>🔑</span> Entrar na Minha Conta
-                    </button>
-                    <button type="button" class="btn-secondary" onclick="esqueciSenha()" style="width: 100%; margin-top: 8px;">
-                        Esqueci minha senha
+                    <p class="auth-msg" id="authMsgLogin" role="alert"></p>
+                    <button type="submit" class="btn-primary auth-submit">
+                        <span>🔑</span> Entrar na minha conta
                     </button>
                 </form>
 
-                <p style="text-align: center; font-size: 0.8rem; color: var(--text-dim); margin-top: 15px;">
+                <p class="auth-footnote">
                     ✦ Sua conta fica guardada na nuvem: entre em qualquer aparelho e continue sua jornada. Sem conta, o app funciona no modo convidado, salvando apenas neste aparelho.
                 </p>
             </div>

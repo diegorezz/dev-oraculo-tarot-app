@@ -444,6 +444,17 @@ function atualizarHeaderUserUI() {
     const u = AppState.user;
     if (!u) return;
 
+    // Botão de conta: "Entrar / Criar conta" para convidados, avatar para quem está logado
+    const btnConta = document.getElementById('userProfileBtn');
+    if (btnConta) {
+        const logado = typeof Nuvem !== 'undefined' && !!Nuvem.session;
+        btnConta.classList.toggle('is-guest', !logado);
+        btnConta.classList.toggle('is-logged', logado);
+        const rotulo = logado ? 'Minha conta e perfil astral' : 'Entrar ou criar conta';
+        btnConta.title = rotulo;
+        btnConta.setAttribute('aria-label', rotulo);
+    }
+
     const streakCount = document.getElementById('headerStreakCount');
     const levelTitle = document.getElementById('headerLevelTitle');
     const xpCount = document.getElementById('headerXpCount');
@@ -455,6 +466,16 @@ function atualizarHeaderUserUI() {
     if (xpCount) xpCount.textContent = u.xp || 0;
     if (avatarIcon) avatarIcon.textContent = u.avatar || '🧙‍♂️';
     if (userName) userName.textContent = (u.name || 'Viajante').split(' ')[0];
+}
+
+function abrirContaOuPerfil() {
+    const logado = typeof Nuvem !== 'undefined' && !!Nuvem.session;
+    if (logado) {
+        openProfileModal('profile');
+    } else {
+        openProfileModal('auth');
+        toggleAuthMode('register');
+    }
 }
 
 // Modal de Perfil & Sistema de Contas
@@ -498,13 +519,13 @@ function toggleAuthMode(mode) {
     const loginBtn = document.getElementById('authModeLoginBtn');
 
     if (mode === 'register') {
-        if (regForm) regForm.style.display = 'block';
+        if (regForm) regForm.style.display = 'flex';
         if (loginForm) loginForm.style.display = 'none';
         if (regBtn) regBtn.classList.add('active');
         if (loginBtn) loginBtn.classList.remove('active');
     } else {
         if (regForm) regForm.style.display = 'none';
-        if (loginForm) loginForm.style.display = 'block';
+        if (loginForm) loginForm.style.display = 'flex';
         if (regBtn) regBtn.classList.remove('active');
         if (loginBtn) loginBtn.classList.add('active');
     }
@@ -588,6 +609,78 @@ function selecionarAvatarRapido(avatar) {
 // ========================================================
 // CONTAS REAIS (Supabase Auth) — cadastro, login, logout, senha
 // ========================================================
+// ---------- Helpers de formulário de conta ----------
+function senhaAtendeRegras(senha) {
+    return senha.length >= 8 && /[A-Za-zÀ-ÿ]/.test(senha) && /\d/.test(senha);
+}
+
+function alternarVisibilidadeSenha(btn) {
+    const campo = btn.closest('.pw-field');
+    const input = campo.querySelector('input');
+    const mostrar = input.type === 'password';
+    input.type = mostrar ? 'text' : 'password';
+    campo.classList.toggle('is-visible', mostrar);
+    btn.setAttribute('aria-pressed', String(mostrar));
+    btn.setAttribute('aria-label', mostrar ? 'Ocultar senha' : 'Mostrar senha');
+}
+
+function atualizarRegrasSenha() {
+    const senha = (document.getElementById('regPassword') || {}).value || '';
+    const conf = (document.getElementById('regPasswordConfirm') || {}).value || '';
+    const estado = {
+        len: senha.length >= 8,
+        letra: /[A-Za-zÀ-ÿ]/.test(senha),
+        numero: /\d/.test(senha)
+    };
+    document.querySelectorAll('#pwRules li').forEach(li => {
+        li.classList.toggle('ok', !!estado[li.dataset.regra]);
+    });
+    const msg = document.getElementById('pwMatch');
+    const confInput = document.getElementById('regPasswordConfirm');
+    if (msg) {
+        if (!conf) {
+            msg.textContent = '';
+            msg.className = 'auth-hint pw-match';
+            if (confInput) confInput.classList.remove('is-invalid');
+        } else if (conf === senha) {
+            msg.textContent = '✓ As senhas coincidem';
+            msg.className = 'auth-hint pw-match ok';
+            if (confInput) confInput.classList.remove('is-invalid');
+        } else {
+            msg.textContent = 'As senhas ainda não coincidem';
+            msg.className = 'auth-hint pw-match bad';
+            if (confInput) confInput.classList.add('is-invalid');
+        }
+    }
+    return estado.len && estado.letra && estado.numero && conf === senha && conf.length > 0;
+}
+
+function avisoAuth(modo, texto, tipo = 'erro') {
+    const el = document.getElementById(modo === 'register' ? 'authMsgRegister' : 'authMsgLogin');
+    if (el) {
+        el.textContent = texto || '';
+        el.className = 'auth-msg ' + (texto ? tipo : '');
+    } else if (texto) {
+        showToast(texto);
+    }
+}
+
+function limparFormulariosAuth() {
+    ['registerForm', 'loginForm'].forEach(id => {
+        const f = document.getElementById(id);
+        if (f) f.reset();
+    });
+    document.querySelectorAll('.pw-field').forEach(c => {
+        c.classList.remove('is-visible');
+        const i = c.querySelector('input');
+        if (i) i.type = 'password';
+        const b = c.querySelector('.pw-toggle');
+        if (b) { b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-label', 'Mostrar senha'); }
+    });
+    avisoAuth('register', ''); avisoAuth('login', '');
+    atualizarRegrasSenha();
+}
+
 function contaIndisponivel() {
     if (!Nuvem.disponivel()) {
         showToast('Serviço de contas indisponível no momento. Verifique sua conexão e recarregue a página.');
@@ -621,10 +714,11 @@ async function sincronizarComNuvem() {
         // Primeira vez desta conta: cria o perfil inicial (tarefas/histórico locais são aproveitados)
         const meta = authUser.user_metadata || {};
         const nasc = meta.birthdate || '2000-01-01';
+        if (!meta.birthdate) Nuvem.pedirNascimento = true;
         const alma = calcularArcanoDeNascimento(nasc);
         const perfil = Object.assign({}, DEFAULT_USER, {
             id: authUser.id,
-            name: meta.name || 'Viajante Astral',
+            name: meta.name || meta.full_name || 'Viajante Astral',
             email: authUser.email,
             birthdate: nasc,
             avatar: meta.avatar || DEFAULT_USER.avatar,
@@ -673,13 +767,19 @@ async function submeterCadastro() {
     const avatar = document.querySelector('input[name="regAvatar"]:checked')?.value || '🧙‍♂️';
 
     if (!name || !email || !birthdate || !password) {
-        showToast('Preencha todos os campos obrigatórios.');
+        avisoAuth('register', 'Preencha todos os campos obrigatórios.');
         return;
     }
-    if (password.length < 6) {
-        showToast('A senha precisa ter no mínimo 6 caracteres.');
+    if (!atualizarRegrasSenha()) {
+        const conf = document.getElementById('regPasswordConfirm').value;
+        const msg = !senhaAtendeRegras(password)
+            ? 'A senha precisa ter 8+ caracteres, com letra e número.'
+            : (!conf ? 'Repita a senha no campo de confirmação.' : 'As senhas não coincidem.');
+        avisoAuth('register', msg);
+        document.getElementById(!senhaAtendeRegras(password) ? 'regPassword' : 'regPasswordConfirm').focus();
         return;
     }
+    avisoAuth('register', '');
 
     const { data, error } = await Nuvem.client.auth.signUp({
         email,
@@ -691,22 +791,23 @@ async function submeterCadastro() {
     });
 
     if (error) {
-        showToast(traduzirErroAuth(error));
+        avisoAuth('register', traduzirErroAuth(error));
         return;
     }
 
     // Com confirmação de e-mail ligada, e-mail repetido volta "sucesso" sem identidades
     if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
-        showToast('Este e-mail já tem conta. Use "Já Tenho Conta".');
         toggleAuthMode('login');
+        document.getElementById('loginEmail').value = email;
+        avisoAuth('login', 'Este e-mail já tem conta. Entre com sua senha.');
         return;
     }
 
     if (!data.session) {
         // Confirmação de e-mail exigida
-        showToast('Quase lá! Enviamos um link de confirmação para o seu e-mail. Confirme e depois entre.');
         toggleAuthMode('login');
         document.getElementById('loginEmail').value = email;
+        avisoAuth('login', 'Quase lá! Enviamos um link de confirmação para o seu e-mail. Confirme e depois entre.', 'ok');
         return;
     }
 
@@ -715,6 +816,7 @@ async function submeterCadastro() {
     if (st === 'erro') return;
     recarregarInterfaceCompleta();
     await Nuvem.salvarAgora();
+    limparFormulariosAuth();
     switchProfileModalTab('profile');
     playLevelUpSound();
     const alma = calcularArcanoDeNascimento(birthdate);
@@ -724,16 +826,17 @@ async function submeterCadastro() {
 async function submeterLogin() {
     if (contaIndisponivel()) return;
 
+    avisoAuth('login', '');
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value;
     if (!email || !password) {
-        showToast('Informe e-mail e senha.');
+        avisoAuth('login', 'Informe e-mail e senha.');
         return;
     }
 
     const { data, error } = await Nuvem.client.auth.signInWithPassword({ email, password });
     if (error) {
-        showToast(traduzirErroAuth(error));
+        avisoAuth('login', traduzirErroAuth(error));
         return;
     }
 
@@ -742,34 +845,69 @@ async function submeterLogin() {
     if (st === 'erro') return;
     recarregarInterfaceCompleta();
     await Nuvem.salvarAgora();
-    document.getElementById('loginPassword').value = '';
+    limparFormulariosAuth();
     switchProfileModalTab('profile');
     playMysticChime(660, 1);
     showToast(`Bem-vindo(a) de volta, ${AppState.user.name}!`);
+}
+
+async function entrarComGoogle() {
+    if (contaIndisponivel()) return;
+    const { error } = await Nuvem.client.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: window.location.origin + window.location.pathname }
+    });
+    if (error) showToast(traduzirErroAuth(error));
+}
+
+// Contas criadas via Google não informam a data de nascimento: pergunta uma vez
+function pedirDataNascimentoSeNecessario() {
+    if (!Nuvem.pedirNascimento || !AppState.user) return;
+    Nuvem.pedirNascimento = false;
+    for (let tentativa = 0; tentativa < 3; tentativa++) {
+        const txt = window.prompt('Para calcular seu Arcano da Alma, informe sua data de nascimento (DD/MM/AAAA):');
+        if (!txt) break;
+        const m = txt.trim().match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
+        if (m) {
+            const d = parseInt(m[1], 10), mes = parseInt(m[2], 10), a = parseInt(m[3], 10);
+            const dt = new Date(a, mes - 1, d);
+            if (dt.getFullYear() === a && dt.getMonth() === mes - 1 && dt.getDate() === d && a > 1900 && dt <= new Date()) {
+                const iso = `${a}-${String(mes).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                const alma = calcularArcanoDeNascimento(iso);
+                AppState.user.birthdate = iso;
+                AppState.user.soulCardId = alma.id;
+                salvarUsuarioAtual();
+                renderProfileModalContent();
+                showToast(`Seu Arcano da Alma é ${alma.nome} ✦`);
+                return;
+            }
+        }
+        showToast('Data inválida. Use o formato DD/MM/AAAA.');
+    }
 }
 
 async function esqueciSenha() {
     if (contaIndisponivel()) return;
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     if (!email) {
-        showToast('Digite seu e-mail no campo acima e toque em "Esqueci minha senha" de novo.');
+        avisoAuth('login', 'Digite seu e-mail no campo acima e toque em "Esqueci minha senha" de novo.');
         return;
     }
     const { error } = await Nuvem.client.auth.resetPasswordForEmail(email, {
         redirectTo: window.location.origin + window.location.pathname
     });
     if (error) {
-        showToast(traduzirErroAuth(error));
+        avisoAuth('login', traduzirErroAuth(error));
         return;
     }
-    showToast('Se esse e-mail tiver conta, enviamos um link para criar uma nova senha.');
+    avisoAuth('login', 'Se esse e-mail tiver conta, enviamos um link para criar uma nova senha.', 'ok');
 }
 
 async function definirNovaSenha() {
-    const nova = window.prompt('Digite sua nova senha (mínimo 6 caracteres):');
+    const nova = window.prompt('Digite sua nova senha (mínimo 8 caracteres, com letra e número):');
     if (!nova) return;
-    if (nova.length < 6) {
-        showToast('A senha precisa ter no mínimo 6 caracteres.');
+    if (!senhaAtendeRegras(nova)) {
+        showToast('A senha precisa ter 8+ caracteres, com letra e número.');
         return;
     }
     const { error } = await Nuvem.client.auth.updateUser({ password: nova });
@@ -2262,6 +2400,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Conta na nuvem: garante gravação inicial e trata link de "esqueci a senha"
     if (Nuvem.session) Nuvem.salvarAgora();
+    setTimeout(pedirDataNascimentoSeNecessario, 600);
     if (Nuvem.recuperandoSenha) setTimeout(definirNovaSenha, 400);
 
     // Eventos das Abas Principais
