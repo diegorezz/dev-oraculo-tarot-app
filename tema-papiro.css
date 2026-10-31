@@ -266,3 +266,8 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* Camadas: janelas de confirmação/conta ficam acima da janela "Minha Conta"; avisos (toast) acima de tudo */
 #confirmModal, #nascimentoModal, #novaSenhaModal { z-index: 1100; }
 .toast-notification { z-index: 1300; }
+
+/* Rodapé */
+.site-footer { text-align: center; padding: 20px 16px 32px; font-size: .85rem; position: relative; z-index: 2; }
+.site-footer a { color: var(--text-muted); text-decoration: underline; padding: 10px 8px; display: inline-block; }
+.site-footer a:hover { color: var(--accent-color); }
