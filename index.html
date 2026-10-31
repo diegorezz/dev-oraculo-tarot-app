@@ -533,6 +533,23 @@
     </main>
 
 
+
+    <!-- Janela de confirmação do app (substitui o confirm() nativo) -->
+    <div id="confirmModal" class="modal-overlay" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitulo" aria-describedby="confirmTexto" onclick="if(event.target===this) resolverConfirmacao(false)">
+        <div class="modal-content mini-dialog">
+            <h3 id="confirmTitulo">Confirmar</h3>
+            <p class="mini-dialog-text" id="confirmTexto"></p>
+            <div class="form-group confirm-type-group" id="confirmTypeGroup" style="display: none;">
+                <label for="confirmTypeInput" id="confirmTypeLabel"></label>
+                <input type="text" id="confirmTypeInput" autocomplete="off" autocapitalize="characters" spellcheck="false" oninput="atualizarConfirmTexto()">
+            </div>
+            <div class="confirm-actions">
+                <button type="button" class="btn-secondary" id="confirmCancelBtn" onclick="resolverConfirmacao(false)">Cancelar</button>
+                <button type="button" class="btn-primary" id="confirmOkBtn" onclick="resolverConfirmacao(true)">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ============================================== -->
     <!-- MODAIS DE CONTA: DATA DE NASCIMENTO / NOVA SENHA -->
     <!-- ============================================== -->

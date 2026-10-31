@@ -251,3 +251,14 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .mini-dialog { --ok: #4f6b3a; max-width: 420px; padding: 28px 22px 22px; text-align: left; }
 .mini-dialog h3 { margin: 0 0 8px; text-align: center; font-size: 1.35rem; }
 .mini-dialog-text { margin: 0 0 18px; text-align: center; font-size: .92rem; color: var(--text-muted); line-height: 1.45; }
+
+/* ===== Janela de confirmação ===== */
+.confirm-actions { display: flex; gap: 10px; margin-top: 18px; }
+.confirm-actions .btn-secondary, .confirm-actions .btn-primary { flex: 1; min-height: 48px; justify-content: center; }
+.confirm-type-group input { width: 100%; box-sizing: border-box; min-height: 48px; padding: 12px 14px; font-size: 16px; border: 1px solid var(--border-color); border-radius: 10px; background: #fbf8ef; text-transform: uppercase; letter-spacing: .08em; outline: none; }
+.confirm-type-group input:focus { border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(201,154,46,.28); }
+.btn-danger-solid { background: #a33b32 !important; border-color: #8a2f27 !important; color: #fff !important; }
+.btn-danger-solid:hover:not(:disabled) { background: #8a2f27 !important; }
+#confirmOkBtn:disabled { opacity: .45; cursor: not-allowed; }
+.confirm-actions > * { min-width: 0; white-space: normal; text-align: center; letter-spacing: .02em; font-size: .88rem; line-height: 1.2; }
+@media (max-width: 480px) { .confirm-actions { flex-direction: column-reverse; } .confirm-actions > * { width: 100%; flex: none; } }

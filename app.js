@@ -681,6 +681,53 @@ function limparFormulariosAuth() {
     atualizarRegrasSenha();
 }
 
+// ---------- Janela de confirmação do app (substitui confirm() nativo) ----------
+let _confirmResolver = null;
+let _confirmExigir = null;
+
+function confirmarAcao({ titulo = 'Confirmar', texto = '', rotuloOk = 'Confirmar', perigo = false, exigirTexto = null } = {}) {
+    return new Promise(resolve => {
+        if (_confirmResolver) _confirmResolver(false);
+        _confirmResolver = resolve;
+        _confirmExigir = exigirTexto ? String(exigirTexto).toUpperCase() : null;
+
+        document.getElementById('confirmTitulo').textContent = titulo;
+        document.getElementById('confirmTexto').textContent = texto;
+        const ok = document.getElementById('confirmOkBtn');
+        ok.textContent = rotuloOk;
+        ok.classList.toggle('btn-danger-solid', !!perigo);
+
+        const grupo = document.getElementById('confirmTypeGroup');
+        const campo = document.getElementById('confirmTypeInput');
+        grupo.style.display = _confirmExigir ? 'flex' : 'none';
+        campo.value = '';
+        document.getElementById('confirmTypeLabel').textContent = _confirmExigir ? `Para confirmar, digite ${_confirmExigir}` : '';
+        atualizarConfirmTexto();
+
+        document.getElementById('confirmModal').classList.add('active');
+        setTimeout(() => (_confirmExigir ? campo : document.getElementById('confirmCancelBtn')).focus(), 150);
+    });
+}
+
+function atualizarConfirmTexto() {
+    const ok = document.getElementById('confirmOkBtn');
+    if (!_confirmExigir) { ok.disabled = false; return; }
+    ok.disabled = document.getElementById('confirmTypeInput').value.trim().toUpperCase() !== _confirmExigir;
+}
+
+function resolverConfirmacao(valor) {
+    const modal = document.getElementById('confirmModal');
+    if (modal) modal.classList.remove('active');
+    const r = _confirmResolver;
+    _confirmResolver = null;
+    _confirmExigir = null;
+    if (r) r(valor);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && _confirmResolver) resolverConfirmacao(false);
+});
+
 function contaIndisponivel() {
     if (!Nuvem.disponivel()) {
         showToast('Serviço de contas indisponível no momento. Verifique sua conexão e recarregue a página.');
@@ -968,7 +1015,12 @@ async function desconectarOuResetarConta() {
         switchProfileModalTab('auth');
         return;
     }
-    if (!confirm('Deseja sair da sua conta? Seus dados ficam guardados na nuvem.')) return;
+    const sair = await confirmarAcao({
+        titulo: '🚪 Sair da conta',
+        texto: 'Deseja sair da sua conta? Seus dados continuam guardados na nuvem.',
+        rotuloOk: 'Sair'
+    });
+    if (!sair) return;
 
     await Nuvem.salvarAgora();
     await Nuvem.client.auth.signOut();
@@ -980,8 +1032,14 @@ async function desconectarOuResetarConta() {
 
 async function excluirMinhaConta() {
     if (!Nuvem.session) return;
-    if (!confirm('Excluir sua conta apaga TODOS os seus dados na nuvem, de forma definitiva. Deseja continuar?')) return;
-    if (!confirm('Tem certeza? Esta ação não pode ser desfeita.')) return;
+    const excluir = await confirmarAcao({
+        titulo: '🗑️ Excluir minha conta',
+        texto: 'Isso apaga TODOS os seus dados na nuvem (perfil, tarefas e histórico), de forma definitiva. Esta ação não pode ser desfeita.',
+        rotuloOk: 'Excluir definitivamente',
+        perigo: true,
+        exigirTexto: 'EXCLUIR'
+    });
+    if (!excluir) return;
 
     const { error } = await Nuvem.client.rpc('excluir_minha_conta');
     if (error) {
@@ -2324,8 +2382,14 @@ function compartilharItemHistorico(readingId) {
     });
 }
 
-function clearHistory() {
-    if (confirm('Deseja realmente limpar todo o histórico de consultas?')) {
+async function clearHistory() {
+    const limpar = await confirmarAcao({
+        titulo: '📜 Limpar histórico',
+        texto: 'Deseja realmente limpar todo o histórico de consultas?',
+        rotuloOk: 'Limpar',
+        perigo: true
+    });
+    if (limpar) {
         AppState.history = [];
         saveHistory();
         renderHistory();
