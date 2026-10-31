@@ -714,7 +714,6 @@ async function sincronizarComNuvem() {
         // Primeira vez desta conta: cria o perfil inicial (tarefas/histórico locais são aproveitados)
         const meta = authUser.user_metadata || {};
         const nasc = meta.birthdate || '2000-01-01';
-        if (!meta.birthdate) Nuvem.pedirNascimento = true;
         const alma = calcularArcanoDeNascimento(nasc);
         const perfil = Object.assign({}, DEFAULT_USER, {
             id: authUser.id,
@@ -729,7 +728,8 @@ async function sincronizarComNuvem() {
             streak: 1,
             lastVisitDate: new Date().toISOString().split('T')[0],
             badges: ['despertar'],
-            humorHistory: []
+            humorHistory: [],
+            nascimentoPendente: !meta.birthdate
         });
         localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify([perfil]));
         localStorage.setItem(STORAGE_KEYS.ACTIVE_USER_ID, authUser.id);
@@ -860,30 +860,44 @@ async function entrarComGoogle() {
     if (error) showToast(traduzirErroAuth(error));
 }
 
-// Contas criadas via Google não informam a data de nascimento: pergunta uma vez
+// Contas criadas via Google não informam a data de nascimento: pergunta em uma janela do app
 function pedirDataNascimentoSeNecessario() {
-    if (!Nuvem.pedirNascimento || !AppState.user) return;
-    Nuvem.pedirNascimento = false;
-    for (let tentativa = 0; tentativa < 3; tentativa++) {
-        const txt = window.prompt('Para calcular seu Arcano da Alma, informe sua data de nascimento (DD/MM/AAAA):');
-        if (!txt) break;
-        const m = txt.trim().match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
-        if (m) {
-            const d = parseInt(m[1], 10), mes = parseInt(m[2], 10), a = parseInt(m[3], 10);
-            const dt = new Date(a, mes - 1, d);
-            if (dt.getFullYear() === a && dt.getMonth() === mes - 1 && dt.getDate() === d && a > 1900 && dt <= new Date()) {
-                const iso = `${a}-${String(mes).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-                const alma = calcularArcanoDeNascimento(iso);
-                AppState.user.birthdate = iso;
-                AppState.user.soulCardId = alma.id;
-                salvarUsuarioAtual();
-                renderProfileModalContent();
-                showToast(`Seu Arcano da Alma é ${alma.nome} ✦`);
-                return;
-            }
-        }
-        showToast('Data inválida. Use o formato DD/MM/AAAA.');
+    if (!AppState.user || !AppState.user.nascimentoPendente || !Nuvem.session) return;
+    const modal = document.getElementById('nascimentoModal');
+    const input = document.getElementById('nascimentoInput');
+    if (!modal || !input) return;
+    input.max = new Date().toISOString().split('T')[0];
+    input.min = '1900-01-01';
+    input.value = '';
+    document.getElementById('nascimentoMsg').textContent = '';
+    modal.classList.add('active');
+    setTimeout(() => input.focus(), 150);
+}
+
+function fecharNascimento() {
+    const modal = document.getElementById('nascimentoModal');
+    if (modal) modal.classList.remove('active');
+}
+
+function confirmarNascimento() {
+    const input = document.getElementById('nascimentoInput');
+    const msg = document.getElementById('nascimentoMsg');
+    const v = input.value;
+    const dt = new Date(v + 'T00:00:00');
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(v) || isNaN(dt) || dt > new Date() || dt.getFullYear() < 1900) {
+        msg.textContent = 'Informe uma data de nascimento válida.';
+        msg.className = 'auth-msg erro';
+        return;
     }
+    const alma = calcularArcanoDeNascimento(v);
+    AppState.user.birthdate = v;
+    AppState.user.soulCardId = alma.id;
+    delete AppState.user.nascimentoPendente;
+    salvarUsuarioAtual();
+    renderProfileModalContent();
+    atualizarHeaderUserUI();
+    fecharNascimento();
+    showToast(`Seu Arcano da Alma é ${alma.nome} ✦`);
 }
 
 async function esqueciSenha() {
@@ -903,19 +917,43 @@ async function esqueciSenha() {
     avisoAuth('login', 'Se esse e-mail tiver conta, enviamos um link para criar uma nova senha.', 'ok');
 }
 
-async function definirNovaSenha() {
-    const nova = window.prompt('Digite sua nova senha (mínimo 8 caracteres, com letra e número):');
-    if (!nova) return;
+function definirNovaSenha() {
+    const modal = document.getElementById('novaSenhaModal');
+    if (!modal) return;
+    document.getElementById('novaSenhaInput').value = '';
+    document.getElementById('novaSenhaMsg').textContent = '';
+    atualizarRegrasNovaSenha();
+    modal.classList.add('active');
+    setTimeout(() => document.getElementById('novaSenhaInput').focus(), 150);
+}
+
+function fecharNovaSenha() {
+    const modal = document.getElementById('novaSenhaModal');
+    if (modal) modal.classList.remove('active');
+}
+
+function atualizarRegrasNovaSenha() {
+    const senha = document.getElementById('novaSenhaInput').value || '';
+    const estado = { len: senha.length >= 8, letra: /[A-Za-zÀ-ÿ]/.test(senha), numero: /\d/.test(senha) };
+    document.querySelectorAll('#novaSenhaRules li').forEach(li => li.classList.toggle('ok', !!estado[li.dataset.regra]));
+}
+
+async function salvarNovaSenha() {
+    const msg = document.getElementById('novaSenhaMsg');
+    const nova = document.getElementById('novaSenhaInput').value;
     if (!senhaAtendeRegras(nova)) {
-        showToast('A senha precisa ter 8+ caracteres, com letra e número.');
+        msg.textContent = 'A senha precisa ter 8+ caracteres, com letra e número.';
+        msg.className = 'auth-msg erro';
         return;
     }
     const { error } = await Nuvem.client.auth.updateUser({ password: nova });
     if (error) {
-        showToast(traduzirErroAuth(error));
+        msg.textContent = traduzirErroAuth(error);
+        msg.className = 'auth-msg erro';
         return;
     }
     Nuvem.recuperandoSenha = false;
+    fecharNovaSenha();
     showToast('Senha alterada com sucesso! ✦');
 }
 

@@ -532,6 +532,50 @@
 
     </main>
 
+
+    <!-- ============================================== -->
+    <!-- MODAIS DE CONTA: DATA DE NASCIMENTO / NOVA SENHA -->
+    <!-- ============================================== -->
+    <div id="nascimentoModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="nascimentoTitulo">
+        <div class="modal-content mini-dialog">
+            <h3 id="nascimentoTitulo">✦ Seu Arcano da Alma</h3>
+            <p class="mini-dialog-text">Para descobrir a carta que rege a sua alma, informe a sua data de nascimento.</p>
+            <form class="auth-form" onsubmit="event.preventDefault(); confirmarNascimento();">
+                <div class="form-group">
+                    <label for="nascimentoInput">Data de nascimento</label>
+                    <input type="date" id="nascimentoInput" required>
+                </div>
+                <p class="auth-msg" id="nascimentoMsg" role="alert"></p>
+                <button type="submit" class="btn-primary auth-submit"><span>✨</span> Calcular meu Arcano</button>
+                <button type="button" class="auth-link-btn" style="align-self: center;" onclick="fecharNascimento()">Agora não</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="novaSenhaModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="novaSenhaTitulo">
+        <div class="modal-content mini-dialog">
+            <h3 id="novaSenhaTitulo">🔑 Criar nova senha</h3>
+            <p class="mini-dialog-text">Escolha uma nova senha para a sua conta.</p>
+            <form class="auth-form" onsubmit="event.preventDefault(); salvarNovaSenha();">
+                <div class="form-group">
+                    <label for="novaSenhaInput">Nova senha</label>
+                    <div class="pw-field">
+                        <input type="password" id="novaSenhaInput" placeholder="Digite a nova senha" autocomplete="new-password" required oninput="atualizarRegrasNovaSenha()">
+                        <button type="button" class="pw-toggle" onclick="alternarVisibilidadeSenha(this)" aria-label="Mostrar senha" aria-pressed="false"><svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12A3 3 0 1 1 9.88 9.88"/><path d="M1 1l22 22"/></svg></button>
+                    </div>
+                </div>
+                <ul class="pw-rules" id="novaSenhaRules" aria-live="polite">
+                    <li data-regra="len">Mínimo de 8 caracteres</li>
+                    <li data-regra="letra">Pelo menos uma letra</li>
+                    <li data-regra="numero">Pelo menos um número</li>
+                </ul>
+                <p class="auth-msg" id="novaSenhaMsg" role="alert"></p>
+                <button type="submit" class="btn-primary auth-submit"><span>💾</span> Salvar nova senha</button>
+                <button type="button" class="auth-link-btn" style="align-self: center;" onclick="fecharNovaSenha()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
     <!-- ============================================== -->
     <!-- MODAL DE CONTA & PERFIL MÍSTICO               -->
     <!-- ============================================== -->

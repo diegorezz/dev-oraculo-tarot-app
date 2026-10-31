@@ -245,3 +245,9 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     .brand-badge { flex: 1 1 180px; min-width: 0; letter-spacing: .08em; font-size: .72rem; }
     .top-actions { gap: 8px; flex: 0 1 auto; }
 }
+
+
+/* ===== Janelas pequenas (data de nascimento / nova senha) ===== */
+.mini-dialog { --ok: #4f6b3a; max-width: 420px; padding: 28px 22px 22px; text-align: left; }
+.mini-dialog h3 { margin: 0 0 8px; text-align: center; font-size: 1.35rem; }
+.mini-dialog-text { margin: 0 0 18px; text-align: center; font-size: .92rem; color: var(--text-muted); line-height: 1.45; }
