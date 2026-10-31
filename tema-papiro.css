@@ -262,3 +262,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 #confirmOkBtn:disabled { opacity: .45; cursor: not-allowed; }
 .confirm-actions > * { min-width: 0; white-space: normal; text-align: center; letter-spacing: .02em; font-size: .88rem; line-height: 1.2; }
 @media (max-width: 480px) { .confirm-actions { flex-direction: column-reverse; } .confirm-actions > * { width: 100%; flex: none; } }
+
+/* Camadas: janelas de confirmação/conta ficam acima da janela "Minha Conta"; avisos (toast) acima de tudo */
+#confirmModal, #nascimentoModal, #novaSenhaModal { z-index: 1100; }
+.toast-notification { z-index: 1300; }
