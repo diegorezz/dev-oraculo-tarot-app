@@ -271,3 +271,6 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 .site-footer { text-align: center; padding: 20px 16px 32px; font-size: .85rem; position: relative; z-index: 2; }
 .site-footer a { color: var(--text-muted); text-decoration: underline; padding: 10px 8px; display: inline-block; }
 .site-footer a:hover { color: var(--accent-color); }
+
+#acessoModal { z-index: 1100; }
+#acessoInput, #regCodigo { text-transform: uppercase; letter-spacing: .06em; }

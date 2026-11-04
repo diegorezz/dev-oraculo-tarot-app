@@ -7,6 +7,12 @@
 const SUPABASE_URL = 'https://vihbomwmmjtflxnuvwrr.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_EA45W1BB9Mozhd54Cncbig_-j7urLXB';
 
+// Link da página de vendas do curso (aparece na tela de acesso). Deixe '' para ocultar.
+const LINK_COMPRA = '';
+
+// E-mail de suporte exibido na tela de acesso
+const EMAIL_SUPORTE = 'codylabr.br@gmail.com';
+
 const Nuvem = {
     client: null,
     session: null,
@@ -42,6 +48,16 @@ const Nuvem = {
             this.client = null;
             return null;
         }
+    },
+
+    // Verifica se a conta já tem acesso liberado. Retorna true, false ou null (erro)
+    async verificarAcesso() {
+        if (!this.client || !this.session) return null;
+        const { data, error } = await this.client
+            .from('acessos').select('user_id')
+            .eq('user_id', this.session.user.id).maybeSingle();
+        if (error) { console.error('Erro ao verificar acesso:', error); return null; }
+        return !!data;
     },
 
     // Lê os dados do usuário logado.

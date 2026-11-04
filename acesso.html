@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#efe6d2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Acesso | Oráculo &amp; Tarefas Sagradas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tema-papiro.css">
+    <style>
+        body.acesso-body { justify-content: center; padding: 24px 16px 48px; --ok: #4f6b3a; }
+        .acesso-card { width: 100%; max-width: 440px; margin: 0 auto; }
+        .acesso-brand { text-align: center; margin-bottom: 22px; }
+        .acesso-selo { font-size: 1.6rem; color: var(--gold-dark, #a8801f); line-height: 1; margin-bottom: 6px; }
+        .acesso-brand h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.9rem; line-height: 1.15; margin: 0 0 6px; color: var(--text-color); }
+        .acesso-sub { margin: 0; font-size: .92rem; color: var(--text-muted); }
+        .acesso-view { display: none; }
+        .acesso-view.active { display: block; }
+        .acesso-view h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; margin: 0 0 6px; text-align: center; }
+        .acesso-view .acesso-texto { text-align: center; font-size: .92rem; color: var(--text-muted); margin: 0 0 18px; line-height: 1.5; }
+        .acesso-links { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 8px; }
+        .acesso-rodape { text-align: center; font-size: .8rem; color: var(--text-muted); margin-top: 22px; line-height: 1.6; }
+        .acesso-rodape a { color: var(--text-muted); text-decoration: underline; padding: 6px 4px; display: inline-block; }
+        .acesso-carregando { text-align: center; padding: 30px 0; color: var(--text-muted); }
+        .acesso-email-chip { display: inline-block; background: #fbf8ef; border: 1px solid var(--border-color); border-radius: 999px; padding: 4px 14px; font-size: .88rem; margin-bottom: 14px; overflow-wrap: anywhere; }
+        .acesso-view .btn-secondary { width: 100%; min-height: 48px; justify-content: center; margin-top: 8px; }
+    </style>
+</head>
+<body class="acesso-body">
+
+    <main class="acesso-card glass-panel">
+        <div class="acesso-brand">
+            <div class="acesso-selo" aria-hidden="true">✦</div>
+            <h1>Oráculo &amp; Tarefas Sagradas</h1>
+            <p class="acesso-sub">Acesso exclusivo para alunos</p>
+        </div>
+
+        <!-- Carregando -->
+        <section class="acesso-view active" id="viewCarregando" aria-live="polite">
+            <p class="acesso-carregando">Verificando seu acesso…</p>
+        </section>
+
+        <!-- Entrar -->
+        <section class="acesso-view" id="viewLogin">
+            <form class="auth-form" onsubmit="event.preventDefault(); entrar();">
+                <div class="form-group">
+                    <label for="loginEmail">E-mail da compra</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <div class="pw-field">
+                        <input type="password" id="loginPassword" placeholder="Sua senha" autocomplete="current-password" required>
+                        <button type="button" class="pw-toggle" onclick="alternarVisibilidadeSenha(this)" aria-label="Mostrar senha" aria-pressed="false"><svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12A3 3 0 1 1 9.88 9.88"/><path d="M1 1l22 22"/></svg></button>
+                    </div>
+                </div>
+                <p class="auth-msg" id="msgLogin" role="alert"></p>
+                <button type="submit" class="btn-primary auth-submit" id="btnEntrar"><span>🔑</span> Entrar</button>
+            </form>
+
+            <div class="acesso-links">
+                <button type="button" class="auth-link-btn" style="align-self: center;" onclick="mostrar('recuperar')">Primeiro acesso ou esqueci minha senha</button>
+            </div>
+
+        </section>
+
+        <!-- Primeiro acesso / esqueci a senha -->
+        <section class="acesso-view" id="viewRecuperar">
+            <h2>Criar ou redefinir senha</h2>
+            <p class="acesso-texto">Informe o e-mail usado na compra. Enviaremos um link para você criar uma senha e entrar.</p>
+            <form class="auth-form" onsubmit="event.preventDefault(); enviarLink();">
+                <div class="form-group">
+                    <label for="recEmail">E-mail da compra</label>
+                    <input type="email" id="recEmail" placeholder="seu@email.com" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" required>
+                </div>
+                <p class="auth-msg" id="msgRecuperar" role="alert"></p>
+                <button type="submit" class="btn-primary auth-submit" id="btnLink"><span>✉️</span> Enviar link</button>
+                <button type="button" class="auth-link-btn" style="align-self: center;" onclick="mostrar('login')">Voltar para o login</button>
+            </form>
+        </section>
+
+        <!-- Criar senha (link do e-mail) -->
+        <section class="acesso-view" id="viewSenha">
+            <h2>Crie sua senha</h2>
+            <p class="acesso-texto">Bem-vindo(a)! Escolha uma senha para entrar sempre que quiser.</p>
+            <form class="auth-form" onsubmit="event.preventDefault(); salvarSenha();">
+                <div class="form-group">
+                    <label for="novaSenha">Nova senha</label>
+                    <div class="pw-field">
+                        <input type="password" id="novaSenha" placeholder="Crie uma senha" autocomplete="new-password" required oninput="atualizarRegras()">
+                        <button type="button" class="pw-toggle" onclick="alternarVisibilidadeSenha(this)" aria-label="Mostrar senha" aria-pressed="false"><svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12A3 3 0 1 1 9.88 9.88"/><path d="M1 1l22 22"/></svg></button>
+                    </div>
+                </div>
+                <ul class="pw-rules" id="regrasSenha" aria-live="polite">
+                    <li data-regra="len">Mínimo de 8 caracteres</li>
+                    <li data-regra="letra">Pelo menos uma letra</li>
+                    <li data-regra="numero">Pelo menos um número</li>
+                </ul>
+                <div class="form-group">
+                    <label for="novaSenhaConf">Confirmar senha</label>
+                    <div class="pw-field">
+                        <input type="password" id="novaSenhaConf" placeholder="Repita a senha" autocomplete="new-password" required oninput="atualizarRegras()">
+                        <button type="button" class="pw-toggle" onclick="alternarVisibilidadeSenha(this)" aria-label="Mostrar senha" aria-pressed="false"><svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 5c7 0 11 7 11 7a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12A3 3 0 1 1 9.88 9.88"/><path d="M1 1l22 22"/></svg></button>
+                    </div>
+                    <p class="auth-hint pw-match" id="senhaCoincide" aria-live="polite"></p>
+                </div>
+                <p class="auth-msg" id="msgSenha" role="alert"></p>
+                <button type="submit" class="btn-primary auth-submit" id="btnSenha"><span>💾</span> Salvar senha e entrar</button>
+            </form>
+        </section>
+
+        <!-- Conta sem acesso liberado -->
+        <section class="acesso-view" id="viewSemAcesso">
+            <h2>Acesso não liberado</h2>
+            <p class="acesso-texto" style="margin-bottom: 10px;">Esta conta ainda não tem acesso ao Oráculo:</p>
+            <p style="text-align: center; margin: 0;"><span class="acesso-email-chip" id="emailSemAcesso"></span></p>
+            <p class="acesso-texto">O acesso é liberado automaticamente para o e-mail usado na compra do curso. Se você comprou com outro e-mail, entre com ele, ou fale com o suporte.</p>
+            <p class="auth-msg" id="msgSemAcesso" role="alert"></p>
+            <button type="button" class="btn-primary auth-submit" onclick="verificarEEntrar()"><span>🔄</span> Verificar novamente</button>
+            <button type="button" class="btn-secondary" onclick="sair()">Sair e usar outro e-mail</button>
+        </section>
+
+        <p class="acesso-rodape">
+            <span id="blocoCompra" style="display: none;"><a id="linkCompra" href="#">Ainda não é aluno? Conheça o curso</a><br></span>
+            Precisa de ajuda? <a id="linkSuporte" href="#"></a><br>
+            <a href="privacidade.html">Política de Privacidade</a>
+        </p>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="nuvem.js"></script>
+    <script>
+        // Guarda o endereço original (o Supabase limpa o "#" depois de ler o link do e-mail)
+        const HASH_INICIAL = window.location.hash || '';
+        const PARAMS_HASH = new URLSearchParams(HASH_INICIAL.replace(/^#/, ''));
+        const PARAMS_QUERY = new URLSearchParams(window.location.search);
+        const TIPO_LINK = PARAMS_HASH.get('type');                       // invite | recovery
+        const ERRO_LINK = PARAMS_HASH.get('error_description') || PARAMS_QUERY.get('error_description');
+        const ERRO_CODIGO = PARAMS_HASH.get('error_code') || PARAMS_QUERY.get('error_code') || '';
+
+        const VIEWS = ['Carregando', 'Login', 'Recuperar', 'Senha', 'SemAcesso'];
+        function mostrar(nome) {
+            VIEWS.forEach(v => document.getElementById('view' + v).classList.remove('active'));
+            const alvo = nome.charAt(0).toUpperCase() + nome.slice(1);
+            document.getElementById('view' + alvo).classList.add('active');
+            const foco = { login: 'loginEmail', recuperar: 'recEmail', senha: 'novaSenha' }[nome];
+            if (foco) setTimeout(() => document.getElementById(foco).focus({ preventScroll: true }), 100);
+        }
+
+        function aviso(id, texto, tipo) {
+            const el = document.getElementById(id);
+            el.textContent = texto || '';
+            el.className = 'auth-msg' + (texto ? ' ' + (tipo || 'erro') : '');
+        }
+
+        function senhaAtendeRegras(s) {
+            return s.length >= 8 && /[A-Za-zÀ-ÿ]/.test(s) && /\d/.test(s);
+        }
+
+        function alternarVisibilidadeSenha(btn) {
+            const campo = btn.closest('.pw-field');
+            const input = campo.querySelector('input');
+            const mostrarSenha = input.type === 'password';
+            input.type = mostrarSenha ? 'text' : 'password';
+            campo.classList.toggle('is-visible', mostrarSenha);
+            btn.setAttribute('aria-pressed', String(mostrarSenha));
+            btn.setAttribute('aria-label', mostrarSenha ? 'Ocultar senha' : 'Mostrar senha');
+        }
+
+        function atualizarRegras() {
+            const s = document.getElementById('novaSenha').value;
+            const c = document.getElementById('novaSenhaConf').value;
+            const estado = { len: s.length >= 8, letra: /[A-Za-zÀ-ÿ]/.test(s), numero: /\d/.test(s) };
+            document.querySelectorAll('#regrasSenha li').forEach(li => li.classList.toggle('ok', !!estado[li.dataset.regra]));
+            const msg = document.getElementById('senhaCoincide');
+            const conf = document.getElementById('novaSenhaConf');
+            if (!c) { msg.textContent = ''; msg.className = 'auth-hint pw-match'; conf.classList.remove('is-invalid'); }
+            else if (c === s) { msg.textContent = '✓ As senhas coincidem'; msg.className = 'auth-hint pw-match ok'; conf.classList.remove('is-invalid'); }
+            else { msg.textContent = 'As senhas ainda não coincidem'; msg.className = 'auth-hint pw-match bad'; conf.classList.add('is-invalid'); }
+            return estado.len && estado.letra && estado.numero && c === s && c.length > 0;
+        }
+
+        function irParaApp() {
+            window.location.replace('index.html');
+        }
+
+        function limparEndereco() {
+            window.history.replaceState(null, '', window.location.pathname);
+        }
+
+        async function verificarEEntrar() {
+            if (!Nuvem.session) { mostrar('login'); return; }
+            aviso('msgSemAcesso', '');
+            const tem = await Nuvem.verificarAcesso();
+            if (tem === true) { irParaApp(); return; }
+            document.getElementById('emailSemAcesso').textContent = Nuvem.session.user.email || '';
+            if (tem === null) {
+                mostrar('semAcesso');
+                aviso('msgSemAcesso', 'Não foi possível verificar agora. Confira sua conexão e tente de novo.');
+                return;
+            }
+            mostrar('semAcesso');
+        }
+
+        async function entrar() {
+            if (!Nuvem.disponivel()) { aviso('msgLogin', 'Serviço indisponível no momento. Recarregue a página.'); return; }
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const senha = document.getElementById('loginPassword').value;
+            if (!email || !senha) { aviso('msgLogin', 'Informe e-mail e senha.'); return; }
+            const btn = document.getElementById('btnEntrar');
+            btn.disabled = true; aviso('msgLogin', '');
+            const { data, error } = await Nuvem.client.auth.signInWithPassword({ email, password: senha });
+            btn.disabled = false;
+            if (error) { aviso('msgLogin', traduzirErroAuth(error)); return; }
+            Nuvem.session = data.session;
+            mostrar('carregando');
+            await verificarEEntrar();
+        }
+
+        async function enviarLink() {
+            if (!Nuvem.disponivel()) { aviso('msgRecuperar', 'Serviço indisponível no momento. Recarregue a página.'); return; }
+            const email = document.getElementById('recEmail').value.trim().toLowerCase();
+            if (!email) { aviso('msgRecuperar', 'Informe o e-mail da compra.'); return; }
+            const btn = document.getElementById('btnLink');
+            btn.disabled = true;
+            const { error } = await Nuvem.client.auth.resetPasswordForEmail(email, {
+                redirectTo: window.location.origin + window.location.pathname
+            });
+            btn.disabled = false;
+            if (error) { aviso('msgRecuperar', traduzirErroAuth(error)); return; }
+            aviso('msgRecuperar', 'Se esse e-mail tiver acesso ao curso, enviamos um link para criar sua senha. Confira também o spam.', 'ok');
+        }
+
+        async function salvarSenha() {
+            const s = document.getElementById('novaSenha').value;
+            if (!atualizarRegras()) {
+                aviso('msgSenha', senhaAtendeRegras(s) ? 'As senhas não coincidem.' : 'A senha precisa ter 8+ caracteres, com letra e número.');
+                return;
+            }
+            const btn = document.getElementById('btnSenha');
+            btn.disabled = true; aviso('msgSenha', '');
+            const { error } = await Nuvem.client.auth.updateUser({ password: s });
+            btn.disabled = false;
+            if (error) { aviso('msgSenha', traduzirErroAuth(error)); return; }
+            Nuvem.recuperandoSenha = false;
+            mostrar('carregando');
+            await verificarEEntrar();
+        }
+
+        async function sair() {
+            await Nuvem.client.auth.signOut();
+            Nuvem.session = null;
+            mostrar('login');
+        }
+
+        function mensagemDoErroDoLink() {
+            const desc = (ERRO_LINK || '').toLowerCase();
+            if (ERRO_CODIGO === 'otp_expired' || desc.includes('expired') || desc.includes('invalid')) {
+                return 'Este link expirou ou já foi usado. Use "Primeiro acesso ou esqueci minha senha" para receber um novo.';
+            }
+            if (desc.includes('signup') || desc.includes('not allowed')) {
+                return 'Este e-mail não tem acesso ao curso. Entre com o e-mail usado na compra.';
+            }
+            return 'Não foi possível concluir o acesso. Tente novamente.';
+        }
+
+        (async function iniciar() {
+            // Rodapé
+            const suporte = document.getElementById('linkSuporte');
+            suporte.textContent = EMAIL_SUPORTE;
+            suporte.href = 'mailto:' + EMAIL_SUPORTE;
+            if (LINK_COMPRA) {
+                document.getElementById('blocoCompra').style.display = 'inline';
+                document.getElementById('linkCompra').href = LINK_COMPRA;
+            }
+
+            await Nuvem.iniciar();
+            if (!Nuvem.disponivel()) {
+                mostrar('login');
+                aviso('msgLogin', 'Serviço indisponível no momento. Verifique sua conexão e recarregue a página.');
+                return;
+            }
+            if (ERRO_LINK) {
+                limparEndereco();
+                mostrar('login');
+                aviso('msgLogin', mensagemDoErroDoLink());
+                return;
+            }
+            if (Nuvem.session && (TIPO_LINK === 'invite' || TIPO_LINK === 'recovery' || Nuvem.recuperandoSenha)) {
+                limparEndereco();
+                mostrar('senha');
+                return;
+            }
+            if (Nuvem.session) {
+                limparEndereco();
+                await verificarEEntrar();
+                return;
+            }
+            mostrar('login');
+        })();
+    </script>
+</body>
+</html>
