@@ -11,7 +11,7 @@ const SUPABASE_KEY = 'sb_publishable_EA45W1BB9Mozhd54Cncbig_-j7urLXB';
 const LINK_COMPRA = '';
 
 // E-mail de suporte exibido na tela de acesso
-const EMAIL_SUPORTE = 'codylabr.br@gmail.com';
+const EMAIL_SUPORTE = 'suporte.guiatarotiniciatico@gmail.com';
 
 const Nuvem = {
     client: null,
